@@ -32,7 +32,7 @@ UnitTest:
   before_script:
     - *django_before_script
   script:
-    - coverage run --parallel --include="./*" --omit="manage.py,my_web/*"
+    - coverage run --parallel --include="./*" --omit="manage.py,CoroNow/*"
       manage.py test --exclude-tag=functional
 
 FunctionalTest:
@@ -43,7 +43,7 @@ FunctionalTest:
     - apt-get update -q && apt-get install -yq chromium-driver
     - *django_before_script
   script:
-    - coverage run --parallel --include="./*" --omit="manage.py,my_web/*"
+    - coverage run --parallel --include="./*" --omit="manage.py,CoroNow/*"
       manage.py test --tag=functional
 
 
