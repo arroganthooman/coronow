@@ -6,15 +6,15 @@
 CoroNow adalah website layanan penyedia informasi terkini mengenai COVID-19. CoroNow menyediakan informasi dalam bentuk Status Covid (Data terkini penyebaran Covid), News (Berita terkini mengenai Covid), Blog (Artikel-artikel penunjang), Feedback page, dan Landing Page.
 
 **Link repo:** 
-https://gitlab.com/ppw-b-kelompok-7 
-https://git.heroku.com/coronow.git (https://coronow.herokuapp.com/)
+* https://gitlab.com/ppw-b-kelompok-7 
+* https://git.heroku.com/coronow.git (https://coronow.herokuapp.com/)
 
 **API:**
-https://services5.arcgis.com/VS6HdKS0VfIhv8Ct/ArcGIS/rest/services 
-https://dekontaminasi.com/ 
+* https://services5.arcgis.com/VS6HdKS0VfIhv8Ct/ArcGIS/rest/services 
+* https://dekontaminasi.com/ 
 
 
-Apps : 
+**Apps:** 
 * Landing Page
 * CovidBlog
 * CovidNews
@@ -23,7 +23,6 @@ Apps :
 
 
 **Daftar Fitur:**
-
 1. Landing Page:
 Page yang berisi deskripsi umum mengenai website CoroNow.
 
