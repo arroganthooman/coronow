@@ -45,10 +45,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'landing_page.apps.LandingPageConfig',
+    'covidblog.apps.CovidblogConfig',
+    'covidnews.apps.CovidnewsConfig',
+    'covidstats.apps.CovidstatsConfig',
+    'feedback.apps.FeedbackConfig'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
