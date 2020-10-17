@@ -1,8 +1,6 @@
 # CoroNow
 
-[![Test and Deploy][actions-badge]][commits-gh]
-[![pipeline status][pipeline-badge]][commits-gl]
-[![coverage report][coverage-badge]][commits-gl]
+[![Pipeline Status](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-1/badges/master/pipeline.svg)](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-1/-/commits/master)
 
 ### **coronow.herokuapp.com**
 
