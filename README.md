@@ -1,22 +1,22 @@
-# CoroNow
+# [CoroNow](https://coronow.herokuapp.com/ "Visit me!")
 
 [![Pipeline Status](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-1/badges/master/pipeline.svg)](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-1/-/commits/master)
 
-### **coronow.herokuapp.com**
+#### coronow.herokuapp.com
 
-**Deskripsi app:**
+## Deskripsi app:
 CoroNow adalah website layanan penyedia informasi terkini mengenai COVID-19. CoroNow menyediakan informasi dalam bentuk Status Covid (Data terkini penyebaran Covid), News (Berita terkini mengenai Covid), Blog (Artikel-artikel penunjang), Feedback page, dan Landing Page.
 
-**Link repo:** 
-* https://gitlab.com/ppw-b-kelompok-7 
-* https://git.heroku.com/coronow.git (https://coronow.herokuapp.com/)
+## Link repo: 
+* [Gitlab](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-1)
+* [Heroku App](https://coronow.herokuapp.com/)
 
-**API:**
+## API:
 * https://services5.arcgis.com/VS6HdKS0VfIhv8Ct/ArcGIS/rest/services 
 * https://dekontaminasi.com/ 
 
 
-**Apps:** 
+## Apps: 
 * Landing Page
 * CovidBlog
 * CovidNews
@@ -24,23 +24,23 @@ CoroNow adalah website layanan penyedia informasi terkini mengenai COVID-19. Cor
 * Feedback (Kritik Saran)
 
 
-**Daftar Fitur:**
-1. Landing Page:
-Page yang berisi deskripsi umum mengenai website CoroNow.
+## Daftar Fitur:
+1. Landing Page:\
+   Page yang berisi deskripsi umum mengenai website CoroNow.
 
-2. Blog (Fikri):
-Page yang berisi tulisan-tulisan yang diposting oleh admin dengan konten pandemi COVID-19, baik masalah COVID-19, PJJ, dan WFH. Tulisan-tulisan ini bertujuan untuk mengedukasi para pengunjung website mengenai COVID-19.
+2. Blog (Fikri):\
+   Page yang berisi tulisan-tulisan yang diposting oleh admin dengan konten pandemi COVID-19, baik masalah COVID-19, PJJ, dan WFH. Tulisan-tulisan ini bertujuan untuk mengedukasi para pengunjung website mengenai COVID-19.
 
-3. News (Ghifari) :
-Page yang berisi berita-berita terkini mengenai perkembangan COVID. Page ini bertujuan untuk memberikan informasi dan berita aktual mengenai COVID agar para user bisa mengikuti perkembangan COVID yang terjadi di Indonesia.
+3. News (Ghifari):\
+   Page yang berisi berita-berita terkini mengenai perkembangan COVID. Page ini bertujuan untuk memberikan informasi dan berita aktual mengenai COVID agar para user bisa mengikuti perkembangan COVID yang terjadi di Indonesia.
 
-4. Status Covid (Adit):
-Page yang berisi data data terkini mengenai jumlah total pasien yang terinfeksi, sembuh, dan meninggal, serta data update per-harinya.
+4. Status Covid (Adit):\
+   Page yang berisi data data terkini mengenai jumlah total pasien yang terinfeksi, sembuh, dan meninggal, serta data update per-harinya.
 
-5. Feedback (Vanessa) :
-Page yang berisi kritik dan saran yang akan diberikan oleh user.
+5. Feedback (Vanessa):\
+   Page yang berisi kritik dan saran yang akan diberikan oleh user.
 
-**Persona:**
+## Persona:
 1. Kalangan mahasiswa
     * Goals: Membuat website yang terlihat modern, enak dilihat dan memiliki loading time yang cepat.
     * Motivations: Memilih warna yang menarik, membuat website ringan saat diakses.
@@ -56,10 +56,10 @@ Page yang berisi kritik dan saran yang akan diberikan oleh user.
     * Motivations: Membuat website yang mudah digunakan, 
     * Frustrations:  Lingkup masyarakat yang luas dan beragam membuat kami susah untuk memuaskan selera setiap orang
 
-**Link Wireframe dan Prototype**
+## Link Wireframe dan Prototype
 https://www.figma.com/file/8Kp7rKQJzqf2VtixuIfHAi/CoroNow?node-id=0%3A1
 
-#### Anggota: 
+## Anggota: 
 * Fikri Akmal (1906307132)
 * Ghifari Zakaria Ramadhan (1906350591)
 * I Gede Aditya Premana Putra (1906350566)
