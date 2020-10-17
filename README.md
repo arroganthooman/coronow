@@ -1,5 +1,9 @@
 # CoroNow
 
+[![Test and Deploy][actions-badge]][commits-gh]
+[![pipeline status][pipeline-badge]][commits-gl]
+[![coverage report][coverage-badge]][commits-gl]
+
 ### **coronow.herokuapp.com**
 
 **Deskripsi app:**
@@ -52,8 +56,10 @@ Page yang berisi kritik dan saran yang akan diberikan oleh user.
 3. Masyarakat umum
     * Goals: Menyediakan informasi yang akurat, membuat website yang terlihat menarik / enak dilihat, dapat digunakan seluruh kalangan masyarakat.
     * Motivations: Membuat website yang mudah digunakan, 
-    * Frustrations:  
+    * Frustrations:  Lingkup masyarakat yang luas dan beragam membuat kami susah untuk memuaskan selera setiap orang
 
+**Link Wireframe dan Prototype**
+https://www.figma.com/file/8Kp7rKQJzqf2VtixuIfHAi/CoroNow?node-id=0%3A1
 
 #### Anggota: 
 * Fikri Akmal (1906307132)
