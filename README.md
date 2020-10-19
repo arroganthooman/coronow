@@ -41,22 +41,9 @@ CoroNow adalah website layanan penyedia informasi terkini mengenai COVID-19. Cor
    Page yang berisi kritik dan saran yang akan diberikan oleh user.
 
 ## Persona:
-1. Kalangan mahasiswa
-    * Goals: Membuat website yang terlihat modern, enak dilihat dan memiliki loading time yang cepat.
-    * Motivations: Memilih warna yang menarik, membuat website ringan saat diakses.
-    * Frustrations: Selera warna yang berbeda-beda, merealisasikan loading time yang cepat cukup susah jika menggunakan aset-aset 
+https://drive.google.com/file/d/1HrJhSRwUpQUfXDYFieBPjQC510wLq7MO/view?usp=sharing
 
-2. Kalangan orang tua
-    * Goals: Membuat website yang menarik dan simple, mudah digunakan, dan dapat dilihat dengan jelas
-    * Motivations: Pemilihan ukuran font yang pas, pemilihan warna yang kontras agar dapat mudah dilihat.
-    * Frustrations: Taraf simple setiap orang berbeda.
-
-3. Masyarakat umum
-    * Goals: Menyediakan informasi yang akurat, membuat website yang terlihat menarik / enak dilihat, dapat digunakan seluruh kalangan masyarakat.
-    * Motivations: Membuat website yang mudah digunakan, 
-    * Frustrations:  Lingkup masyarakat yang luas dan beragam membuat kami susah untuk memuaskan selera setiap orang
-
-## Link Wireframe dan Prototype
+## Link Wireframe dan Prototype:
 https://www.figma.com/file/8Kp7rKQJzqf2VtixuIfHAi/CoroNow?node-id=0%3A1
 
 ## Anggota: 
