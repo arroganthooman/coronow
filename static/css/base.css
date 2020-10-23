@@ -1,0 +1,55 @@
+body {
+    background-image: url('/static/img/Vector3.svg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: #222831;
+
+}
+
+/* Navbar */
+.navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-brand span:nth-child(1) {
+    font-size: 61px;
+    font-weight: 300;
+}
+.navbar-brand span:nth-child(2) {
+    font-size: 48px;
+    font-weight: 300;
+}
+.navbar-brand span:nth-child(3) {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.navbar-nav a {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 35px;
+    margin-left: 50px;
+}
+
+
+
+/* Footer */
+.footer {
+    background: linear-gradient(360deg, #4F8A8B 0%, rgba(79, 138, 139, 0.4) 85.79%);
+    height: 25vh;
+}
+.kontak span{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: #FBD46D;
+    font-size: 32px;
+}
+.foto-kontak img {
+    border-radius:50%;
+    width:80px;
+    height:80px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+
