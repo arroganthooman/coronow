@@ -5,6 +5,60 @@ body {
     background-color: #222831;
     width:100%;
 }
+
+/*Title*/
+.title {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 150px;
+}
+.coro {
+    background-color: #222831;
+    color: #F7F7F7;
+    padding: 20px 0px 20px 250px;
+}
+
+.oro {
+    font-size: 48px;
+    font-weight: 300;
+}
+
+.now {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    font-weight: bolder;
+    color: #222831;
+}
+
+.title span:nth-child(1){
+    font-size: 61px;
+    font-weight: 300;
+}
+
+.gambar {
+    text-align: center;
+    width: 35%;
+    height: 35%;
+    margin-left: 200px;
+    margin-top: 40px;
+}
+
+.penjelasan {
+    font-family: 'Montserrat', sans-serif;
+    color: #F7F7F7;
+    font-weight: 300;
+    padding-left: 250px;
+    font-size: 24px;
+    margin-top: 30px;
+}
+
+.jelas-desktop {
+    display: block;
+}
+
+.jelas-mobile {
+    display: none;
+}
+
 /* Navbar */
 .navbar-brand {
     font-family: 'Montserrat', sans-serif;
@@ -30,8 +84,6 @@ body {
     margin-left: 50px;
 }
 
-
-
 /* Footer */
 .footer {
     background: linear-gradient(360deg, #4F8A8B 0%, rgba(79, 138, 139, 0.4) 85.79%);
@@ -50,4 +102,39 @@ body {
     height:80px;
 }
 
-
+/*Frameworks*/
+@media (max-width: 576px) {
+    .coro {
+        padding-left: 60px;
+    }
+    .title span:nth-child(1){
+        font-size: 40px;
+        font-weight: 300;
+    }
+    .oro {
+        font-size: 34px;
+        font-weight: 300;
+    }
+    .now {
+        font-size: 34px;
+    }
+    .penjelasan {
+        padding-left: 60px;
+        font-size: 16px;
+        margin-top: 30px;
+    }
+    .jelas-desktop {
+        display: none;
+    }
+    .jelas-mobile {
+        display: block;
+    }
+    .gambar {
+        margin: auto;
+        width: 80%;
+        height: 80%;
+    }
+    .title {
+        margin-top: 10px;
+    }
+}
