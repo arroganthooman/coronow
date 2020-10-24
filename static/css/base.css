@@ -3,7 +3,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #222831;
-    width:100%;
+    width: 100%;
 }
 
 /*Title*/
@@ -14,7 +14,7 @@ body {
 .coro {
     background-color: #222831;
     color: #F7F7F7;
-    padding: 20px 0px 20px 250px;
+    padding: 20px 5px 20px clamp(0px, 17vw, 250px);
 }
 
 .oro {
@@ -27,6 +27,7 @@ body {
     font-size: 48px;
     font-weight: bolder;
     color: #222831;
+    margin-left: 3px;
 }
 
 .title span:nth-child(1){
@@ -38,15 +39,19 @@ body {
     text-align: center;
     width: 35%;
     height: 35%;
-    margin-left: 200px;
-    margin-top: 40px;
+    position: absolute;
+    top: 13vw;
+    right: 8vw;
 }
-
+.gambar > img {
+    min-height: 200px;
+    min-width: 200px;
+}
 .penjelasan {
     font-family: 'Montserrat', sans-serif;
     color: #F7F7F7;
     font-weight: 300;
-    padding-left: 250px;
+    padding-left: clamp(0px, 17vw, 250px);
     font-size: 24px;
     margin-top: 30px;
 }
@@ -130,9 +135,12 @@ body {
         display: block;
     }
     .gambar {
+        position: relative;
         margin: auto;
         width: 80%;
         height: 80%;
+        top: unset;
+        right: unset;
     }
     .title {
         margin-top: 10px;
