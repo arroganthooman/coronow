@@ -4,6 +4,7 @@ body {
     background-size: cover;
     background-color: #222831;
     width:100%;
+    font-family: 'Montserrat';
 }
 /* Navbar */
 .navbar-brand {

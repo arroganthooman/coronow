@@ -19,5 +19,6 @@ from django.urls.conf import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('', include('landing_page.urls'), name='landing_page')
+    re_path('', include('landing_page.urls'), name='landing_page'),
+    re_path('^covidstats/', include('covidstats.urls'), name="covidstats")
 ]
