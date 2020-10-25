@@ -80,6 +80,12 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+<<<<<<< HEAD
 #VSCode
 .vscode/
 .vscode
+=======
+# VSCode
+.vscode
+.vscode\
+>>>>>>> master

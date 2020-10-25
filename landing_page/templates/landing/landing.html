@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!--Perkenalan-->
+<section id="perkenalan">
+    <!--Desktop-->
+    <div class="jelas-desktop mb-5">
+        <div class="row position-relative w-100">
+            <div class="col-auto">
+                <h1 class="title"><span class="coro"><span>C</span><span class="oro">oro</span></span><span
+                        class="now">Now</span></h1>
+                <p class="penjelasan">CoroNow adalah website layanan<br>
+                    penyedia informasi terkini mengenai<br>
+                    COVID-19.</p>
+            </div>
+            <div class="col-auto d-flex justify-content-center align-items-center gambar">
+                <img class="img-fluid" src="{% static 'img/logo.svg'%}">
+            </div>
+        </div>
+    </div>
+    <!--Mobile-->
+    <div class="jelas-mobile mb-5">
+        <div class="row">
+
+            <div class="col-auto d-flex justify-content-center align-items-center gambar">
+                <img class="img-fluid" src="{% static 'img/logo.svg'%}">
+            </div>
+            <div class="col-auto">
+                <h1 class="title"><span class="coro"><span>C</span><span class="oro">oro</span></span><span
+                        class="now">Now</span></h1>
+                <p class="penjelasan">CoroNow adalah website layanan<br>
+                    penyedia informasi terkini mengenai<br>
+                    COVID-19.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
