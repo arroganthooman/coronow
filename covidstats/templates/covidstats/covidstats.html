@@ -2,11 +2,48 @@
 {% load static %}
 
 {% block content %}
+
+    <style>
+        h1, h2, h3, h4, p {
+            margin: 0!important;
+        }
+        .font-white{
+            color: #EEEEEE;
+        }
+        .total-card{
+            border-radius: 12.5px;
+        }
+        .total-card:nth-child(1){
+            background-image: linear-gradient(to right, #222831 40%, #252e37f3 ,  #C1A352);
+        }
+        .total-card:nth-child(2){
+            background-image: linear-gradient(to right, #222831 40%, #252e37f3 ,  #4F8A8B);
+        }
+        .total-card:nth-child(3){
+            background-image: linear-gradient(to right, #222831 40%, #252e37f3 ,  #972222);
+        }
+        
+    </style>
     <div class="p-5 m-5 d-flex justify-content-center">
-        <h1 style="font-weight: 700; font-size: 60px;" class="text-white ">CovidStats</h1>
+        <h1 style="font-weight: 700; font-size: 60px;" class="font-white">CovidStats</h1>
     </div>
-    <div style="max-width: 800px;" class="mx-auto d-flex flex-column">
-        <h2 style="font-size: 40px;" class="text-white">Total Kasus</h2>
+    <div style="max-width: 900px;" class="mx-auto px-4 d-flex flex-column">
+        <h2 style="font-size: 40px; font-weight: 500;" class="font-white mx-3">Total Kasus</h2>
+        <p style="font-size: 20px;" class="font-white mx-3">Indonesia</p>
+        <div class="d-flex flex-row align-content-around">
+            <div class="my-3 mx-3 px-4 py-2 col total-card shadow-lg">
+                <h2 style="color: #FBD46D;">344,749</h2>
+                <h4 class="font-white font-weight-light ">Positif</h3>
+            </div>
+            <div class="my-3 mx-3 px-4 py-2 col total-card shadow-lg">
+                <h2 style="color: #4F8A8B;">344,749</h2>
+                <h4 class="font-white font-weight-light ">Positif</h3>
+            </div>
+            <div class="my-3 mx-3 px-4 py-2 col total-card shadow-lg">
+                <h2 style="color: #C8312A;">344,749</h2>
+                <h4 class="font-white font-weight-light ">Positif</h3>
+            </div>
+        </div>
     </div>
 
 {% endblock content %}
