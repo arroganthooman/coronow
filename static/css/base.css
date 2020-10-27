@@ -94,7 +94,7 @@ body {
 .footer {
     background: linear-gradient(360deg, #4F8A8B 0%, rgba(79, 138, 139, 0.4) 85.79%);
     height: 25vh;
-    width:100vw;
+    width:100%;
 }
 .kontak span{
     font-family: 'Montserrat', sans-serif;
