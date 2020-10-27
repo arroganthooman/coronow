@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'covidblog.apps.CovidblogConfig',
     'covidnews.apps.CovidnewsConfig',
     'covidstats.apps.CovidstatsConfig',
-    'feedback.apps.FeedbackConfig'
+    'feedback.apps.FeedbackConfig',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
