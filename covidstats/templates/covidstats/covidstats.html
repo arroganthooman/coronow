@@ -4,8 +4,23 @@
 {% block content %}
 
     <style>
+        @media screen and (max-width: 640px) {
+            #kasus-harian {
+                position: relative!important;
+                top: 0!important;
+                left: 0!important;
+            }
+            #kasus-harian-graph{
+                height: unset!important;
+            }
+        }
         h1, h2, h3, h4, p {
             margin: 0!important;
+        }
+        #kasus-harian{
+            position: absolute;
+            left: 5vw; 
+            top: 100px;
         }
         .font-white{
             color: #EEEEEE;
@@ -24,26 +39,98 @@
         }
         
     </style>
-    <div class="p-5 m-5 d-flex justify-content-center">
-        <h1 style="font-weight: 700; font-size: 60px;" class="font-white">CovidStats</h1>
+    <br>
+    <div class="pt-5 mt-5 d-flex justify-content-center">
+        <h1 style="font-weight: 700; font-size: 60px;" class="font-white m-5">CovidStats</h1>
     </div>
-    <div style="max-width: 900px;" class="mx-auto px-4 d-flex flex-column">
-        <h2 style="font-size: 40px; font-weight: 500;" class="font-white mx-3">Total Kasus</h2>
-        <p style="font-size: 20px;" class="font-white mx-3">Indonesia</p>
-        <div class="d-flex flex-row align-content-around">
-            <div class="my-3 mx-3 px-4 py-2 col total-card shadow-lg">
+    <div style="max-width: 900px;" class="mx-auto mb-5 d-flex container-fluid flex-column">
+        <h2 style="font-size: 40px; font-weight: 500;" class="font-white mx-2">Total Kasus</h2>
+        <p style="font-size: 20px;" class="font-white font-weight-light mx-2">Indonesia</p>
+        <div class="d-flex flex-row row my-2 align-content-around">
+            <div class="my-1 mx-3 px-4 py-2 col total-card shadow">
                 <h2 style="color: #FBD46D;">344,749</h2>
-                <h4 class="font-white font-weight-light ">Positif</h3>
+                <h4 class="font-white font-weight-light ">Positif</h4>
             </div>
-            <div class="my-3 mx-3 px-4 py-2 col total-card shadow-lg">
+            <div class="my-1 mx-3 px-4 py-2 col total-card shadow">
                 <h2 style="color: #4F8A8B;">344,749</h2>
-                <h4 class="font-white font-weight-light ">Positif</h3>
+                <h4 class="font-white font-weight-light ">Sembuh</h4>
             </div>
-            <div class="my-3 mx-3 px-4 py-2 col total-card shadow-lg">
+            <div class="my-1 mx-3 px-4 py-2 col total-card shadow">
                 <h2 style="color: #C8312A;">344,749</h2>
-                <h4 class="font-white font-weight-light ">Positif</h3>
+                <h4 class="font-white font-weight-light ">Meninggal</h4>
             </div>
         </div>
     </div>
-
+    <br>
+    <br>
+    <div style="max-width: 1115px;" class="d-flex flex-column mx-auto my-5 px-3 py-5 justify-content-start position-relative">
+        <div id="kasus-harian" class="d-flex flex-column">
+            <form action="#" onsubmit="event.preventDefault();" class="position-relative d-flex flex-row ">
+                <div class="position-relative d-flex flex-row-reverse align-items-center">
+                    <input style="border-radius: 8px; outline: none; border: none; width: clamp(300px , 50vw, 380px); height: 40px; font-size: 22px;" class="my-4 px-3 shadow" type="text" placeholder="Input Wilayah">
+                    <button style="position: absolute; right: 4px; background-color: transparent; outline: none; border: none;" type="submit">
+                        <p style="font-weight: 300; font-family: 'Font Awesome'; ">&#xf002</p>
+                    </button>
+                </div>
+            </form>
+            <h2 style="font-size: 40px; font-weight: 500;" class="font-white my-1">Kasus Harian</h2>
+            <p style="font-size: 20px;" class="font-white font-weight-light">Jakarta Utara</p>
+        </div>
+        <div class="mx-auto">
+            <img id="kasus-harian-graph" style="height: 512px;" class="w-100" src="{% static 'covidstats/img.svg' %}" alt="">
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="d-flex flex-column mx-auto mb-5 px-3 py-5 align-content-center text-center position-relative">
+        <h2 style="font-size: 44px; font-weight: 500;" class="font-white my-1">Detail Kasus</h2>
+        <p style="font-size: 12px;" class="font-white font-weight-light"><span style="color: #64b1b3" class="font-weight-bold">14 Oktober</span> dari infeksiemerging.kemkes.go.id</p>
+        <h4 class="font-white mt-5 pt-4 font-weight-bold">Indonesia</h4>
+        <div class="container mt-4">
+            <div class="row justify-content-md-center">
+                <div style="border-right: 1px solid #FBD46D;" class="col">
+                    <div  class="d-flex flex-row-reverse align-items-center m-4">
+                        <h2 style="color: #C8312A;">344,749</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Konfirmasi</p>
+                    </div>
+                    <div class="d-flex flex-row-reverse align-items-center m-4">
+                        <h2 style="color: #C8312A;">12,156</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Meninggal</p>
+                    </div>
+                    <div class="d-flex flex-row-reverse align-items-center m-4">
+                        <h2 style="color: #EEEEEE;">154,420</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Suspek</p>
+                    </div>
+                    <div class="d-flex flex-row-reverse align-items-center m-4">
+                        <h2 style="color: #EEEEEE;">500</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kab Kota Terdampak</p>
+                    </div>
+                    <div class="d-flex flex-row-reverse align-items-center m-4">
+                        <h2 style="color: #EEEEEE;">304</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Transmisi Lokal</p>
+                    </div>
+                </div>
+                <div style="border-left: 1px solid #FBD46D;" class="col">
+                    <div class="d-flex m-4 align-items-center">
+                        <h2 style="color: #FBD46D;">2,415,606</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus dg Spesimen Diperiksa</p>
+                    </div>
+                    <div class="d-flex m-4 align-items-center">
+                        <h2 style="color: #FBD46D;">2,070,857</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Negatif (85.7% spesimen)</p>
+                    </div>
+                    <div class="d-flex m-4 align-items-center">
+                        <h2 style="color: #4F8A8B;">267,851</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Sembuh</p>
+                    </div>
+                    <div class="d-flex m-4 align-items-center">
+                        <h2 style="color: #4F8A8B;">64,742</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Aktif</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
 {% endblock content %}

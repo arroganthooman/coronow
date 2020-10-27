@@ -1,7 +1,8 @@
 body {
     background-image: url('/static/img/Vector3.svg');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: max(1520px, 100%);
+    background-position: center top;
     background-color: #222831;
     width:100%;
     font-family: 'Montserrat';
@@ -146,4 +147,27 @@ body {
     .title {
         margin-top: 10px;
     }
+}
+
+
+/* Fonts */
+@font-face{
+    font-family: 'Font Awesome Brands';
+    src: url('fonts/Font Awesome/fa-brands-400.ttf');
+    font-weight: 400;
+}
+@font-face{
+    font-family: 'Font Awesome';
+    src: url('fonts/Font Awesome/fa-light-300.ttf');
+    font-weight: 300;
+}
+@font-face{
+    font-family: 'Font Awesome';
+    src: url('fonts/Font Awesome/fa-regular-400.ttf');
+    font-weight: 400;
+}
+@font-face{
+    font-family: 'Font Awesome';
+    src: url('fonts/Font Awesome/fa-solid-900.ttf');
+    font-weight: 900;
 }
