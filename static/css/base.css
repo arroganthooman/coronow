@@ -1,9 +1,11 @@
 body {
     background-image: url('/static/img/Vector3.svg');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: max(1520px, 100%);
+    background-position: center top;
     background-color: #222831;
     width:100%;
+    font-family: 'Montserrat';
 }
 
 /*Title*/
@@ -14,7 +16,7 @@ body {
 .coro {
     background-color: #222831;
     color: #F7F7F7;
-    padding: 20px 0px 20px 250px;
+    padding: 20px 5px 20px clamp(0px, 17vw, 250px);
 }
 
 .oro {
@@ -27,6 +29,7 @@ body {
     font-size: 48px;
     font-weight: bolder;
     color: #222831;
+    margin-left: 3px;
 }
 
 .title span:nth-child(1){
@@ -38,15 +41,19 @@ body {
     text-align: center;
     width: 35%;
     height: 35%;
-    margin-left: 200px;
-    margin-top: 40px;
+    position: absolute;
+    top: 13vw;
+    right: 8vw;
 }
-
+.gambar > img {
+    min-height: 200px;
+    min-width: 200px;
+}
 .penjelasan {
     font-family: 'Montserrat', sans-serif;
     color: #F7F7F7;
     font-weight: 300;
-    padding-left: 250px;
+    padding-left: clamp(0px, 17vw, 250px);
     font-size: 24px;
     margin-top: 30px;
 }
@@ -88,7 +95,7 @@ body {
 .footer {
     background: linear-gradient(360deg, #4F8A8B 0%, rgba(79, 138, 139, 0.4) 85.79%);
     height: 25vh;
-    width:100vw;
+    width:100%;
 }
 .kontak span{
     font-family: 'Montserrat', sans-serif;
@@ -130,11 +137,37 @@ body {
         display: block;
     }
     .gambar {
+        position: relative;
         margin: auto;
         width: 80%;
         height: 80%;
+        top: unset;
+        right: unset;
     }
     .title {
         margin-top: 10px;
     }
+}
+
+
+/* Fonts */
+@font-face{
+    font-family: 'Font Awesome Brands';
+    src: url('fonts/Font Awesome/fa-brands-400.ttf');
+    font-weight: 400;
+}
+@font-face{
+    font-family: 'Font Awesome';
+    src: url('fonts/Font Awesome/fa-light-300.ttf');
+    font-weight: 300;
+}
+@font-face{
+    font-family: 'Font Awesome';
+    src: url('fonts/Font Awesome/fa-regular-400.ttf');
+    font-weight: 400;
+}
+@font-face{
+    font-family: 'Font Awesome';
+    src: url('fonts/Font Awesome/fa-solid-900.ttf');
+    font-weight: 900;
 }
