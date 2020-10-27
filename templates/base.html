@@ -13,6 +13,9 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
+    {% block style %}
+    {% endblock style %}
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
@@ -47,12 +50,12 @@
                     <span class="">Contact Us.</span>
                 </div>
                 <div class="col-lg-7 foto-kontak d-flex justify-content-around align-items-center">
-                    <a target="_blank" href="https://maung.id/i.gede97"><img  class="img-fluid"src="{% static 'img/adit.png'%}"></a>
-                    <a target="_blank" href="https://maung.id/fikri.akmal"><img class="img-fluid"src="{% static 'img/fikri.png'%}"
+                    <a target="_blank" href="https://maung.id/i.gede97"><img  class="img-fluid" src="{% static 'img/adit.png'%}"></a>
+                    <a target="_blank" href="https://maung.id/fikri.akmal"><img class="img-fluid" src="{% static 'img/fikri.png'%}"
                             alt=""></a>
-                    <a target="_blank" href="https://maung.id/ghifari.zakaria"><img class="img-fluid"src="{% static 'img/ghiffari.png'%}"
+                    <a target="_blank" href="https://maung.id/ghifari.zakaria"><img class="img-fluid" src="{% static 'img/ghiffari.png'%}"
                             alt=""></a>
-                    <a target="_blank" href="https://maung.id/vanessa.emily"><img class="img-fluid"src="{% static 'img/vanessa.png'%}"
+                    <a target="_blank" href="https://maung.id/vanessa.emily"><img class="img-fluid" src="{% static 'img/vanessa.png'%}"
                             alt=""></a>
                 </div>
             </div>
