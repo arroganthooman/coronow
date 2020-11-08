@@ -1,0 +1,102 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block head %}
+	<link rel="stylesheet" href="{% static 'css/isiBlog.css' %}">
+{% endblock head%}
+{% block content %}
+	<!-- Judul -->
+	<section>
+		<div class="container d-flex justify-content-center judul">
+			<div class="row">
+				<div class="col-auto">
+					<p>CovidBlog</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- end of judul -->
+	<!-- Judul Blog -->
+	<section>
+		<div class="container d-flex justify-content-center judul-blog">
+			<div class="row">
+				<p>
+					{{blog.title}}
+				</p>
+			</div>
+			
+		</div>
+	</section>
+	<!-- end of judul blog -->
+	
+	<!-- Blog Image -->
+	<section>
+		<div class="container d-flex justify-content-center blog-image">
+			<img src="{{blog.image.url}}" alt="">
+		</div>
+	</section>
+	<!-- end of blog image -->
+	
+	<!-- Blog body -->
+	<section>
+		<div class="container d-flex justify-content-center isi-blog">
+			<div class="row">
+				<div class="col-auto body">
+					{{blog.body|safe}}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- end of blog body -->
+	
+	<!-- comments section -->
+	<section class="komentar">
+		<div class="container">
+			<div class="row header">
+				<div class="col-auto">
+					<p>
+						KOMENTAR
+					</p>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="container">
+			<form method="POST">
+				{% csrf_token %}
+				<div class="form-group">
+					<input style="color:white;" type="text" name="nama" class="form-control bg-transparent" placeholder="Nama Anda">
+				</div>
+				<div class="form-group">
+					<textarea style="color:white;" name="komentar" class="form-control bg-transparent" placeholder="Berikan Komentar Anda"></textarea>
+				</div>
+				<div class="row d-flex flex-row-reverse button">
+					<div class="col-auto align-self-end">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</div>
+				
+			</form>
+		</div>
+
+
+		<div class="container list-komen">
+			{% for comment in comments%}
+			{% if comment.blog == blog%}
+			<div class="row">
+				<div class="col-auto nama-komentar">
+					<span>{{comment.nama}}</span>
+				</div>	
+			</div>
+			
+			<div class="row">
+				<div class="col-auto komentar-orang">
+					{{comment.komentar}}
+				</div>
+			</div>
+			{% endif %}
+			{% endfor %}
+		</div>
+	</section>
+	<!-- end of comments section -->
+{% endblock content%}
