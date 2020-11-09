@@ -171,9 +171,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ## cloud storage to store image
 cloudinary.config(
-  cloud_name = os.environ.get('CLOUD_NAME'),
-  api_key = os.environ.get('API_KEY'),
-  api_secret = os.environ.get('API_SECRET'),
+  cloud_name = 'hqegsx6eq',
+  api_key = '144782739416582',
+  api_secret = '-Wwj4lJtrSf8PZaBtvLWpQv-hf0',
   secure = True
 )
 
