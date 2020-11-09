@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import cloudinary
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -54,7 +56,9 @@ INSTALLED_APPS = [
     'covidstats.apps.CovidstatsConfig',
     'feedback.apps.FeedbackConfig',
     'ckeditor',
-    'covidblog'
+    'covidblog',
+    'cloudinary',
+    'cloudinary_storage'
 ]
 
 MIDDLEWARE = [
@@ -165,3 +169,14 @@ for directory in [*STATICFILES_DIRS, STATIC_ROOT]:
     directory.mkdir(exist_ok=True)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+## cloud storage to store image
+cloudinary.config(
+  cloud_name = 'hqegsx6eq',
+  api_key = '144782739416582',
+  api_secret = '-Wwj4lJtrSf8PZaBtvLWpQv-hf0',
+  secure = True
+)
+
+if PRODUCTION:
+    DEFAULT_FILE_STORAGE='cloudinary_storage.storage.MediaCloudinaryStorage'
