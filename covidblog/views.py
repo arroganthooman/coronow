@@ -27,4 +27,5 @@ def isiBlog(request,pk):
 		'blog' : blog,
 		'comments': comments
 	}
+	
 	return render(request, 'isiBlog.html', response)

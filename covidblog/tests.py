@@ -4,10 +4,8 @@ from django.contrib.auth.models import User
 from django.core.files import File
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
-import mock
-
 from datetime import *
-	
+import mock
 
 
 # Create your tests here.
@@ -41,7 +39,6 @@ class TestBlog(TestCase):
 
 
 	## Test Model
-
 	def test_model_blog(self):
 		self.assertEquals(Blog.objects.count(),1)
 		Blog.objects.get(id=1).image.delete(save=True)
@@ -54,7 +51,6 @@ class TestBlog(TestCase):
 
 
 	## Test URL
-
 	def test_url_list_blog(self):
 		client = Client()
 		url = reverse("covidBlog")
