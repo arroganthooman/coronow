@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
+import cloudinary
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,7 +34,9 @@ PRODUCTION = os.getenv('DATABASE_URL') is not None
 # SECURITY WARNING: don't run with debug turned on in production!
 # If you want to enable debugging on Heroku for learning purposes,
 # set this to True.
+
 DEBUG = not PRODUCTION
+
 
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', '')
 
@@ -46,10 +52,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'landing_page.apps.LandingPageConfig',
-    'covidblog.apps.CovidblogConfig',
     'covidnews.apps.CovidnewsConfig',
     'covidstats.apps.CovidstatsConfig',
-    'feedback.apps.FeedbackConfig'
+    'feedback.apps.FeedbackConfig',
+    'ckeditor',
+    'covidblog',
+    'cloudinary',
+    'cloudinary_storage'
 ]
 
 MIDDLEWARE = [
@@ -96,6 +105,12 @@ DATABASES = {
     }
 }
 
+# Set database settings automatically using DATABASE_URL.
+if PRODUCTION:
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=600, ssl_require=True
+    )
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -130,6 +145,11 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -148,6 +168,14 @@ STATICFILES_DIRS = [
 for directory in [*STATICFILES_DIRS, STATIC_ROOT]:
     directory.mkdir(exist_ok=True)
 
-# Enable compression and caching features of whitenoise.
-# You can remove this if it causes problems on your setup.
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+## cloud storage to store image
+cloudinary.config(
+  cloud_name = 'hqegsx6eq',
+  api_key = '144782739416582',
+  api_secret = '-Wwj4lJtrSf8PZaBtvLWpQv-hf0',
+  secure = True
+)
+
+DEFAULT_FILE_STORAGE='cloudinary_storage.storage.MediaCloudinaryStorage'

@@ -16,8 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from django.urls.conf import include
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('', include('landing_page.urls'), name='landing_page')
-]
+    re_path('', include('landing_page.urls'), name='landing_page'),
+    path('covidBlog/', include('covidblog.urls'))
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

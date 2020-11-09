@@ -16,6 +16,9 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+
+    {% block head %}
+    {% endblock head %}
 </head>
 
 <body>
@@ -30,7 +33,7 @@
             <div class="navbar-nav ml-auto mr-5">
                 <a class="nav-link" href="#">Stats</a>
                 <a class="nav-link" href="#">News</a>
-                <a class="nav-link" href="#">Blog</a>
+                <a class="nav-link" href="{% url 'covidBlog'%}">Blog</a>
                 <a class="nav-link" href="#" tabindex="-1">Feedback</a>
             </div>
         </div>
@@ -47,12 +50,12 @@
                     <span class="">Contact Us.</span>
                 </div>
                 <div class="col-lg-7 foto-kontak d-flex justify-content-around align-items-center">
-                    <a target="_blank" href="https://maung.id/i.gede97"><img  class="img-fluid"src="{% static 'img/adit.png'%}"></a>
-                    <a target="_blank" href="https://maung.id/fikri.akmal"><img class="img-fluid"src="{% static 'img/fikri.png'%}"
+                    <a target="_blank" href="https://maung.id/i.gede97"><img  class="img-fluid" src="{% static 'img/adit.png'%}"></a>
+                    <a target="_blank" href="https://maung.id/fikri.akmal"><img class="img-fluid" src="{% static 'img/fikri.png'%}"
                             alt=""></a>
-                    <a target="_blank" href="https://maung.id/ghifari.zakaria"><img class="img-fluid"src="{% static 'img/ghiffari.png'%}"
+                    <a target="_blank" href="https://maung.id/ghifari.zakaria"><img class="img-fluid" src="{% static 'img/ghiffari.png'%}"
                             alt=""></a>
-                    <a target="_blank" href="https://maung.id/vanessa.emily"><img class="img-fluid"src="{% static 'img/vanessa.png'%}"
+                    <a target="_blank" href="https://maung.id/vanessa.emily"><img class="img-fluid" src="{% static 'img/vanessa.png'%}"
                             alt=""></a>
                 </div>
             </div>
