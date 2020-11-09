@@ -2,6 +2,9 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.dispatch import receiver
+from cloudinary.models import CloudinaryField
+from django.db.models.signals import pre_delete
+import cloudinary
 import os
 
 # Create your models here.
@@ -9,25 +12,27 @@ import os
 class BlogQuerySet(models.QuerySet):
     def delete(self, *args, **kwargs):
         for obj in self:
-            obj.image.delete(save=True)
+            # obj.image.delete(save=True)
+            cloudinary.uploader.destroy(obj.image.public_id)
         super(BlogQuerySet, self).delete(*args, **kwargs)
 
 
 class Blog(models.Model):
-	objects = BlogQuerySet.as_manager()
-	author = models.ForeignKey(User, default=None, on_delete=models.PROTECT, db_constraint=False)
-	title = models.CharField(max_length=200, blank=False)
-	post_date = models.DateField(auto_now_add = True)
-	image = models.ImageField(null = False, blank = False, upload_to='images/')
-	body = RichTextField(blank=False, null=False)
-	snippet = RichTextField(blank=False, null=False, max_length=100)
+    objects = BlogQuerySet.as_manager()
+    author = models.ForeignKey(User, default=None, on_delete=models.PROTECT, db_constraint=False)
+    title = models.CharField(max_length=200, blank=False)
+    post_date = models.DateField(auto_now_add = True)
+    image = CloudinaryField("image")
+    body = RichTextField(blank=False, null=False)
+    snippet = RichTextField(blank=False, null=False, max_length=100)
+    # image = models.ImageField(null = False, blank = False, upload_to='images/')
 
-	def __str__(self):
-		return self.title
+    def __str__(self):
+    	return self.title
 
-	def delete(self, *args, **kwargs):
-		self.image.delete(save=True)
-		super(Blog, self).delete(*args, **kwargs)
+    # def delete(self, *args, **kwargs):
+    # 	self.image.delete(save=True)
+    # 	super(Blog, self).delete(*args, **kwargs)
 
 
 class Comment(models.Model):
@@ -39,6 +44,12 @@ class Comment(models.Model):
 	def __str__(self):
 		return self.nama
 
+
+
+@receiver(pre_delete, sender=Blog)
+def delete(sender, instance, **kwargs):
+    cloudinary.uploader.destroy(instance.image.public_id)
+    super(Blog, self).delete(*args, **kwargs)
 
 @receiver(models.signals.pre_save, sender=Blog)
 def auto_delete_file_on_change(sender, instance, **kwargs):
@@ -57,5 +68,6 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
 
     new_file = instance.image
     if not old_file == new_file:
-        if os.path.isfile(old_file.path):
-            os.remove(old_file.path)
+        # if os.path.isfile(old_file.path):
+        #     os.remove(old_file.path)
+        cloudinary.uploader.destroy(old_file.public_id)
