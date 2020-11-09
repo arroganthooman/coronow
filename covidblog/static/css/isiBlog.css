@@ -1,0 +1,152 @@
+/* Judul */
+
+.judul {
+	margin-top:10vh;
+}
+
+
+.judul p {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 61px;
+	font-weight: bold;
+	color: white;
+}
+
+
+/* Isi Blog */
+.judul-blog {
+	width:50vw;
+	border-bottom:10px solid #61B9BB;
+}
+
+.judul-blog .row {
+	margin-top: 5vh;
+}
+
+
+.judul-blog p {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	font-size: 40px;
+	color:#FBD46D;
+}
+
+.blog-image {
+	margin-top:8vh;
+}
+
+.isi-blog {
+	margin-top: 10vh;
+	width:50vw;
+}
+
+.isi-blog .body {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 17px;
+	color: white;
+	text-align:justify;
+	line-height: 45px;
+}
+
+.isi-blog .author-dan-tanggal {
+	font-size: 15px;
+}
+
+.isi-blog .body .blog-body p {
+	margin-top: 5vh;
+	padding-bottom: 7vh;
+}
+
+
+
+/* Comment section */
+
+.komentar .container {
+	width:50vw;
+}
+
+
+.komentar ::placeholder {
+	color:#FBD46D;
+}
+
+.komentar input[type=text], .komentar textarea {
+	border: 2px solid #4F8A8B;
+	color:white;
+}
+
+.komentar input[type=text]:focus, .komentar textarea:focus {
+	border: 3px solid #4F8A8B;
+}
+
+.komentar textarea {
+	resize: none;
+	height: 33vh;
+}
+
+.komentar .header .col-auto p{
+	background-color: #4F8A8B;
+	font-size: 20px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 300;
+}
+
+.komentar .button {
+	padding-bottom: 5vh;
+}
+
+.komentar button {
+	color:#FBD46D;
+	border: 2px solid #4F8A8B;
+	background-color: transparent;
+}
+
+.komentar button:hover {
+	background-color: white;
+	color:black;
+	border: 2px solid #4F8A8B;
+}
+
+.komentar .nama-komentar {
+	color:#FBD46D;
+	font-size: 25px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	margin-top: 5vh;
+}
+
+.komentar .nama-komentar span {
+	border-bottom: 1.5px solid #4F8A8B;
+	padding-bottom: 5px;
+}
+
+.komentar .komentar-orang{
+	color:#f7f7f7;
+	font-weight: 400;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 15px;
+	margin-top: 10px;
+}
+
+.komentar .list-komen {
+	padding-bottom: 20vh;
+}
+
+
+@media only screen and (max-width: 900px) {
+
+	.judul-blog p {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 30px;
+		text-align: center;
+	}
+
+	.isi-blog {
+		margin-top: 10vh;
+		width:100%
+	}
+
+	.komentar .container {
+		width:100%;
+	}
+}
