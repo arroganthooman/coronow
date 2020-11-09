@@ -29,7 +29,6 @@ class TestBlog(TestCase):
 		)
 		image = SimpleUploadedFile(name='test_image.gif', content=small_gif, content_type='image/gif')
 
-		# image = '/static/img/virus.png'
 		with mock.patch('django.utils.timezone.now') as mock_now:
 			mock_now.return_value = testtime
 			self.blog = Blog.objects.create(
@@ -52,15 +51,12 @@ class TestBlog(TestCase):
 
 	def test_model_blog(self):
 		self.assertEquals(Blog.objects.count(),1)
-		# Blog.objects.get(id=1).image.delete(save=True)
-		# Blog.objects.get(id=1).image.destroy(self.blog.image.public_id)
 		cloudinary.uploader.destroy(self.blog.image.public_id)
 		Blog.objects.all().delete()
 
 	def test_model_komentar(self):
 		self.assertEquals(Comment.objects.count(),1)
 		self.assertEquals(str(Comment.objects.get(blog=self.blog)), "fikri")
-		# Blog.objects.get(id=1).image.destroy(self.blog.image.public_id)
 		cloudinary.uploader.destroy(self.blog.image.public_id)
 		self.blog.delete()
 
@@ -72,16 +68,12 @@ class TestBlog(TestCase):
 		url = reverse("covidBlog")
 		response = client.get(url)
 		self.assertEquals(response.status_code, 200)
-		# Blog.objects.get(id=1).image.delete(save=True)
-		# Blog.objects.get(id=1).image.destroy(self.blog.image.public_id)
 		cloudinary.uploader.destroy(self.blog.image.public_id)
 
 	def test_url_per_blog(self):
 		client = Client()
 		response = client.get(reverse('blog', args=[self.blog.id]))
 		self.assertEquals(response.status_code, 200)
-		# Blog.objects.get(id=1).image.delete(save=True)
-		# Blog.objects.get(id=1).image.destroy(self.blog.image.public_id)
 		cloudinary.uploader.destroy(self.blog.image.public_id)
 
 
@@ -93,8 +85,6 @@ class TestBlog(TestCase):
 
 		self.assertTemplateUsed(response, 'base.html')
 		self.assertTemplateUsed(response, 'covidBlog.html')
-		# Blog.objects.get(id=1).image.delete(save=True)
-		# Blog.objects.get(id=1).image.destroy(self.blog.image.public_id)
 		cloudinary.uploader.destroy(self.blog.image.public_id)		
 
 	def test_view_isiBlog(self):
@@ -103,8 +93,6 @@ class TestBlog(TestCase):
 
 		self.assertTemplateUsed(response, 'base.html')
 		self.assertTemplateUsed(response, 'isiBlog.html')
-		# Blog.objects.get(id=1).image.delete(save=True)
-		# Blog.objects.get(id=1).image.destroy(self.blog.image.public_id)
 		cloudinary.uploader.destroy(self.blog.image.public_id)
 
 
@@ -116,14 +104,10 @@ class TestBlog(TestCase):
 		})
 
 		self.assertEquals(Comment.objects.count(),2)
-		# Blog.objects.get(id=1).image.delete(save=True)
-		# Blog.objects.get(id=1).image.destroy(self.blog.image.public_id)
-		# cloudinary.uploader.destroy(self.blog.image.public_id)
 
 
 	def test_admin_change_image(self):
 		url = f'admin/covidblog/blog/1/change'
-		# image = SimpleUploadedFile(name='testing_image.jpg', content=b'', content_type='image/jpeg')
 		small_gif = (
 		    b'\x47\x49\x46\x38\x39\x61\x01\x00\x01\x00\x00\x00\x00\x21\xf9\x04'
 		    b'\x01\x0a\x00\x01\x00\x2c\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02'
