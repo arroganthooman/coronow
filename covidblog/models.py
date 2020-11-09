@@ -47,9 +47,9 @@ class Comment(models.Model):
 
 
 @receiver(pre_delete, sender=Blog)
-def delete(sender, instance, **kwargs):
+def image_delete(sender, instance, **kwargs):
     cloudinary.uploader.destroy(instance.image.public_id)
-    super(Blog, self).delete(*args, **kwargs)
+    # super(Blog, self).delete(*args, **kwargs)
 
 @receiver(models.signals.pre_save, sender=Blog)
 def auto_delete_file_on_change(sender, instance, **kwargs):
