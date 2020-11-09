@@ -34,7 +34,7 @@ DEBUG = not PRODUCTION
 
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', '')
 
-ALLOWED_HOSTS = [f'{HEROKU_APP_NAME}.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = [f'{HEROKU_APP_NAME}.herokuapp.com', 'localhost', 'coronow.herokuapp.com']
 
 # Application definition
 
@@ -46,11 +46,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'landing_page.apps.LandingPageConfig',
-    'covidblog.apps.CovidblogConfig',
     'covidnews.apps.CovidnewsConfig',
     'covidstats.apps.CovidstatsConfig',
     'feedback.apps.FeedbackConfig',
-    'ckeditor'
+    'ckeditor',
+    'covidblog'
 ]
 
 MIDDLEWARE = [
