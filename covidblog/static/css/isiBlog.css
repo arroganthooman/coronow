@@ -35,6 +35,11 @@
 	margin-top:8vh;
 }
 
+.blog-image img {
+	max-width: 768px;
+	height:auto;
+}
+
 .isi-blog {
 	margin-top: 10vh;
 	width:50vw;
