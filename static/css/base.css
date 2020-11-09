@@ -88,7 +88,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-size: 35px;
-    margin-left: 50px;
+    margin-left: 3.25vw;
 }
 
 /* Footer */
@@ -114,17 +114,26 @@ body {
     .coro {
         padding-left: 60px;
     }
-    .title span:nth-child(1){
+
+    .navbar-brand span:nth-child(1) {
         font-size: 40px;
         font-weight: 300;
     }
-    .oro {
+    .navbar-brand span:nth-child(2) {
         font-size: 34px;
         font-weight: 300;
     }
-    .now {
+    .navbar-brand span:nth-child(3) {
         font-size: 34px;
+        font-weight: 700;
     }
+
+    .navbar-nav a {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 25px;
+    }
+
     .penjelasan {
         padding-left: 60px;
         font-size: 16px;

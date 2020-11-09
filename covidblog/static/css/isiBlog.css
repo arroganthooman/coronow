@@ -140,6 +140,10 @@
 
 @media only screen and (max-width: 900px) {
 
+	.judul p{
+		font-size: 45px;
+	}
+
 	.judul-blog p {
 		font-family: 'Montserrat', sans-serif;
 		font-size: 30px;
@@ -153,5 +157,13 @@
 
 	.komentar .container {
 		width:100%;
+	}
+
+	.isi-blog {
+		width:100%;
+	}
+	.blog-image img {
+		max-width: 100%;
+		height:auto;
 	}
 }
