@@ -59,6 +59,27 @@ body {
     display: none;
 }
 
+/* Penjelasan */
+.box {
+    border-right: solid 1px #FBD46D;
+}
+
+.teks {
+    color: #FBD46D;
+    padding-right: 60px;
+    text-align: right;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 60px;
+}
+.teks-2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    padding-left: 60px;
+    text-align: left;
+    font-size: 24px;
+    color: #F7F7F7;
+}
 /* Navbar */
 .navbar-brand {
     font-family: 'Montserrat', sans-serif;
