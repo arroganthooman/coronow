@@ -42,11 +42,22 @@
 
 .isi-blog .body {
 	font-family: 'Montserrat', sans-serif;
-	font-size: 19px;
+	font-size: 17px;
 	color: white;
 	text-align:justify;
 	line-height: 45px;
 }
+
+.isi-blog .author-dan-tanggal {
+	font-size: 15px;
+}
+
+.isi-blog .body .blog-body p {
+	margin-top: 5vh;
+	padding-bottom: 7vh;
+}
+
+
 
 /* Comment section */
 
