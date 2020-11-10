@@ -66,6 +66,67 @@ body {
     display: none;
 }
 
+/* Penjelasan */
+.container-penjelasan {
+    margin-top: 200px;
+    margin-bottom: 500px;
+}
+
+.container-teks {
+    margin-top: 100px;
+    min-height: 350px;
+}
+
+.box {
+    border-right: solid 1px #FBD46D;
+}
+
+.teks {
+    color: #FBD46D;
+    padding-right: 60px;
+    text-align: right;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 64px;
+    padding-left: 20px;
+    line-height: 1.5;
+}
+
+.teks-2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    padding-left: 60px;
+    text-align: left;
+    font-size: 24px;
+    color: #F7F7F7;
+    padding-right: 37px;
+}
+
+.teks-1 {
+    color: #FBD46D;
+    padding-right: 60px;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 64px;
+    padding-left: 60px;
+    line-height: 1.5;
+}
+
+.teks-2-1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    padding-left: 60px;
+    text-align: right;
+    font-size: 24px;
+    color: #F7F7F7;
+    padding-right: 60px;
+}
+ 
+.gelombing {
+    position: absolute;
+    padding-top: 150px;
+}
 /* Navbar */
 .navbar-brand {
     font-family: 'Montserrat', sans-serif;
@@ -155,6 +216,42 @@ body {
     }
     .title {
         margin-top: 10px;
+    }
+    .box {
+        border: none;
+    }
+    .teks {
+        padding: 0;
+        margin: 0px 10px 0px 0px;
+        font-size: 34px;
+        padding-left: 30px;
+        margin-right: 10px;
+    }
+    .teks-2 {
+        text-align: left;
+        font-size: 18px;
+        padding: 30px 20px 0px 25px;
+        border-left: solid 1px #FBD46D;
+        margin-left: 10px;
+    }
+    .teks-1 {
+        text-align: center;
+        margin: 10px 0px 0px 10px;
+        padding: 0;
+        font-size: 34px;
+    }
+    .teks-2-1 {
+        text-align: right;
+        font-size: 18px;
+        padding: 30px 25px 0px 20px;
+        border-right: solid 1px #FBD46D;
+        margin-right: 10px;
+    }
+    .container-teks {
+        min-height: 20px;
+    }
+    .gelombing {
+        width: 98%;
     }
 }
 
