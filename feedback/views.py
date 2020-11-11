@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from .models import Feedback
 from .forms import Form_Feedback
 
@@ -6,3 +7,11 @@ from .forms import Form_Feedback
 def feedback(request):
     response = {'field' : Form_Feedback}
     return render(request, 'feedback.html', response)
+
+def savefeedback(request):
+    form = Form_Feedback(request.POST or None)
+    if (form.is_valid and request.method == 'POST'):
+        form.save()
+        return HttpResponseRedirect('/feedback/')
+    else:
+        return HttpResponseRedirect('/feedbac/k')

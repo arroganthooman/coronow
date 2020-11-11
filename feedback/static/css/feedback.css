@@ -27,7 +27,7 @@
 
 .container-form {
     text-align: right;
-    margin-top: 100px;
+    margin-top: 80px;
     margin-bottom: 200px;
     max-width: 480px;
 }
@@ -40,6 +40,22 @@
     background-color: #4F8A8B;
     padding: 10px;
     margin-top: 20px;
-    margin
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .judul p {
+        font-size: 30px;
+    }
+    .container-form {
+        max-width: 300px;
+    }
+    .inputbox {
+        width: 270px;
+        font-size: 18px;
+    }
+    .submit-button {
+        font-size: 18px;
+    }
 }
 

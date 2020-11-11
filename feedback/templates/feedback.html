@@ -21,7 +21,7 @@
 <!--Form-->
 <section>
     <div class="container container-form">
-        <form class="form" method="POST">
+        <form class="form" action="savefeedback/" method="POST">
             {% csrf_token %}
             <p class="fields">{{ field.nama }}</p>
             <p class="fields">{{ field.email }}</p>
