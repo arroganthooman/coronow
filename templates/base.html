@@ -24,7 +24,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-        <a class="navbar-brand ml-2" href="#"><span>C</span><span>oro</span><span>Now</span></a>
+        <a class="navbar-brand ml-2" href="{% url 'index' %}"><span>C</span><span>oro</span><span>Now</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -33,8 +33,8 @@
             <div class="navbar-nav ml-auto mr-5">
                 <a class="nav-link" href="#">Stats</a>
                 <a class="nav-link" href="#">News</a>
-                <a class="nav-link" href="{% url 'covidBlog'%}">Blog</a>
-                <a class="nav-link" href="#" tabindex="-1">Feedback</a>
+                <a class="nav-link" href="{% url 'covidBlog' %}">Blog</a>
+                <a class="nav-link" href="{% url 'feedback' %}" tabindex="-1">Feedback</a>
             </div>
         </div>
     </nav>
