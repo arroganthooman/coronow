@@ -122,10 +122,13 @@ body {
     color: #F7F7F7;
     padding-right: 60px;
 }
+
+
  
 .gelombing {
     position: absolute;
     padding-top: 150px;
+    
 }
 /* Navbar */
 .navbar-brand {
