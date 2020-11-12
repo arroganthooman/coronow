@@ -19,8 +19,8 @@
 	<!-- Judul Blog -->
 	<section>
 		<div class="container d-flex justify-content-center judul-blog">
-			<div class="row">
-				<p>
+			<div class="row d-flex justify-content-center">
+				<p style="text-align: center">
 					{{blog.title}}
 				</p>
 			</div>
@@ -97,7 +97,7 @@
 				{% if comment.blog == blog%}
 					<div class="row">
 						<div class="col-auto nama-komentar">
-							<span>{{comment.nama}}</span>
+							<span id={{comment.id}}>{{comment.nama}}</span>
 						</div>
 					</div>
 					
@@ -105,7 +105,6 @@
 						<div class="col-auto komentar-orang">
 							{{comment.post_date}}<br><br>
 							{{comment.komentar}}
-							
 						</div>
 					</div>
 				{% endif %}

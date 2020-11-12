@@ -50,7 +50,7 @@
 	font-size: 17px;
 	color: white;
 	text-align:justify;
-	line-height: 45px;
+	line-height: 2.5;
 }
 
 .isi-blog .author-dan-tanggal {
@@ -60,6 +60,11 @@
 .isi-blog .body .blog-body p {
 	margin-top: 5vh;
 	padding-bottom: 7vh;
+}
+
+.isi-blog .body .blog-body img {
+	max-width: 768px;
+	height:auto;
 }
 
 

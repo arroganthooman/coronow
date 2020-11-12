@@ -11,14 +11,13 @@ def covidBlog(request):
 	return render(request, 'covidBlog.html', response)
 
 def isiBlog(request,pk):
-
 	if request.method == "POST":
 		nama = request.POST.get("nama")
 		komentar = request.POST.get("komentar")
 		blog = Blog.objects.get(id=pk)
 		if len(nama)<=30 and len(komentar)<=100:
-			Comment.objects.create(nama=nama, komentar=komentar, blog=blog)
-			return redirect(f'/covidBlog/blog/{pk}')
+			comment = Comment.objects.create(nama=nama, komentar=komentar, blog=blog)
+			return redirect(f'/covidBlog/blog/{pk}#{comment.id}')
 
 	blog = Blog.objects.get(id=pk)
 	comments = Comment.objects.all()
