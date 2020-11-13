@@ -14,4 +14,4 @@ def savefeedback(request):
         form.save()
         return HttpResponseRedirect('/feedback/')
     else:
-        return HttpResponseRedirect('/feedbac/k')
+        return HttpResponseRedirect('/feedback/')
