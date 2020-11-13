@@ -27,7 +27,7 @@
 
 .container-form {
     text-align: right;
-    margin-top: 80px;
+    margin-top: 95px;
     margin-bottom: 200px;
     max-width: 480px;
 }
@@ -45,10 +45,11 @@
 /* Responsive */
 @media (max-width: 576px) {
     .judul p {
-        font-size: 30px;
+        font-size: 45px;
     }
     .container-form {
         max-width: 300px;
+        margin-top: 60px;
     }
     .inputbox {
         width: 270px;
