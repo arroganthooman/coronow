@@ -44,3 +44,9 @@ class TestFeedback(TestCase):
     def test_views_savefeedback(self):
         found = resolve('/feedback/savefeedback/')
         self.assertEquals(found.func, savefeedback)
+
+    def test_POST_form(self):
+        response = Client().post('/feedback/savefeedback/', data = {'nama': 'Spongebob','email':
+        'spongebob@gmail.com','isi': 'halo'})
+        banyaknya = Feedback.objects.filter(nama="Spongebob").count()
+        self.assertEquals(banyaknya, 1)
