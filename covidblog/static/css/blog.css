@@ -32,7 +32,7 @@
 }
 .card-img-top {
 	object-fit: cover;
-	max-width:100%;
+	max-width:99%;
 	height:100%;
 	border-top-left-radius: 10.2796px;
 	border-top-right-radius: 10.2796px;
@@ -73,7 +73,7 @@
 
 
 /* Media Queries */
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1000px) {
 	
 	/* Judul */
 	.judul {
