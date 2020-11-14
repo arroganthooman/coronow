@@ -57,13 +57,17 @@
 	font-size: 15px;
 }
 
-.isi-blog .body .blog-body p {
-	margin-top: 5vh;
-	padding-bottom: 7vh;
+.isi-blog .body .blog-body p{
+	margin-top: 3vh;
+	/*width:100%;*/
 }
 
+/*.isi-blog .body .blog-body a{
+	width:100%;
+}*/
+
 .isi-blog .body .blog-body img {
-	max-width: 768px;
+	max-width: 100%;
 	height:auto;
 }
 
@@ -168,6 +172,13 @@
 		width:100%;
 	}
 	.blog-image img {
+		max-width: 100%;
+		height:auto;
+	}
+}
+
+@media only screen and (max-width: 576px) {
+	.isi-blog .body .blog-body img {
 		max-width: 100%;
 		height:auto;
 	}
