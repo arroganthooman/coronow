@@ -26,7 +26,6 @@ class CovidstatsTest(TestCase):
         while(not task_thread.__dict__.get('task_done_once', False)):
             pass
 
-
     #Task Test
     def test_task_thread_exists(self):
         self.assertTrue(len(threading.enumerate()) > 1)

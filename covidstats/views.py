@@ -8,7 +8,7 @@ def covidstats(request):
     if request.method == "POST":
         try:
             if request.POST["post_type"] == "POST_PROV":
-                provinsi = KasusProvinsi.objects.find(nama_provinsi = request.POST["prov"].upper())[0]
+                provinsi = KasusProvinsi.objects.get(nama_provinsi = request.POST["prov"].upper())
                 return JsonResponse(provinsi.data_json, safe=False)
         except KasusProvinsi.DoesNotExist as e:
             return JsonResponse(
