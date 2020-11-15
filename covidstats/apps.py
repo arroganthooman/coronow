@@ -5,7 +5,7 @@ class CovidstatsConfig(AppConfig):
     name = 'covidstats'
 
     def ready(self):
-        if 'runserver' in sys.argv or 'gunicorn' in sys.argv:
+        if 'runserver' in sys.argv or 'CoroNow.wsgi' in sys.argv:
             from . import task
             task.main()
         return True
