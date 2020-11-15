@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/feedback.css' %}">
+{% endblock head %}
+
+{% block content %}
+<!--Judul-->
+<section>
+    <div class="container d-flex justify-content-center judul">
+        <div class="row">
+            <div class="col-auto">
+                <p>Feedback</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!--end of judul-->
+
+<!--Form-->
+<section>
+    <div class="container container-form">
+        <form class="form" action="savefeedback/" method="POST">
+            {% csrf_token %}
+            <p class="fields">{{ field.nama }}</p>
+            <p class="fields">{{ field.email }}</p>
+            <p class="fields">{{ field.isi }}</p>
+            <input type="submit" value="Submit" class="submit-button">
+        </form>
+    </div>
+</section>
+{% endblock content %}

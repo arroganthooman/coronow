@@ -34,7 +34,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-        <a class="navbar-brand ml-2" href="#"><span>C</span><span>oro</span><span>Now</span></a>
+        <a class="navbar-brand ml-2" href="{% url 'index' %}"><span>C</span><span>oro</span><span>Now</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -43,8 +43,8 @@
             <div class="navbar-nav ml-auto mr-5">
                 <a class="nav-link" href="#">Stats</a>
                 <a class="nav-link" href="#">News</a>
-                <a class="nav-link" href="#">Blog</a>
-                <a class="nav-link" href="#" tabindex="-1">Feedback</a>
+                <a class="nav-link" href="{% url 'covidBlog' %}">Blog</a>
+                <a class="nav-link" href="{% url 'feedback' %}" tabindex="-1">Feedback</a>
             </div>
         </div>
     </nav>
@@ -60,12 +60,12 @@
                     <span class="">Contact Us.</span>
                 </div>
                 <div class="col-lg-7 foto-kontak d-flex justify-content-around align-items-center">
-                    <a target="_blank" href="https://maung.id/i.gede97"><img  class="img-fluid"src="{% static 'img/adit.png'%}"></a>
-                    <a target="_blank" href="https://maung.id/fikri.akmal"><img class="img-fluid"src="{% static 'img/fikri.png'%}"
+                    <a target="_blank" href="https://maung.id/i.gede97"><img  class="img-fluid" src="{% static 'img/adit.png'%}"></a>
+                    <a target="_blank" href="https://maung.id/fikri.akmal"><img class="img-fluid" src="{% static 'img/fikri.png'%}"
                             alt=""></a>
-                    <a target="_blank" href="https://maung.id/ghifari.zakaria"><img class="img-fluid"src="{% static 'img/ghiffari.png'%}"
+                    <a target="_blank" href="https://maung.id/ghifari.zakaria"><img class="img-fluid" src="{% static 'img/ghiffari.png'%}"
                             alt=""></a>
-                    <a target="_blank" href="https://maung.id/vanessa.emily"><img class="img-fluid"src="{% static 'img/vanessa.png'%}"
+                    <a target="_blank" href="https://maung.id/vanessa.emily"><img class="img-fluid" src="{% static 'img/vanessa.png'%}"
                             alt=""></a>
                 </div>
             </div>

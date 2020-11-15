@@ -1,0 +1,62 @@
+/* Judul */
+
+.judul {
+	margin-top:10vh;
+}
+
+.judul p {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 61px;
+	font-weight: bold;
+	color: white;
+}
+
+/* Form Feedback */
+.inputbox {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    border-radius: 10px;
+    border: none;
+    padding: 5px 10px 5px 10px;
+    width: 450px;
+}
+
+.fields {
+    margin-top: 40px;
+}
+
+.container-form {
+    text-align: right;
+    margin-top: 95px;
+    margin-bottom: 200px;
+    max-width: 480px;
+}
+
+.submit-button {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    border-radius: 10px;
+    border: none;
+    background-color: #4F8A8B;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .judul p {
+        font-size: 45px;
+    }
+    .container-form {
+        max-width: 300px;
+        margin-top: 60px;
+    }
+    .inputbox {
+        width: 270px;
+        font-size: 18px;
+    }
+    .submit-button {
+        font-size: 18px;
+    }
+}
+
