@@ -5,7 +5,7 @@ class CovidstatsConfig(AppConfig):
     name = 'covidstats'
 
     def ready(self):
-        if 'runserver' not in sys.argv:
-            return True
-        from . import task
-        task.main()
+        if 'runserver' in sys.argv or 'gunicorn' in sys.argv:
+            from . import task
+            task.main()
+        return True
