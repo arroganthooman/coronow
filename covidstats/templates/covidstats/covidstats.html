@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'covidstats/covidstats.css' %}">
+
+    <!-- JQuery Style -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" />
+
+    <!-- D3 -->
+    <script src="{% static 'covidstats/d3.v5.min.js' %}"></script>
+
+    <!-- Tippy -->
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/shift-toward.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/themes/light.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/svg-arrow.css"/>
+{% endblock head %}
+
+{% block content %}
+    {% csrf_token %}
+    <input type="hidden" name="url" value="{% url 'covidstats' %}">
+    <br>
+    <div class="pt-5 mt-5 d-flex justify-content-center">
+        <h1 style="font-weight: 700; font-size: 60px;" class="font-white m-5">CovidStats</h1>
+    </div>
+    {% if kasus_updated %}
+    <div style="max-width: 900px;" class="mx-auto mb-5 d-flex container-fluid flex-column">
+        <h2 style="font-size: 40px; font-weight: 500;" class="font-white mx-2">Total Kasus</h2>
+        <p style="font-size: 20px;" class="font-white font-weight-light mx-2">Indonesia</p>
+        <div class="d-flex flex-row row my-2 align-content-around">
+            <div class="my-1 mx-3 px-4 py-2 col total-card shadow">
+                <h2 style="color: #FBD46D;">{{ kasus_updated.kasus_terkonfirmasi_kum|intcomma }}</h2>
+                <h4 class="font-white font-weight-light ">Positif</h4>
+            </div>
+            <div class="my-1 mx-3 px-4 py-2 col total-card shadow">
+                <h2 style="color: #4F8A8B;">{{ kasus_updated.kasus_sembuh_kum|intcomma }}</h2>
+                <h4 class="font-white font-weight-light ">Sembuh</h4>
+            </div>
+            <div class="my-1 mx-3 px-4 py-2 col total-card shadow">
+                <h2 style="color: #C8312A;">{{ kasus_updated.kasus_meninggal_kum|intcomma }}</h2>
+                <h4 class="font-white font-weight-light ">Meninggal</h4>
+            </div>
+        </div>
+    </div>
+    <div style="height: 3em;"><br></div>
+    <div style="max-width: 1115px;" class="d-flex flex-column mx-auto my-5 px-3 py-5 justify-content-start position-relative">
+        <div id="kasus-harian" class="d-flex flex-column">
+            <form id="form-daerah" action="" class="position-relative d-flex flex-row ">
+                <div class="position-relative d-flex flex-row-reverse align-items-center">
+                    <input id="input-daerah" style="border-radius: 8px; outline: none; border: none; width: clamp(300px , 50vw, 380px); height: 40px; font-size: 22px;" class="my-4 px-3 shadow" type="text" placeholder="Input Wilayah">
+                    <div id="notif" role="notif">
+                    </div>
+                    <button style="position: absolute; right: 4px; background-color: transparent; outline: none; border: none;" type="submit">
+                        <p style="font-weight: 300; font-family: 'Font Awesome'; ">&#xf002</p>
+                    </button>
+                </div>
+            </form>
+            <h2 style="font-size: 40px; font-weight: 500;" class="font-white my-1">Kasus Harian</h2>
+            <p id="prov-daerah" style="font-size: 20px; text-transform: capitalize;" class="font-white font-weight-light"></p>
+            <div class="d-flex flex-column mx-1 my-1 position-relative">
+                <p id="p-sembuh" class="font-white font-weight-lighter my-1">Sembuh</p>
+                <p id="p-positif" class="font-white font-weight-lighter my-1">Positif</p>
+                <p id="p-meninggal" class="font-white font-weight-lighter my-1">Meninggal</p>
+            </div>
+        </div>
+        <div id="chart-container" class="d-flex justify-content-center">
+        </div>
+    </div>
+    <div style="height: 15em;"><br></div>
+    <div class="d-flex flex-column mx-auto mb-5 px-3 py-5 align-content-center text-center position-relative">
+        <h2 style="font-size: 44px; font-weight: 500;" class="font-white my-1">Detail Kasus</h2>
+        <h4 class="font-white font-weight-light">Indonesia</h4>
+        <div class="container mt-4">
+            <div class="row justify-content-md-center">
+                <div style="border-right: 1px solid #FBD46D;" class="col">
+                    <div  class="d-flex flex-row-reverse align-items-center m-4">
+                        <h2 style="color: #C8312A;">{{ kasus_updated.kasus_terkonfirmasi_kum|intcomma }}</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Positif</p>
+                    </div>
+                    <div class="d-flex flex-row-reverse align-items-center m-4">
+                        <h2 style="color: #C8312A;">{{ kasus_updated.kasus_meninggal_kum|intcomma }}</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Meninggal</p>
+                    </div>
+                    <div class="d-flex flex-row-reverse align-items-center m-4">
+                        <h2 style="color: #4F8A8B;">{{ kasus_updated.kasus_sembuh_kum|intcomma }}</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Sembuh</p>
+                    </div>
+                    <div class="d-flex flex-row-reverse align-items-center m-4">
+                        <h2 style="color: #4F8A8B;">{{ kasus_updated.kasus_dirawat_kum|intcomma }}</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Aktif</p>
+                    </div>
+                    <div class="d-flex flex-row-reverse align-items-center m-4">
+                        <h2 style="color: #EEEEEE;">{{ kasus_updated.kasus_suspek|intcomma }}</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Suspek</p>
+                    </div>
+                    <div class="d-flex flex-row-reverse align-items-center m-4">
+                    </div>
+                </div>
+                <div style="border-left: 1px solid #FBD46D;" class="col">
+                    <div class="d-flex m-4 align-items-center">
+                        <h2 style="color: #FBD46D;">{{ kasus_updated.spesimen|intcomma }}</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Spesimen Diperiksa</p>
+                    </div>
+                    <div class="d-flex m-4 align-items-center">
+                        <h2 style="color: #FBD46D;">{{ kasus_updated.spesimen_negatif|intcomma }}</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3 text-left">Spesimen Negatif</p>
+                    </div>
+                    <div class="d-flex m-4 align-items-center">
+                        <h2 style="color: #EEEEEE;">{{ kasus_updated.kab_kota_terdampak|intcomma }}</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kab Kota Terdampak</p>
+                    </div>
+                    <div class="d-flex m-4 align-items-center">
+                        <h2 style="color: #EEEEEE;">{{ kasus_updated.transmisi_lokal|intcomma }}</h2>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Transmisi Lokal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 35vh;">
+        <br>
+    </div>
+    {% else %}
+    <div class="d-flex justify-content-center">
+        <p class="font-white text-center">Data sedang diperbaharui,<br>mohon coba beberapa saat lagi.</p>
+    </div>
+    {% endif %}
+<script src="{% static 'covidstats/covidstats.js' %}"></script>
+{% endblock content %}
