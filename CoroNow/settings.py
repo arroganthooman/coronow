@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'covidstats.apps.CovidstatsConfig',
     'feedback.apps.FeedbackConfig',
     'ckeditor',
-    "django.contrib.humanize"
+    "django.contrib.humanize",
     'covidblog',
     'cloudinary',
     'cloudinary_storage'
