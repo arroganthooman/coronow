@@ -41,15 +41,27 @@ footer{
     position: relative;
     top: 4px;
     margin-right: 5px;
+}
+.tooltip-box-sembuh, .tooltip-box-meninggal, .tooltip-box-positif, .tooltip-tanggal{
+    color: black;
+    font-size: smaller;
+}
+.tooltip-box-sembuh::before, .tooltip-box-meninggal::before, .tooltip-box-positif::before{
+    content: '\200B';
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    margin-right: 5px;
+}
+#p-sembuh::before, .tooltip-box-sembuh::before{
     background-color: #4F8A8B;
 }
-#p-sembuh::before{
-    background-color: #4F8A8B;
-}
-#p-meninggal::before {
+#p-meninggal::before, .tooltip-box-meninggal::before{
     background-color: #972222;
 }
-#p-positif::before {
+#p-positif::before, .tooltip-box-positif::before{
     background-color: #C1A352;
 }
 .font-white{
@@ -67,6 +79,21 @@ footer{
 .total-card:nth-child(3){
     background-image: linear-gradient(to right, #222831 40%, #252e37f3 ,  #972222);
 }
-.stroke-black line, .domain{
+.tick line, .domain{
     stroke: white!important;
+}
+.tick text{
+    color: white;
+    font-family: Montserrat;
+    font-size: 5px;
+}
+.svg-hover{
+    opacity: 0.6;
+}
+rect:focus{
+    border: unset;
+    outline: unset;
+}
+svg{
+    overflow: visible;
 }
