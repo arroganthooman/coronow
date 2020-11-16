@@ -18,8 +18,10 @@
         rel="stylesheet">
 
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
@@ -44,13 +46,20 @@
                 <a class="nav-link" href="{% url 'covidstats' %}">Stats</a>
                 <a class="nav-link" href="{% url 'covidNews' %}">News</a>
                 <a class="nav-link" href="{% url 'covidBlog' %}">Blog</a>
-                <a class="nav-link" href="{% url 'feedback' %}" tabindex="-1">Feedback</a>
+                <div class="dropdown">
+                    <button class="nav-link btn dropdown-toggle" type="button"
+                    data-toggle="dropdown" aria-haspopup="true">Feedback</button>
+                    <div class="dropdown-menu">
+                        <a class="dpdwn dropdown-item" href="{% url 'feedback' %}">Isi Feedback</a>
+                        <a class="dpdwn dropdown-item" href="{% url 'feedback' %}">List Feedback</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
     <!-- end of Navbar -->
-        {%block content%}
-        {% endblock content%}
+    {%block content%}
+    {% endblock content%}
 
     <!-- Footer -->
     <footer>
@@ -60,17 +69,19 @@
                     <span class="">Contact Us.</span>
                 </div>
                 <div class="col-lg-7 foto-kontak d-flex justify-content-around align-items-center">
-                    <a target="_blank" href="https://maung.id/i.gede97"><img  class="img-fluid" src="{% static 'img/adit.png'%}"></a>
-                    <a target="_blank" href="https://maung.id/fikri.akmal"><img class="img-fluid" src="{% static 'img/fikri.png'%}"
-                            alt=""></a>
-                    <a target="_blank" href="https://maung.id/ghifari.zakaria"><img class="img-fluid" src="{% static 'img/ghiffari.png'%}"
-                            alt=""></a>
-                    <a target="_blank" href="https://maung.id/vanessa.emily"><img class="img-fluid" src="{% static 'img/vanessa.png'%}"
-                            alt=""></a>
+                    <a target="_blank" href="https://maung.id/i.gede97"><img class="img-fluid"
+                            src="{% static 'img/adit.png'%}"></a>
+                    <a target="_blank" href="https://maung.id/fikri.akmal"><img class="img-fluid"
+                            src="{% static 'img/fikri.png'%}" alt=""></a>
+                    <a target="_blank" href="https://maung.id/ghifari.zakaria"><img class="img-fluid"
+                            src="{% static 'img/ghiffari.png'%}" alt=""></a>
+                    <a target="_blank" href="https://maung.id/vanessa.emily"><img class="img-fluid"
+                            src="{% static 'img/vanessa.png'%}" alt=""></a>
                 </div>
             </div>
         </div>
     </footer>
     <!-- end of footer -->
 </body>
+
 </html>

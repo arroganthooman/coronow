@@ -162,6 +162,31 @@ body {
     font-size: 35px;
     margin-left: 3.25vw;
 }
+.navbar-nav button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 35px;
+    margin-left: 3.25vw;
+}
+.dpdwn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 30px !important;
+    background-color: transparent;
+    color: rgba(255,255,255,.5);
+    padding: .25rem .25rem;
+}
+.dpdwn:hover {
+    color: white;
+    background-color: transparent;
+}
+
+.dropdown-menu {
+    position: absolute !important;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+}
 
 /* Footer */
 .footer {
