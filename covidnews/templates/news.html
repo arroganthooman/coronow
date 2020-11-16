@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block head%}
+<link rel="stylesheet" href="{% static 'css/news.css' %}">
+{% endblock head %}
+
+{% block content %}
+<div class="judul">
+    <P style="text-align:center;">CovidNews</P>
+</div>
+    {% for news in news%}
+    <div class= "column">
+        <div class="imgcon">
+            <img src={{news.Foto}}  >
+        </div>
+        <div class="berita">
+            <P>{{news.Judul}}</P>
+        </div>
+        <div class="lebihlanjut">
+            <p ><a href="/covidnews/news/{{news.id}}">Baca lebih lanjut</a> &#8594;</p>
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+
+<br>
+<br>
+<br>
+{% endblock content%}
