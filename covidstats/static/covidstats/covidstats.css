@@ -16,15 +16,6 @@
 h1, h2, h3, h4, p {
     margin: 0!important;
 }
-body{
-    min-height: 100vh;
-    position: relative;
-}
-footer{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
 .font-white{
     color: #EEEEEE;
 }
