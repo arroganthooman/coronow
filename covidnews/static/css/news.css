@@ -1,0 +1,77 @@
+.judul {
+    margin-top:10vh;
+    text-align: center;
+}
+
+.judul p {
+    text-align: center;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 61px;
+	font-weight: bold;
+	color: white;
+}
+
+.column {
+    position: relative;
+    top: 50px;
+    width: 761.89px;
+    height: 299px;
+    left: 339px;
+    background: #222831;
+  box-shadow: 0px 0px 13.5808px 4.07425px rgba(0, 0, 0, 0.4);
+  border-radius: 10.1856px;
+  }
+  .column .imgcon{
+  position:relative;
+  float: left;
+  top:0px;
+  width:280px;
+  height:300 px;
+  left: 2px;
+  }
+  .column .imgcon img{
+    width :280px;
+  height:270px;
+  object-fit: cover;
+  }
+  .column .berita{
+    float: right;
+    position: relative;
+    width: 339.65px;
+    height: 50.03px;
+    top: 20px;
+    left:-100px;
+  }
+  
+  .column .berita p{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 53px;
+    display: flex;
+    align-items: center;
+    color: #FBD46D;
+  }
+  .column .lebihlanjut{
+    position: relative;
+    top: 250px;
+    width: 129.22px;
+    height: 27.6px;
+    right: -300px;
+    float: right;
+  }
+  .column .lebihlanjut p{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #FBD46D;
+  }
+  .column .lebihlanjut a{
+    color: #FBD46D;
+  }
+

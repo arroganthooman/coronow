@@ -1,0 +1,44 @@
+.judul {
+    margin-top:10vh;
+    text-align: center;
+}
+
+.judul p {
+    text-align: center;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 61px;
+	font-weight: bold;
+	color: white;
+}
+.Namaberita {
+    margin-left: 375px;
+    margin-right: 375px;
+}
+.Namaberita img{
+    float: right;
+    width: 190.29px;
+    height: 255.59px;
+}
+.Namaberita p{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 39.7994px;
+    line-height: 49px;
+    display: flex;
+    align-items: center;
+    color: #FBD46D;
+}
+.isiBerita {
+    margin-left: 330px;
+    margin-right: 330px;
+}
+.isiBerita p{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18.656px;
+    line-height: 28px;
+    text-align: justify;
+    color: #FFFFFF;
+}
