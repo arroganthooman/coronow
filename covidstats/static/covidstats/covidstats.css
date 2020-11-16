@@ -8,9 +8,11 @@
         height: unset!important;
     }
     #chart-container {
-        top: -30px!important;
+        top: -100px!important;
     }
 }
+
+/* Global */
 h1, h2, h3, h4, p {
     margin: 0!important;
 }
@@ -23,38 +25,35 @@ footer{
     bottom: 0;
     width: 100%;
 }
-#kasus-harian{
-    position: absolute;
-    left: 5vw; 
-    top: 100px;
-}
-#chart-container{
-    max-width: 100vw;
-    position: relative;
-    top: 150px;
-}
-#p-sembuh::before, #p-meninggal::before, #p-positif::before {
-    content: '\200B';
-    width: 15px;
-    height: 15px;
-    display: inline-block;
-    position: relative;
-    top: 4px;
-    margin-right: 5px;
-    background-color: #4F8A8B;
-}
-#p-sembuh::before{
-    background-color: #4F8A8B;
-}
-#p-meninggal::before {
-    background-color: #972222;
-}
-#p-positif::before {
-    background-color: #C1A352;
-}
 .font-white{
     color: #EEEEEE;
 }
+.ui-menu{
+    max-height: 50vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    outline: unset!important;
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #222831 #FFFFFF00;
+}
+.ui-menu::-webkit-scrollbar{
+    width: 5px;
+}
+.ui-menu::-webkit-scrollbar-thumb{
+    margin: 1px;
+    background-color: #222831;
+}
+.ui-menu::-webkit-scrollbar-track{
+    background-color: #FFFFFF00;
+}
+.ui-widget{
+    font-family: Montserrat, Arial, Helvetica, sans-serif!important;
+}
+
+
+/* Total Kasus */
 .total-card{
     border-radius: 12.5px;
 }
@@ -67,6 +66,73 @@ footer{
 .total-card:nth-child(3){
     background-image: linear-gradient(to right, #222831 40%, #252e37f3 ,  #972222);
 }
-.stroke-black line, .domain{
+
+
+/* Chart */
+#kasus-harian{
+    position: absolute;
+    left: 5vw; 
+    top: 100px;
+}
+#input-daerah{
+    border: none;
+    border-radius: 8px; 
+    outline: none; 
+    width: clamp(300px , 50vw, 380px); 
+    height: 40px; 
+    font-size: 22px;
+}
+#p-sembuh::before, #p-meninggal::before, #p-positif::before {
+    content: '\200B';
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    margin-right: 5px;
+}
+#p-sembuh::before, .tooltip-box-sembuh::before{
+    background-color: #4F8A8B;
+}
+#p-meninggal::before, .tooltip-box-meninggal::before{
+    background-color: #972222;
+}
+#p-positif::before, .tooltip-box-positif::before{
+    background-color: #C1A352;
+}
+#chart-container{
+    max-width: 100vw;
+    position: relative;
+    top: 150px;
+}
+.tooltip-box-sembuh, .tooltip-box-meninggal, .tooltip-box-positif, .tooltip-tanggal{
+    color: black;
+    font-size: smaller;
+}
+.tooltip-box-sembuh::before, .tooltip-box-meninggal::before, .tooltip-box-positif::before{
+    content: '\200B';
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    margin-right: 5px;
+}
+.tick line, .domain{
     stroke: white!important;
+}
+.tick text{
+    color: white;
+    font-family: Montserrat;
+    font-size: 5px;
+}
+.svg-hover{
+    opacity: 0.6;
+}
+rect:focus{
+    border: unset;
+    outline: unset;
+}
+svg{
+    overflow: visible;
 }

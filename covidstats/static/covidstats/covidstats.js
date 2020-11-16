@@ -14,6 +14,16 @@ let tippy_prov_not_found = tippy("#input-daerah", {
     trigger: "manual"
 })[0]
 
+String.prototype.format = String.prototype.f = function() {
+    var s = this,
+        i = arguments.length;
+
+    while (i--) {
+        s = s.replace(new RegExp('\\{' + i + '\\}', 'gm'), arguments[i]);
+    }
+    return s;
+};
+
 function tippyShow (t) {
     t.show()
     window.setTimeout(() => {
@@ -51,6 +61,10 @@ function generateChart(provinsi){
 function createSVG(data){
     let m = data.length
     
+    tanggal = data.map((d) => (new Date(d.tanggal)).toISOString().slice(0,10))
+    tanggal_obj = data.map((d) => (new Date(d.tanggal)))
+    
+
     //Rerepresent data as stacked
     dataStacked = d3.transpose(
         d3.stack()
@@ -61,11 +75,17 @@ function createSVG(data){
 
     let y1Max = d3.max(dataStacked, y => d3.max(y, d => d[1]))
 
+    dataStacked = dataStacked.map((d,i) => d.concat([[0, y1Max, i]]))
+
     //Function of relation between x axis and element's width
     let x = d3.scaleBand()
         .domain(d3.range(m))
         .rangeRound([margin.left, width - margin.right])
         .padding(0.08)
+
+    // x_axis = d3.scaleUtc()
+    //     .domain(d3.extent(tanggal_obj))
+    //     .range([margin.left, width - margin.right])
 
     //Function of relation between y axis and element's height
     let y = d3.scaleLinear()
@@ -81,6 +101,8 @@ function createSVG(data){
                 return "#FBD46D"
             case 2:
                 return "#4F8A8B"
+            case 3:
+                return "#ffffff00"
         }
     }
 
@@ -91,6 +113,10 @@ function createSVG(data){
         .call(d3.axisBottom(x).tickSizeOuter(0).tickFormat(() => ""))
     }
 
+    // xAxis2 = (g, x) => g
+    //     .attr("transform", `translate(0,${height - margin.bottom})`)
+    //     .call(d3.axisBottom(x).ticks(width / 1000).tickSizeOuter(0))
+
     //Create SVG element container
     svg = d3.select("#chart-container")
         .html("")
@@ -100,6 +126,12 @@ function createSVG(data){
         .attr("preserveAspectRatio", "none")
         .attr("width", "80vw")
         .style("height", "clamp(450px, 80vw, 530px)")
+        .each((d, i, node) => {
+            $(node[0]).hover(
+                function() {$(this).children().not(":last").toggleClass("svg-hover", true)},
+                function() {$(this).children().not(":last").toggleClass("svg-hover", false)}
+            )
+        })
 
     //Create all stacked bars
     rect = svg.selectAll("g")
@@ -112,12 +144,44 @@ function createSVG(data){
           .attr("x", (d) => x(d[2]))
           .attr("y", height - margin.bottom)
           .attr("width", x.bandwidth())
-          .attr("height", 0);
+          .attr("height", 0)
+          .each((d, i, node) => {
+              if(i == 3){
+                $(node[3]).parent().hover(
+                    function() {$(this).toggleClass("svg-hover", false)},
+                    function() {$(this).toggleClass("svg-hover", true)}
+                );
+                tippy(node[i], {
+                    content: `  <div class="d-flex flex-column">
+                                    <p class="tooltip-box-sembuh">{0}</p>
+                                    <p class="tooltip-box-positif">{1}</p>
+                                    <p class="tooltip-box-meninggal">{2}</p>
+                                    <p class="tooltip-tanggal">{3}</p>
+                                </div>`.format(node[2].__data__[1] - node[2].__data__[0], 
+                                    node[1].__data__[1] - node[1].__data__[0], 
+                                    node[0].__data__[1] - node[0].__data__[0],
+                                    tanggal[node[0].__data__[2]]),
+                    allowHTML: true,
+                    placement: 'bottom',
+                    theme: "light",
+                    duration: 0,
+                    popperOptions: {
+                        modifiers: [
+                            {
+                                name: 'flip',
+                                options: {
+                                    fallbackPlacements: ['bottom', 'right', 'left', 'top']
+                                }
+                            }
+                        ]
+                    }
+                })
+              }
+          })
 
     //Create x Axis
     svg.append("g")
         .call(xAxis)
-        .attr("class", "stroke-black")
 
     //Transition Animation
     function transitionStacked() {
