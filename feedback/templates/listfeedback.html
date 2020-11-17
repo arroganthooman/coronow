@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/feedback.css' %}">
+{% endblock head %}
+
+{% block content %}
+<!--Judul-->
+<section>
+    <div class="container d-flex justify-content-center judul">
+        <div class="row">
+            <div class="col-auto">
+                <p>List Feedbacks</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!--end of judul-->
+
+<!--Form-->
+<section>
+    <div class="container container-form">
+        {% if feedbacks %}
+        {% for feedback in feedbacks %}
+        <p>{{ feedback.nama }}</p>
+    </div>
+</section>
+{% endblock content %}

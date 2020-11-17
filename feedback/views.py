@@ -15,3 +15,8 @@ def savefeedback(request):
         return HttpResponseRedirect('/feedback/')
     else:
         return HttpResponseRedirect('/feedback/')
+
+def listfeedback(request):
+    response = {'feedbacks' : Feedback.objects.all(),
+                'field' : Form_Feedback}
+    return render(request, 'listfeedback.html', response)
