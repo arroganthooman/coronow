@@ -1,7 +1,8 @@
 /* Judul */
 
 .judul {
-	margin-top:10vh;
+    margin-top:10vh;
+    text-align: center;
 }
 
 .judul p {
@@ -42,6 +43,34 @@
     margin-top: 20px;
 }
 
+/*List Feedback */
+.container-list {
+    align-items: center;
+    margin-top: 95px;
+    margin-bottom: 200px;
+}
+
+.container-list p:nth-child(1) {
+    color: #FBD46D;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.container-list p:nth-child(2) {
+    color: #FBD46D;
+    font-weight: 300;
+    border-bottom: 1px solid #FBD46D;
+    padding-bottom: 20px;
+}
+
+.container-list p:nth-child(3) {
+    color: #F7F7F7;
+    font-weight: 300;
+}
+.singles {
+    margin-top: 100px;
+}
+
 /* Responsive */
 @media (max-width: 576px) {
     .judul p {
@@ -51,12 +80,18 @@
         max-width: 300px;
         margin-top: 60px;
     }
+    .container-list {
+        margin-top: 10px;
+    }
     .inputbox {
         width: 270px;
         font-size: 18px;
     }
     .submit-button {
         font-size: 18px;
+    }
+    .singles {
+        margin-top: 50px;
     }
 }
 

@@ -20,10 +20,18 @@
 
 <!--Form-->
 <section>
-    <div class="container container-form">
-        {% if feedbacks %}
-        {% for feedback in feedbacks %}
-        <p>{{ feedback.nama }}</p>
+    <div class="container container-list">
+        <div class="row" style="text-align: center;">
+            {% if feedbacks %}
+            {% for feedback in feedbacks %}
+            <div class="singles col-xl-4 col-lg-4 col-md-3">
+                <p>{{ feedback.nama }}</p>
+                <p>{{ feedback.email }}</p>
+                <p>{{ feedback.isi }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
     </div>
 </section>
 {% endblock content %}
