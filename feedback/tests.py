@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import resolve
 from .models import Feedback
-from .views import feedback, savefeedback
+from .views import feedback, savefeedback, listfeedback
 
 # Create your tests here.
 
@@ -29,6 +29,10 @@ class TestFeedback(TestCase):
     def test_url_savefeedback_ada(self):
         response = Client().get('/feedback/savefeedback/')
         self.assertEquals(response.status_code, 302)
+
+    def test_url_listfeedback_ada(self):
+        response = Client().get('/feedback/listfeedback/')
+        self.assertEquals(response.status_code, 200)
 
     ## Test Views
 
