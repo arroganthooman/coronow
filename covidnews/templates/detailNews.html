@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block head%}
+<link rel="stylesheet" href="{% static 'css/detail.css' %}">
+{% endblock head %}
+{% block content %}
+<div class="judul">
+    <p>CovidNews</p>
+</div>
+<div class="Namaberita">
+    <p>{{news.Judul}} <img src="{{news.Foto}}"></p>
+</div>
+<div class="isiBerita">
+    <p>{{news.isi|safe}}</p>
+    <p>Sumber:{{news.Sumber}}</p>
+</div>
+{% endblock content%}

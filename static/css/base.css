@@ -122,14 +122,23 @@ body {
     color: #F7F7F7;
     padding-right: 60px;
 }
-
-
  
 .gelombing {
     position: absolute;
-    padding-top: 150px;
-    
+    padding-top: 110px;
+    left: 0;
 }
+
+.gelombing2 {
+    position: absolute;
+    padding-top: 110px;
+    right: 0;
+}
+
+.gbr {
+    width: 100%;
+}
+
 /* Navbar */
 .navbar-brand {
     font-family: 'Montserrat', sans-serif;
@@ -147,12 +156,36 @@ body {
     font-size: 48px;
     font-weight: 700;
 }
-
 .navbar-nav a {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-size: 35px;
     margin-left: 3.25vw;
+}
+.navbar-nav button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 35px;
+    margin-left: 3.25vw;
+}
+.dpdwn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 30px !important;
+    background-color: transparent;
+    color: rgba(255,255,255,.5);
+    padding: .25rem .25rem;
+}
+.dpdwn:hover {
+    color: white;
+    background-color: transparent;
+}
+
+.dropdown-menu {
+    position: absolute !important;
+    background-color: transparent;
+    border: none;
+    text-align: left;
 }
 
 /* Footer */
@@ -231,11 +264,14 @@ body {
         margin-right: 10px;
     }
     .teks-2 {
+        display: flex;
         text-align: left;
-        font-size: 18px;
-        padding: 30px 20px 0px 25px;
+        font-size: 16px;
+        padding: 0px 20px 0px 25px;
+        margin: 16px 0px 0px 10px;
         border-left: solid 1px #FBD46D;
-        margin-left: 10px;
+        min-height: 240px;
+        align-items: center;
     }
     .teks-1 {
         text-align: center;
@@ -244,17 +280,23 @@ body {
         font-size: 34px;
     }
     .teks-2-1 {
+        display: flex;
         text-align: right;
-        font-size: 18px;
-        padding: 30px 25px 0px 20px;
+        font-size: 16px;
+        padding: 0px 25px 0px 20px;
         border-right: solid 1px #FBD46D;
         margin-right: 10px;
-    }
-    .container-teks {
-        min-height: 20px;
+        min-height: 240px;
+        align-items: center;
     }
     .gelombing {
-        width: 98%;
+        padding-top: 270px;
+    }
+    .gelombing2 {
+        padding-top: 265px;
+    }
+    .container-penjelasan {
+        margin-bottom: 300px;
     }
 }
 

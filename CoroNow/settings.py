@@ -19,7 +19,6 @@ import cloudinary
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -40,10 +39,9 @@ DEBUG = not PRODUCTION
 
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', '')
 
-ALLOWED_HOSTS = [f'{HEROKU_APP_NAME}.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = [f'{HEROKU_APP_NAME}.herokuapp.com', 'localhost', '192.168.1.5', 'www.coronow.tk']
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -56,6 +54,7 @@ INSTALLED_APPS = [
     'covidstats.apps.CovidstatsConfig',
     'feedback.apps.FeedbackConfig',
     'ckeditor',
+    "django.contrib.humanize",
     'covidblog',
     'cloudinary',
     'cloudinary_storage'
@@ -102,6 +101,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'timeout': 20
     }
 }
 
