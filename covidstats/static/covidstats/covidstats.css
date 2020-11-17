@@ -19,6 +19,12 @@ h1, h2, h3, h4, p {
 .font-white{
     color: #EEEEEE;
 }
+body{
+    align-items: center;
+}
+
+
+/* JQuery Autocomplete */
 .ui-menu{
     max-height: 50vh;
     overflow-y: scroll;
@@ -115,7 +121,8 @@ h1, h2, h3, h4, p {
 .tick text{
     color: white;
     font-family: Montserrat;
-    font-size: 5px;
+    font-size: 10px;
+    text-transform: capitalize;
 }
 .svg-hover{
     opacity: 0.6;
