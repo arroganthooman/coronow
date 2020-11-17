@@ -39,7 +39,7 @@ DEBUG = not PRODUCTION
 
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', '')
 
-ALLOWED_HOSTS = [f'{HEROKU_APP_NAME}.herokuapp.com', 'localhost', '192.168.1.5']
+ALLOWED_HOSTS = [f'{HEROKU_APP_NAME}.herokuapp.com', 'localhost', '192.168.1.5', 'www.coronow.tk']
 
 # Application definition
 INSTALLED_APPS = [
