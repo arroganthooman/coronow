@@ -12,7 +12,6 @@ import os
 class BlogQuerySet(models.QuerySet):
     def delete(self, *args, **kwargs):
         for obj in self:
-            # obj.image.delete(save=True)
             cloudinary.uploader.destroy(obj.image.public_id)
         super(BlogQuerySet, self).delete(*args, **kwargs)
 
@@ -25,14 +24,9 @@ class Blog(models.Model):
     image = CloudinaryField("image")
     body = RichTextField(blank=False, null=False)
     snippet = RichTextField(blank=False, null=False, max_length=100)
-    # image = models.ImageField(null = False, blank = False, upload_to='images/')
-
+    
     def __str__(self):
     	return self.title
-
-    # def delete(self, *args, **kwargs):
-    # 	self.image.delete(save=True)
-    # 	super(Blog, self).delete(*args, **kwargs)
 
 
 class Comment(models.Model):
@@ -46,20 +40,14 @@ class Comment(models.Model):
 
 
 
+## delete image when delete models
 @receiver(pre_delete, sender=Blog)
 def image_delete(sender, instance, **kwargs):
     cloudinary.uploader.destroy(instance.image.public_id)
-    # super(Blog, self).delete(*args, **kwargs)
 
+## delete old image when replacing image
 @receiver(models.signals.pre_save, sender=Blog)
 def auto_delete_file_on_change(sender, instance, **kwargs):
-    """
-    Deletes old file from filesystem
-    when corresponding `MediaFile` object is updated
-    with new file.
-    """
-    # if not instance.pk:
-    #     return False
 
     try:
         old_file = sender.objects.get(pk=instance.pk).image
@@ -68,6 +56,4 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
 
     new_file = instance.image
     if not old_file == new_file:
-        # if os.path.isfile(old_file.path):
-        #     os.remove(old_file.path)
         cloudinary.uploader.destroy(old_file.public_id)
