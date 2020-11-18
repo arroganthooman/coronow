@@ -31,17 +31,18 @@
         <h2 style="font-size: 40px; font-weight: 500;" class="font-white mx-2">Total Kasus</h2>
         <p style="font-size: 20px;" class="font-white font-weight-light mx-2">Indonesia</p>
         <div class="d-flex flex-row row my-2 align-content-around">
-            <div class="my-1 mx-3 px-4 py-2 col total-card shadow">
+            <div data-tippy-content="+{{ kasus_updated.kasus_terkonfirmasi }}" class="my-1 mx-3 px-4 py-2 col total-card shadow">
                 <h2 style="color: #FBD46D;">{{ kasus_updated.kasus_terkonfirmasi_kum|intcomma }}</h2>
                 <h4 class="font-white font-weight-light ">Positif</h4>
             </div>
-            <div class="my-1 mx-3 px-4 py-2 col total-card shadow">
+            <div data-tippy-content="+{{ kasus_updated.kasus_sembuh }}" class="my-1 mx-3 px-4 py-2 col total-card shadow">
                 <h2 style="color: #4F8A8B;">{{ kasus_updated.kasus_sembuh_kum|intcomma }}</h2>
                 <h4 class="font-white font-weight-light ">Sembuh</h4>
             </div>
-            <div class="my-1 mx-3 px-4 py-2 col total-card shadow">
+            <div data-tippy-content="+{{ kasus_updated.kasus_meninggal }}" class="my-1 mx-3 px-4 py-2 col total-card shadow">
                 <h2 style="color: #C8312A;">{{ kasus_updated.kasus_meninggal_kum|intcomma }}</h2>
                 <h4 class="font-white font-weight-light ">Meninggal</h4>
+                <p style="font-size: 10px; right: 10px; bottom: -35px;" class="font-white font-weight-light position-absolute text-right">Update terakhir<br>{{ kasus_updated.str_update_terakhir }}</p>
             </div>
         </div>
     </div>
@@ -65,37 +66,60 @@
                 <p id="p-positif" class="font-white font-weight-lighter my-1">Positif</p>
                 <p id="p-meninggal" class="font-white font-weight-lighter my-1">Meninggal</p>
             </div>
+            <div id="toggle" class="d-flex flex-column align-items-center position-relative mt-4">
+                <div title="Perubahan harian" class="align-items-center" style="position: absolute; top: 0.8em; user-select: none;">
+                    <svg class="m-auto" width="29" height="7"><path d="M.696 6.085l.608-.794c.207.159.392.217.605.208.228-.01.391-.06.98-.283 1.199-.455 1.962-.516 2.99.03.475.254 1.042-.072 2.223-1.216l.14-.135c.942-.918 1.354-1.266 1.913-1.52.846-.386 1.642-.208 2.294.6 1.131 1.401 1.718 2.024 2.15 2.254.289.154.43.079.726-.544.073-.154.15-.327.246-.546l.259-.603c.506-1.176.805-1.747 1.192-2.123.717-.694 1.484-.345 1.981.804.714 1.649.86 1.965 1.132 2.362.31.454.376.46.756.001.159-.192.296-.412.425-.671.076-.153.146-.312.229-.517.015-.037.163-.41.206-.514.472-1.13 1.103-1.508 2.218-.902.526.285.613.27.847-.01.02-.024.317-.405.433-.537a2.918 2.918 0 011.083-.793c1.043-.442 1.538.017 2.11 1.236l.016.034c.28.597.412.763.542.763v1c-.7 0-.992-.369-1.447-1.338l-.016-.034c-.364-.775-.48-.883-.815-.74-.29.123-.509.291-.723.534-.091.103-.377.47-.417.518-.542.647-1.15.756-2.09.246-.497-.27-.547-.24-.818.408-.04.095-.185.46-.202.505a8.265 8.265 0 01-.26.585 4.405 4.405 0 01-.551.865c-.816.985-1.676.914-2.351-.074-.326-.478-.471-.789-1.224-2.53-.256-.592-.256-.591-.368-.482-.252.243-.526.768-.97 1.8l-.26.606c-.1.228-.182.41-.26.576-.514 1.082-1.225 1.464-2.1.998-.601-.321-1.226-.984-2.457-2.51-.362-.448-.667-.516-1.101-.317-.411.187-.782.5-1.632 1.326l-.14.137c-1.514 1.467-2.34 1.94-3.39 1.381-.715-.38-1.209-.341-2.164.022-.705.267-.912.331-1.292.347a1.872 1.872 0 01-1.256-.413z" fill-rule="nonzero"></path></svg>
+                </div>
+                <div title="Kumulatif" class="align-items-center" style="position: absolute; top: 3.9em; user-select: none;">
+                    <svg class="m-auto" width="27" height="17"><path d="M0 16.647v-1c.344 0 .456-.044 1.936-.701 1.663-.739 2.769-.988 3.993-.647 1.763.492 5.28-.475 6.78-1.545.502-.358.56-.39 3.587-2.061l.23-.127c1.806-1 2.82-1.607 3.253-1.98 2.102-1.81 5.318-6.086 5.728-8.522l.986.166c-.458 2.724-3.797 7.165-6.061 9.114-.51.438-1.536 1.053-3.421 2.097l-.232.128c-2.93 1.617-3.038 1.677-3.489 1.999-1.725 1.23-5.536 2.278-7.63 1.694-.934-.26-1.853-.053-3.317.598-1.721.764-1.78.787-2.343.787z" fill-rule="nonzero"></path></svg>
+                </div>
+                <div id="buttonToggle" class="d-flex position-relative flex-column align-items-center">
+                    <div style="user-select: none; height: 6.2em; position: absolute; top: 0" class="d-flex flex-column align-items-center logoToggle">
+                        <div title="Perubahan harian" class="d-flex flex-grow-1 align-items-center" style="user-select: none;">
+                            <svg stroke="white" width="29" height="7"><path d="M.696 6.085l.608-.794c.207.159.392.217.605.208.228-.01.391-.06.98-.283 1.199-.455 1.962-.516 2.99.03.475.254 1.042-.072 2.223-1.216l.14-.135c.942-.918 1.354-1.266 1.913-1.52.846-.386 1.642-.208 2.294.6 1.131 1.401 1.718 2.024 2.15 2.254.289.154.43.079.726-.544.073-.154.15-.327.246-.546l.259-.603c.506-1.176.805-1.747 1.192-2.123.717-.694 1.484-.345 1.981.804.714 1.649.86 1.965 1.132 2.362.31.454.376.46.756.001.159-.192.296-.412.425-.671.076-.153.146-.312.229-.517.015-.037.163-.41.206-.514.472-1.13 1.103-1.508 2.218-.902.526.285.613.27.847-.01.02-.024.317-.405.433-.537a2.918 2.918 0 011.083-.793c1.043-.442 1.538.017 2.11 1.236l.016.034c.28.597.412.763.542.763v1c-.7 0-.992-.369-1.447-1.338l-.016-.034c-.364-.775-.48-.883-.815-.74-.29.123-.509.291-.723.534-.091.103-.377.47-.417.518-.542.647-1.15.756-2.09.246-.497-.27-.547-.24-.818.408-.04.095-.185.46-.202.505a8.265 8.265 0 01-.26.585 4.405 4.405 0 01-.551.865c-.816.985-1.676.914-2.351-.074-.326-.478-.471-.789-1.224-2.53-.256-.592-.256-.591-.368-.482-.252.243-.526.768-.97 1.8l-.26.606c-.1.228-.182.41-.26.576-.514 1.082-1.225 1.464-2.1.998-.601-.321-1.226-.984-2.457-2.51-.362-.448-.667-.516-1.101-.317-.411.187-.782.5-1.632 1.326l-.14.137c-1.514 1.467-2.34 1.94-3.39 1.381-.715-.38-1.209-.341-2.164.022-.705.267-.912.331-1.292.347a1.872 1.872 0 01-1.256-.413z" fill-rule="nonzero"></path></svg>
+                        </div>
+                        <div title="Kumulatif" class="d-flex flex-grow-1 align-items-center" style="user-select: none;">
+                            <svg stroke="white" width="27" height="17"><path d="M0 16.647v-1c.344 0 .456-.044 1.936-.701 1.663-.739 2.769-.988 3.993-.647 1.763.492 5.28-.475 6.78-1.545.502-.358.56-.39 3.587-2.061l.23-.127c1.806-1 2.82-1.607 3.253-1.98 2.102-1.81 5.318-6.086 5.728-8.522l.986.166c-.458 2.724-3.797 7.165-6.061 9.114-.51.438-1.536 1.053-3.421 2.097l-.232.128c-2.93 1.617-3.038 1.677-3.489 1.999-1.725 1.23-5.536 2.278-7.63 1.694-.934-.26-1.853-.053-3.317.598-1.721.764-1.78.787-2.343.787z" fill-rule="nonzero"></path></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="chart-container" class="d-flex justify-content-center">
-            <svg id="chart" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="100%" style="height: clamp(450px, 80vw, 530px);"></svg>
+        <div id="chart-container" class="d-flex justify-content-center position-relative">
+            <svg id="chart" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="100%" style="height: 530px;"></svg>
+            <p style="font-size: 10px; right: 0px; bottom: -60px;" class="font-white font-weight-light position-absolute text-right" id="update-terakhir-chart"></p>
         </div>
     </div>
-    <div style="height: 15em;"><br></div>
-    <div class="d-flex flex-column mx-auto mb-5 px-3 py-5 align-content-center text-center position-relative">
+    <div id="padding-middle" ><br></div>
+    <div class="d-flex flex-column mx-auto w-100 mb-5 px-3 py-5 align-content-center text-center position-relative">
         <h2 style="font-size: 44px; font-weight: 500;" class="font-white my-1">Detail Kasus</h2>
         <h4 class="font-white font-weight-light">Indonesia</h4>
         <div class="container mt-4">
             <div class="row justify-content-md-center">
                 <div style="border-right: 1px solid #FBD46D;" class="col">
-                    <div  class="d-flex flex-row-reverse align-items-center m-4">
+                    <div class="d-flex flex-row-reverse align-items-center m-4 position-relative">
                         <h2 style="color: #C8312A;">{{ kasus_updated.kasus_terkonfirmasi_kum|intcomma }}</h2>
                         <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Positif</p>
+                        <p style="font-size: 12px; bottom: -1em; color: #C8312A;" class="position-absolute align-self-end font-white mx-1">+{{ kasus_updated.kasus_terkonfirmasi }}</p>
                     </div>
-                    <div class="d-flex flex-row-reverse align-items-center m-4">
+                    <div class="d-flex flex-row-reverse align-items-center m-4 position-relative">
                         <h2 style="color: #C8312A;">{{ kasus_updated.kasus_meninggal_kum|intcomma }}</h2>
-                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Meninggal</p>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3 text-right">Kasus Meninggal</p>
+                        <p style="font-size: 12px; bottom: -1em; color: #C8312A;" class="position-absolute align-self-end font-white mx-1">+{{ kasus_updated.kasus_meninggal }}</p>
                     </div>
-                    <div class="d-flex flex-row-reverse align-items-center m-4">
+                    <div class="d-flex flex-row-reverse align-items-center m-4 position-relative">
                         <h2 style="color: #4F8A8B;">{{ kasus_updated.kasus_sembuh_kum|intcomma }}</h2>
-                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Sembuh</p>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3 text-right">Kasus Sembuh</p>
+                        <p style="font-size: 12px; bottom: -1em; color:  #4F8A8B;" class="position-absolute align-self-end font-white mx-1">+{{ kasus_updated.kasus_sembuh }}</p>
                     </div>
-                    <div class="d-flex flex-row-reverse align-items-center m-4">
+                    <div class="d-flex flex-row-reverse align-items-center m-4 position-relative">
                         <h2 style="color: #4F8A8B;">{{ kasus_updated.kasus_dirawat_kum|intcomma }}</h2>
-                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Aktif</p>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3 text-right">Kasus Aktif</p>
+                        <p style="font-size: 12px; bottom: -1em; color:  #4F8A8B;" class="position-absolute align-self-end font-white mx-1">{% if kasus_updated.kasus_dirawat < 0 %}-{% else %}+{% endif %}{{ kasus_updated.kasus_dirawat }}</p>
                     </div>
                     <div class="d-flex flex-row-reverse align-items-center m-4">
                         <h2 style="color: #EEEEEE;">{{ kasus_updated.kasus_suspek|intcomma }}</h2>
-                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kasus Suspek</p>
+                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3 text-right">Kasus Suspek</p>
                     </div>
                     <div class="d-flex flex-row-reverse align-items-center m-4">
                     </div>
@@ -103,25 +127,25 @@
                 <div style="border-left: 1px solid #FBD46D;" class="col">
                     <div class="d-flex m-4 align-items-center">
                         <h2 style="color: #FBD46D;">{{ kasus_updated.spesimen|intcomma }}</h2>
-                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Spesimen Diperiksa</p>
+                        <p style="font-size: 12px;" class="font-white font-weight-light ml-3 text-left">Spesimen Diperiksa</p>
                     </div>
                     <div class="d-flex m-4 align-items-center">
                         <h2 style="color: #FBD46D;">{{ kasus_updated.spesimen_negatif|intcomma }}</h2>
-                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3 text-left">Spesimen Negatif</p>
+                        <p style="font-size: 12px;" class="font-white font-weight-light ml-3 text-left">Spesimen Negatif</p>
                     </div>
                     <div class="d-flex m-4 align-items-center">
                         <h2 style="color: #EEEEEE;">{{ kasus_updated.kab_kota_terdampak|intcomma }}</h2>
-                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Kab Kota Terdampak</p>
+                        <p style="font-size: 12px;" class="font-white font-weight-light ml-3 text-left">Kab Kota Terdampak</p>
                     </div>
                     <div class="d-flex m-4 align-items-center">
                         <h2 style="color: #EEEEEE;">{{ kasus_updated.transmisi_lokal|intcomma }}</h2>
-                        <p style="font-size: 12px;" class="font-white font-weight-light mx-3">Transmisi Lokal</p>
+                        <p style="font-size: 12px;" class="font-white font-weight-light ml-3">Transmisi Lokal</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div style="height: 10vh;">
+    <div id="padding-bottom" style="height: 10vh;">
         <br>
     </div>
     <div style="font-size: 10px;" class="position-relative font-white font-weight-lighter px-2 m-2"><p>Sumber data:<br>- data.covid19.go.id <br>- infeksiemerging.kemkes.go.id</p></div>

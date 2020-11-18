@@ -16,6 +16,7 @@ class KasusUpdated(models.Model):
     kab_kota_terdampak = models.SmallIntegerField()
     transmisi_lokal = models.SmallIntegerField()
     update_terakhir = models.DateTimeField()
+    str_update_terakhir = models.CharField(max_length=100, default="")
 
     def save(self, *args, **kwargs):
         self.full_clean()
@@ -28,6 +29,7 @@ class KasusProvinsi(models.Model):
     nama_provinsi = models.CharField(max_length=100, blank=False)
     data_json = models.JSONField()
     update_terakhir = models.DateTimeField()
+    str_update_terakhir = models.CharField(max_length=100, default="")
 
     def __str__(self) -> str:
         return self.nama_provinsi

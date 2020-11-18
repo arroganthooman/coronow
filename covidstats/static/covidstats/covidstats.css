@@ -10,6 +10,9 @@
     #chart-container {
         top: -120px!important;
     }
+    #padding-middle{
+        height: 3em!important;
+    }
 }
 
 /* Global */
@@ -18,6 +21,9 @@ h1, h2, h3, h4, p {
 }
 .font-white{
     color: #EEEEEE;
+}
+#padding-middle{
+    height: 20em;
 }
 /* body{
     align-items: center;
@@ -138,4 +144,27 @@ rect:focus{
 }
 svg{
     overflow: visible;
+}
+
+#toggle{
+    border-radius: 6px;
+    padding: 2px;
+    height: 6.2em;
+    width: fit-content;
+    background-color: #EEEEEE; 
+    box-shadow: inset -.2rem .2rem .5rem rgba(0,0,0,.2);
+    z-index: 99;
+}
+#buttonToggle{
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 3em; 
+    height: 3em;
+    background-image: linear-gradient(to right, #b49643, #3d6969 70%);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+}
+.logoToggle{
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
