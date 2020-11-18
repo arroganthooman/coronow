@@ -28,6 +28,7 @@ def main():
         update_object.kab_kota_terdampak = re.findall('(?<=<p>Kasus Suspek<\/p>\\\\t\\\\t\\\\t\\\\r\\\\n                <h4 class="text-danger">)[\d.]+', str(r.content))[0]
         update_object.transmisi_lokal = re.findall('(?<=<p>Kab Kota terdampak<\/p>\\\\r\\\\n                <h4 class="text-danger">)[\d.]+', str(r.content))[0]
         update_object.update_terakhir = datetime.datetime.strptime(update_json['update']['penambahan']['created'], '%Y-%m-%d %X').replace(tzinfo = datetime.timezone.utc)
+        update_object.str_update_terakhir = update_object.update_terakhir.strftime("%d %b %y") 
 
         prov_list = requests.get(API_PROV_LIST).json()['list_data']
         prov_obj_list = []
@@ -36,17 +37,23 @@ def main():
             prov_data_json = requests.get(API_UPDATE_PROV.format(prov['key'].replace(" ", "_"))).json()
             prov_object.data_json = prov_data_json['list_perkembangan']
             prov_object.update_terakhir = datetime.datetime.fromtimestamp(int(prov_data_json['list_perkembangan'][-1]['tanggal'])//1000, datetime.timezone.utc)
+            prov_object.str_update_terakhir = prov_object.update_terakhir.strftime("%d %b %y") 
             prov_obj_list.append(prov_object)
         list_harian = update_json['update']['harian']
+        indo_update_terakhir = datetime.datetime.strptime(update_json['update']['harian'][-1]["key_as_string"][:19], '%Y-%m-%dT%X').replace(tzinfo = datetime.timezone(datetime.timedelta(hours=7)))
         prov_obj_list.append(KasusProvinsi(
             nama_provinsi = "INDONESIA",
             data_json = [{
                     "tanggal": x["key"],
                     "KASUS": x["jumlah_positif"]["value"],
                     "MENINGGAL": x["jumlah_meninggal"]["value"],
-                    "SEMBUH": x["jumlah_sembuh"]["value"]
+                    "SEMBUH": x["jumlah_sembuh"]["value"],
+                    "AKUMULASI_KASUS": x["jumlah_positif_kum"]["value"],
+                    "AKUMULASI_MENINGGAL": x["jumlah_meninggal_kum"]["value"],
+                    "AKUMULASI_SEMBUH": x["jumlah_sembuh_kum"]["value"]
                 } for x in list_harian],
-            update_terakhir = datetime.datetime.strptime(update_json['update']['harian'][-1]["key_as_string"][:19], '%Y-%m-%dT%X').replace(tzinfo = datetime.timezone(datetime.timedelta(hours=7)))
+            update_terakhir = indo_update_terakhir,
+            str_update_terakhir = indo_update_terakhir.strftime("%d %b %y") 
         ))
 
         KasusUpdated.objects.all().delete()

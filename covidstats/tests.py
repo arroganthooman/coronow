@@ -1,3 +1,4 @@
+from datetime import time
 from django.http import response
 from django.test import TestCase
 from django.test.client import Client
@@ -66,7 +67,8 @@ class CovidstatsTest(TestCase):
             kasus_suspek = kasus_updated_data['data']['jumlah_odp'],
             kab_kota_terdampak = re.findall('(?<=<p>Kasus Suspek<\/p>\\\\t\\\\t\\\\t\\\\r\\\\n                <h4 class="text-danger">)[\d.]+', str(r.content))[0],
             transmisi_lokal = re.findall('(?<=<p>Kab Kota terdampak<\/p>\\\\r\\\\n                <h4 class="text-danger">)[\d.]+', str(r.content))[0],
-            update_terakhir = datetime.datetime.strptime(kasus_updated_data['update']['penambahan']['created'], '%Y-%m-%d %X').replace(tzinfo = datetime.timezone(datetime.timedelta(hours=7)))
+            update_terakhir = datetime.datetime.strptime(kasus_updated_data['update']['penambahan']['created'], '%Y-%m-%d %X').replace(tzinfo = datetime.timezone(datetime.timedelta(hours=7))),
+            str_update_terakhir = datetime.datetime.strptime(kasus_updated_data['update']['penambahan']['created'], '%Y-%m-%d %X').replace(tzinfo = datetime.timezone(datetime.timedelta(hours=7))).strftime("%d %b %y") 
         )
 
         kasus_updated.save()
@@ -76,7 +78,8 @@ class CovidstatsTest(TestCase):
         kasus_provinsi = KasusProvinsi.objects.create(
             nama_provinsi = "provinsi_dummy",
             data_json = {"json": True},
-            update_terakhir = timezone.now()
+            update_terakhir = timezone.now(),
+            str_update_terakhir = timezone.now().strftime("%d %b %y") 
         )
 
         kasus_provinsi.save()

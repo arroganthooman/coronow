@@ -1,5 +1,6 @@
 let margin = ({top: 0, right: 0, bottom: 10, left: 0})
 let height = 550
+let tickW = 0.9
 let width
 let transitionDuration =  500
 let form = $("#form-daerah")
@@ -32,6 +33,9 @@ function tippyShow (t) {
     }, 3000)
 }
 
+let provData
+let format = "harian"
+
 function generateChart(provinsi){
     $.ajax({
         url: url,
@@ -43,7 +47,9 @@ function generateChart(provinsi){
             post_type: "POST_PROV"
         }
     }).done(function(response) {
-        createSVG(response)
+        provData = response
+        generateSVG()
+
         formInput.val('')
         provinsi = provinsi.toLowerCase()
         if (provinsi.includes("dki")){
@@ -59,8 +65,8 @@ function generateChart(provinsi){
     });
 }
 
-function createSVG(data){
-    m = data.length
+function generateSVG(){
+    m = provData.length
     
     svg = d3.select("#chart")
             .each((d, i, node) => {
@@ -71,19 +77,28 @@ function createSVG(data){
             })
 
     // tanggal = data.map((d) => (new Date(d.tanggal)).toISOString().slice(0,10))
-    tanggal_obj = data.map((d) => (new Date(d.tanggal)))
+    tanggal_obj = provData.map((d) => (new Date(d.tanggal)))
 
+    $("#update-terakhir-chart").html("Update terakhir<br>" + tanggal_obj[tanggal_obj.length - 1].toLocaleDateString("id-ID", {day: 'numeric', month: 'short', year:'numeric'}))
+
+    let keys
+    if(format == "harian"){
+        keys = ["MENINGGAL", "KASUS", "SEMBUH"]
+    } else {
+        keys = ["AKUMULASI_MENINGGAL", "AKUMULASI_KASUS", "AKUMULASI_SEMBUH"]
+    }
+    
     //Rerepresent data as stacked
     dataStacked = d3.transpose(
         d3.stack()
-        .keys(["MENINGGAL", "KASUS", "SEMBUH"])
+        .keys(keys)
         .order(d3.stackOrderNone)
-        .offset(d3.stackOffsetNone)(data))
+        .offset(d3.stackOffsetNone)(provData))
         .map((d, i) => d.map(([y0, y1]) => [y0, y1, i]))
 
     let y1Max = d3.max(dataStacked, y => d3.max(y, d => d[1]))
 
-    dataStacked = dataStacked.map((d,i) => d.concat([[0, d[2][1], i], [0, y1Max, i]]))
+    dataStacked = dataStacked.map((d,i) => d.concat([[0, d[2][1] + 1, i], [0, y1Max, i]]))
 
     x = d3.scaleUtc()
         // .domain([Math.floor(-(m * 0.05)), Math.ceil(m * 1.05)])
@@ -122,8 +137,10 @@ function createSVG(data){
                 .transition()
                 .ease(d3.easeExpInOut)  
                 .duration(transitionDuration)
-                .attr("x", ((width - margin.right) - ((width - margin.right) / m * 0.85) * 10))
+                .attr("x", ((width - margin.right) - ((width - margin.right) / m * tickW) * 10))
                 .attr("width", 0)
+                .attr("y", height - margin.bottom)
+                .attr("height", 0)
                 .remove()
             .remove()
         )
@@ -133,6 +150,7 @@ function createSVG(data){
           enter => enter.append('rect')
             .attr("fill", (d, i) => z(i))
             .attr("y", height - margin.bottom)
+            .attr('width', 0)
             .attr("height", 0)
             .each((d, i, node) => {
                 if(i == 4){
@@ -196,9 +214,8 @@ function createSVG(data){
                                                 }))
                     })
                 }
-            })
-
-          ,exit => exit.remove()
+            }),
+            exit => exit.remove()
         )
 
     //Create x Axis
@@ -210,7 +227,7 @@ function createSVG(data){
     function updateX() {
         width = parseInt(svg.style("width"), 10)
         x.range([margin.left, width - margin.right])
-        tickStep = Math.ceil(m / (width / 100))
+        tickStep = Math.ceil(m / (width / 200))
         xAxis.call(d3.axisBottom(x)
             .tickValues(d3.timeDay.range(
                 new Date(tanggal_obj[0].valueOf()),
@@ -223,20 +240,47 @@ function createSVG(data){
 
     function updateWidth() {
         rect.attr("x", d => x(tanggal_obj[d[2]]))
-            .attr("width", (width - margin.right) / m * 0.85)
+            .attr("width", (width - margin.right) / m * tickW)
     }
 
     //Transition Animation
     async function transitionStacked() {
         y.domain([0, y1Max]);
-    
-        await rect.transition()
-            .ease(d3.easeExpInOut)  
-            .duration(transitionDuration)
-                .attr("x", d => x(tanggal_obj[d[2]]))
-                .attr("width", (width - margin.right) / m * 0.85)
-            .end()
-        updateWidth()
+
+        //Run animation in rect simultaniously
+        if(rect._groups[0][0].getAttribute('x') != null){
+            rect.call(async function() {
+                await d3.select({})
+                    .transition()
+                    .duration(transitionDuration)
+                    .tween(
+                        "attr:x",
+                        function() {
+                            interpX = rect._groups.map(
+                                (el, i) => {
+                                    let initX = parseFloat(el[3].getAttribute('x'))
+                                    let nextX = x(tanggal_obj[i])
+                                    
+                                    return isNaN(initX) ? d3.interpolateNumber(((width - margin.right) - ((width - margin.right) / m * tickW) * 10), nextX) : d3.interpolateNumber(initX, nextX)
+                                }
+                            )
+                            rectW = rect._groups[0][0].getAttribute('width')
+                            expectedW = (width - margin.right) / m * tickW
+                            interpWidth = rectW == 0 ? d3.interpolateNumber(expectedW, expectedW) : d3.interpolateNumber(rectW, expectedW)
+                            return function(t) {
+                                rect.each((d, i, node) => {
+                                    d3.select(node[i])
+                                    .attr("x", interpX[d[2]](t))
+                                    .attr("width", interpWidth(t))
+                                })
+                            }
+                        }
+                    )
+            })
+        } else {
+            updateWidth()
+        }
+        
         rect.transition()
             .ease(d3.easeExpInOut)  
             .duration(transitionDuration)
@@ -246,6 +290,10 @@ function createSVG(data){
 
     updateX()
     transitionStacked()
+
+    if($("#chart:hover").length > 0){
+        document.querySelector("#chart").dispatchEvent(new MouseEvent("mouseover"))
+    }
 
     window.addEventListener('resize', function() {
         updateX()
@@ -258,7 +306,85 @@ function createSVG(data){
     let list_daerah = ['DKI Jakarta', 'Jawa Timur', 'Jawa Barat', 'Jawa Tengah', 'Sulawesi Selatan', 'Sumatera Barat', 'Kalimantan Timur', 'Riau', 'Sumatera Utara', 'Bali', 'Kalimantan Selatan', 'Banten', 'Papua', 'Sumatera Selatan', 'Aceh', 'Sulawesi Utara', 'Sulawesi Tenggara', 'Kalimantan Tengah', 'Kepulauan Riau', 'Papua Barat', 'Daerah Istimewa Yogyakarta', 'Nusa Tenggara Barat', 'Maluku', 'Gorontalo', 'Lampung', 'Maluku Utara', 'Kalimantan Barat', 'Jambi', 'Bengkulu', 'Sulawesi Barat', 'Sulawesi Tengah', 'Kalimantan Utara', 'Nusa Tenggara Timur', 'Kepulauan Bangka Belitung', 'Indonesia']
     $("#input-daerah")
         .autocomplete({ source: list_daerah })    
+
+    tippy('[data-tippy-content]', {
+        placement: 'bottom',
+        interactive: true,
+        appendTo: document.body
+    })
+
+    let btnTgle = $("#buttonToggle")
+    let tgl = btnTgle.parent()
+    let logo = btnTgle.children()
+
+    btnTgle[0].state = 0
+
+    btnTgle.draggable({
+        containment: "#toggle",
+        axis: "y",
+        drag: (event, ui) => {
+            let child = $(ui.helper).children()
+            let el = $(ui.helper)
+            elH = el.height()
+            elY = el.position().top
+            child.css("top", -ui.position.top)
+            //console.log((elH / 2 + elY) < (el.parent().height() / 2))
+        },
+        stop: (event, ui) => {
+            let el = $(ui.helper)
+            let child = el.children()
+            elH = el.height()
+            elY = el.position().top
+    
+            
+            if((elH / 2 + elY) < (el.parent().height() / 2)){
+                el[0].state = 0
+                el.css("top", 0)
+                child.css("top", 0)
+
+                if(format != "harian"){
+                    format = "harian"
+                    generateSVG()
+                }
+            } else {
+                el[0].state = 1
+                el.css("top", el.parent().height() - elH)
+                child.css("top", -(el.parent().height() - elH))
+
+                if(format != "kumulatif"){
+                    format = "kumulatif"
+                    generateSVG()
+                }
+            }
+        }
+    })
+
+    btnTgle.parent()
+        .on("mousedown", (e) => {
+            btnTgle.parent().on("mouseup mousemove", function handler(e) {
+                if (e.type === "mouseup"){
+                    if (btnTgle[0].state == 0){
+                        btnTgle[0].state = 1
+                        btnTgle.css("top", tgl.height() - btnTgle.height())
+                        logo.css("top", -(tgl.height() - btnTgle.height()))
+
+                        format = "kumulatif"
+                        generateSVG()
+                    } else {
+                        btnTgle[0].state = 0
+                        btnTgle.css("top", 0)
+                        logo.css("top", 0)
+
+                        format = "harian"
+                        generateSVG()
+                    }
+                }
+                btnTgle.parent().off('mouseup mousemove', handler);
+            })
+            
+        })
 })()
+
 
 window.onload = () => {
     $("#form-daerah").on('submit', () => {
