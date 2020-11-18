@@ -1,5 +1,5 @@
-let margin = ({top: 0, right: 20, bottom: 10, left: 20})
-let height = 500
+let margin = ({top: 0, right: 0, bottom: 10, left: 0})
+let height = 550
 let width
 let transitionDuration =  500
 let form = $("#form-daerah")
@@ -83,7 +83,7 @@ function createSVG(data){
 
     let y1Max = d3.max(dataStacked, y => d3.max(y, d => d[1]))
 
-    dataStacked = dataStacked.map((d,i) => d.concat([[0, y1Max, i]]))
+    dataStacked = dataStacked.map((d,i) => d.concat([[0, d[2][1], i], [0, y1Max, i]]))
 
     x = d3.scaleUtc()
         // .domain([Math.floor(-(m * 0.05)), Math.ceil(m * 1.05)])
@@ -106,12 +106,11 @@ function createSVG(data){
                 return "#FBD46D"
             case 2:
                 return "#4F8A8B"
-            case 3:
+            default:
                 return "#ffffff00"
         }
     }
 
-    console.log(m)
     //Create all stacked bars
     rect = svg.selectAll("g")
         .data(dataStacked)
@@ -136,23 +135,30 @@ function createSVG(data){
             .attr("y", height - margin.bottom)
             .attr("height", 0)
             .each((d, i, node) => {
-                if(i == 3){
-                    $(node[3]).parent().hover(
+                if(i == 4){
+                    $(node[4]).parent().hover(
                         function() {$(this).toggleClass("svg-hover", false)},
                         function() {$(this).toggleClass("svg-hover", true)}
                     );
-                    tippy(node[i], {
+                    tippy(node[3], {
+                        triggerTarget: node[4],
                         content: `  <div class="d-flex flex-column">
+                                        <p class="tooltip-tanggal">{3}</p>
                                         <p class="tooltip-box-sembuh">{0}</p>
                                         <p class="tooltip-box-positif">{1}</p>
                                         <p class="tooltip-box-meninggal">{2}</p>
-                                        <p class="tooltip-tanggal">{3}</p>
                                     </div>`.format(node[2].__data__[1] - node[2].__data__[0], 
                                         node[1].__data__[1] - node[1].__data__[0], 
                                         node[0].__data__[1] - node[0].__data__[0],
-                                        tanggal_obj[node[0].__data__[2]].toISOString().slice(0,10)),
+                                        tanggal_obj[node[0].__data__[2]]
+                                            .toLocaleDateString(
+                                                "id-ID", 
+                                                {
+                                                    day: 'numeric', 
+                                                    month: 'short', year:'numeric'
+                                                })),
+                        placement: "bottom",
                         allowHTML: true,
-                        placement: 'bottom',
                         theme: "light",
                         duration: 0,
                         popperOptions: {
@@ -160,7 +166,8 @@ function createSVG(data){
                                 {
                                     name: 'flip',
                                     options: {
-                                        fallbackPlacements: ['bottom', 'right', 'left', 'top']
+                                        fallbackPlacements: ['bottom', 'top'],
+                                        padding: -50
                                     }
                                 }
                             ]
@@ -173,14 +180,20 @@ function createSVG(data){
                 if(i == 3){
                     node[i]._tippy.setProps({
                         content: `  <div class="d-flex flex-column">
+                                        <p class="tooltip-tanggal">{3}</p>
                                         <p class="tooltip-box-sembuh">{0}</p>
                                         <p class="tooltip-box-positif">{1}</p>
                                         <p class="tooltip-box-meninggal">{2}</p>
-                                        <p class="tooltip-tanggal">{3}</p>
                                     </div>`.format(node[2].__data__[1] - node[2].__data__[0], 
                                         node[1].__data__[1] - node[1].__data__[0], 
                                         node[0].__data__[1] - node[0].__data__[0],
-                                        tanggal_obj[node[0].__data__[2]].toISOString().slice(0,10))
+                                        tanggal_obj[node[0].__data__[2]]
+                                            .toLocaleDateString(
+                                                "id-ID", 
+                                                {
+                                                    day: 'numeric', 
+                                                    month: 'short', year:'numeric'
+                                                }))
                     })
                 }
             })
