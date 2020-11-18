@@ -1,6 +1,7 @@
-let margin = ({top: 0, right: 0, bottom: 10, left: 0})
+let margin = ({top: 0, right: 20, bottom: 10, left: 20})
 let height = 500
-let width = 4000
+let width
+let transitionDuration =  500
 let form = $("#form-daerah")
 let formInput = $("#input-daerah")
 let csrftoken = $('[name="csrfmiddlewaretoken"]').attr("value")
@@ -59,11 +60,18 @@ function generateChart(provinsi){
 }
 
 function createSVG(data){
-    let m = data.length
+    m = data.length
     
-    tanggal = data.map((d) => (new Date(d.tanggal)).toISOString().slice(0,10))
+    svg = d3.select("#chart")
+            .each((d, i, node) => {
+                $(node[0]).hover(
+                    function() {$(this).children().not(":last").toggleClass("svg-hover", true)},
+                    function() {$(this).children().not(":last").toggleClass("svg-hover", false)}
+                )
+            })
+
+    // tanggal = data.map((d) => (new Date(d.tanggal)).toISOString().slice(0,10))
     tanggal_obj = data.map((d) => (new Date(d.tanggal)))
-    
 
     //Rerepresent data as stacked
     dataStacked = d3.transpose(
@@ -77,18 +85,15 @@ function createSVG(data){
 
     dataStacked = dataStacked.map((d,i) => d.concat([[0, y1Max, i]]))
 
-    //Function of relation between x axis and element's width
-    let x = d3.scaleBand()
-        .domain(d3.range(m))
-        .rangeRound([margin.left, width - margin.right])
-        .padding(0.08)
-
-    // x_axis = d3.scaleUtc()
-    //     .domain(d3.extent(tanggal_obj))
-    //     .range([margin.left, width - margin.right])
+    x = d3.scaleUtc()
+        // .domain([Math.floor(-(m * 0.05)), Math.ceil(m * 1.05)])
+        .domain([
+                new Date(tanggal_obj[0].valueOf() - (10 * 86400000)),
+                new Date(tanggal_obj[tanggal_obj.length - 1].valueOf() + (10 * 86400000))
+        ])
 
     //Function of relation between y axis and element's height
-    let y = d3.scaleLinear()
+    y = d3.scaleLinear()
         .domain([0, y1Max])
         .range([height - margin.bottom, margin.top])
         
@@ -106,99 +111,133 @@ function createSVG(data){
         }
     }
 
-    //Function to create x Axis g element
-    function xAxis (svg){
-        svg.append("g")
-        .attr("transform", `translate(0,${height - margin.bottom})`)
-        .call(d3.axisBottom(x).tickSizeOuter(0).tickFormat(() => ""))
-    }
-
-    // xAxis2 = (g, x) => g
-    //     .attr("transform", `translate(0,${height - margin.bottom})`)
-    //     .call(d3.axisBottom(x).ticks(width / 1000).tickSizeOuter(0))
-
-    //Create SVG element container
-    svg = d3.select("#chart-container")
-        .html("")
-        .append("svg")
-        .attr("viewBox", [0, 0, width, height])
-        .attr("xmlns", "http://www.w3.org/2000/svg")
-        .attr("preserveAspectRatio", "none")
-        .attr("width", "80vw")
-        .style("height", "clamp(450px, 80vw, 530px)")
-        .each((d, i, node) => {
-            $(node[0]).hover(
-                function() {$(this).children().not(":last").toggleClass("svg-hover", true)},
-                function() {$(this).children().not(":last").toggleClass("svg-hover", false)}
-            )
-        })
-
+    console.log(m)
     //Create all stacked bars
     rect = svg.selectAll("g")
         .data(dataStacked)
-        .join("g")
+        .join(
+          enter => enter.append("g"),
+          update => update,
+          exit => exit
+            .selectAll("rect")
+                .transition()
+                .ease(d3.easeExpInOut)  
+                .duration(transitionDuration)
+                .attr("x", ((width - margin.right) - ((width - margin.right) / m * 0.85) * 10))
+                .attr("width", 0)
+                .remove()
+            .remove()
+        )
         .selectAll("rect")
         .data(d => d)
-        .join("rect")
-          .attr("fill", (d, i) => z(i))
-          .attr("x", (d) => x(d[2]))
-          .attr("y", height - margin.bottom)
-          .attr("width", x.bandwidth())
-          .attr("height", 0)
-          .each((d, i, node) => {
-              if(i == 3){
-                $(node[3]).parent().hover(
-                    function() {$(this).toggleClass("svg-hover", false)},
-                    function() {$(this).toggleClass("svg-hover", true)}
-                );
-                tippy(node[i], {
-                    content: `  <div class="d-flex flex-column">
-                                    <p class="tooltip-box-sembuh">{0}</p>
-                                    <p class="tooltip-box-positif">{1}</p>
-                                    <p class="tooltip-box-meninggal">{2}</p>
-                                    <p class="tooltip-tanggal">{3}</p>
-                                </div>`.format(node[2].__data__[1] - node[2].__data__[0], 
-                                    node[1].__data__[1] - node[1].__data__[0], 
-                                    node[0].__data__[1] - node[0].__data__[0],
-                                    tanggal[node[0].__data__[2]]),
-                    allowHTML: true,
-                    placement: 'bottom',
-                    theme: "light",
-                    duration: 0,
-                    popperOptions: {
-                        modifiers: [
-                            {
-                                name: 'flip',
-                                options: {
-                                    fallbackPlacements: ['bottom', 'right', 'left', 'top']
+        .join(
+          enter => enter.append('rect')
+            .attr("fill", (d, i) => z(i))
+            .attr("y", height - margin.bottom)
+            .attr("height", 0)
+            .each((d, i, node) => {
+                if(i == 3){
+                    $(node[3]).parent().hover(
+                        function() {$(this).toggleClass("svg-hover", false)},
+                        function() {$(this).toggleClass("svg-hover", true)}
+                    );
+                    tippy(node[i], {
+                        content: `  <div class="d-flex flex-column">
+                                        <p class="tooltip-box-sembuh">{0}</p>
+                                        <p class="tooltip-box-positif">{1}</p>
+                                        <p class="tooltip-box-meninggal">{2}</p>
+                                        <p class="tooltip-tanggal">{3}</p>
+                                    </div>`.format(node[2].__data__[1] - node[2].__data__[0], 
+                                        node[1].__data__[1] - node[1].__data__[0], 
+                                        node[0].__data__[1] - node[0].__data__[0],
+                                        tanggal_obj[node[0].__data__[2]].toISOString().slice(0,10)),
+                        allowHTML: true,
+                        placement: 'bottom',
+                        theme: "light",
+                        duration: 0,
+                        popperOptions: {
+                            modifiers: [
+                                {
+                                    name: 'flip',
+                                    options: {
+                                        fallbackPlacements: ['bottom', 'right', 'left', 'top']
+                                    }
                                 }
-                            }
-                        ]
-                    }
-                })
-              }
-          })
+                            ]
+                        }
+                    })
+                }
+            }),
+          update => update
+            .each((d, i, node) => {
+                if(i == 3){
+                    node[i]._tippy.setProps({
+                        content: `  <div class="d-flex flex-column">
+                                        <p class="tooltip-box-sembuh">{0}</p>
+                                        <p class="tooltip-box-positif">{1}</p>
+                                        <p class="tooltip-box-meninggal">{2}</p>
+                                        <p class="tooltip-tanggal">{3}</p>
+                                    </div>`.format(node[2].__data__[1] - node[2].__data__[0], 
+                                        node[1].__data__[1] - node[1].__data__[0], 
+                                        node[0].__data__[1] - node[0].__data__[0],
+                                        tanggal_obj[node[0].__data__[2]].toISOString().slice(0,10))
+                    })
+                }
+            })
+
+          ,exit => exit.remove()
+        )
 
     //Create x Axis
-    svg.append("g")
-        .call(xAxis)
-
-    //Transition Animation
-    function transitionStacked() {
-        y.domain([0, y1Max]);
-    
-        rect.transition()
-            .ease(d3.easeExpInOut)  
-            .duration(700)
-            //.delay((d, i) => i * 50)
-            .attr("y", d => y(d[1]))
-            .attr("height", d => y(d[0]) - y(d[1]))
-            .transition()
-            .attr("x", (d, i) => x(d[2]))
-            .attr("width", x.bandwidth());
+    if(typeof xAxis === "undefined"){
+        xAxis = svg.append("g")
+            .attr("transform", `translate(0,${height - margin.bottom})`)
     }
 
+    function updateX() {
+        width = parseInt(svg.style("width"), 10)
+        x.range([margin.left, width - margin.right])
+        tickStep = Math.ceil(m / (width / 100))
+        xAxis.call(d3.axisBottom(x)
+            .tickValues(d3.timeDay.range(
+                new Date(tanggal_obj[0].valueOf()),
+                new Date(tanggal_obj[tanggal_obj.length - 1].valueOf()), //+ (tickStep * 86400000)),
+                tickStep)
+            )
+            .tickFormat(d3.utcFormat("%d %b"))
+            .tickSizeOuter(0))
+    }
+
+    function updateWidth() {
+        rect.attr("x", d => x(tanggal_obj[d[2]]))
+            .attr("width", (width - margin.right) / m * 0.85)
+    }
+
+    //Transition Animation
+    async function transitionStacked() {
+        y.domain([0, y1Max]);
+    
+        await rect.transition()
+            .ease(d3.easeExpInOut)  
+            .duration(transitionDuration)
+                .attr("x", d => x(tanggal_obj[d[2]]))
+                .attr("width", (width - margin.right) / m * 0.85)
+            .end()
+        updateWidth()
+        rect.transition()
+            .ease(d3.easeExpInOut)  
+            .duration(transitionDuration)
+                .attr("y", d => y(d[1]))
+                .attr("height", d => y(d[0]) - y(d[1]))
+    }
+
+    updateX()
     transitionStacked()
+
+    window.addEventListener('resize', function() {
+        updateX()
+        updateWidth()
+    })
 }
 
 
