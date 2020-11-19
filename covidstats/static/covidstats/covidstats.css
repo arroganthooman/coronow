@@ -85,6 +85,43 @@ h1, h2, h3, h4, p {
     height: 40px; 
     font-size: 22px;
 }
+#submit-button{
+    position: absolute; 
+    right: 4px; 
+    background-color: transparent; 
+    outline: none; 
+    border: none;
+}
+#load-anim{
+    height: fit-content;
+}
+.load-rotate{
+    display: unset!important;
+    transform-origin: center;
+    animation: rotate 1.5s infinite linear;
+    -webkit-animation: rotate 1.5s infinite linear;
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+    } 
+    100% {
+        transform: rotate(359deg);
+        -webkit-transform: rotate(359deg);
+    }
+}
+@-webkit-keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+    } 
+    100% {
+        transform: rotate(359deg);
+        -webkit-transform: rotate(359deg);
+    }
+}
+
 #p-sembuh::before, #p-meninggal::before, #p-positif::before {
     content: '\200B';
     width: 15px;

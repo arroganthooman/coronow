@@ -328,3 +328,7 @@ body {
     src: url('fonts/Font Awesome/fa-solid-900.ttf');
     font-weight: 900;
 }
+@font-face{
+    font-family: 'Font Awesome Duo';
+    src: url('fonts/Font Awesome/fa-duotone-900.ttf');
+}

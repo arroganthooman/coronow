@@ -36,8 +36,8 @@ function tippyShow (t) {
 let provData
 let format = "harian"
 
-function generateChart(provinsi){
-    $.ajax({
+async function generateChart(provinsi){
+    await $.ajax({
         url: url,
         method: "POST",
         headers: {'X-CSRFToken': csrftoken},
@@ -62,7 +62,7 @@ function generateChart(provinsi){
         } else{
             console.log(error);
         }
-    });
+    }).catch(e => {});
 }
 
 function generateSVG(){
@@ -387,11 +387,14 @@ function generateSVG(){
 
 
 window.onload = () => {
-    $("#form-daerah").on('submit', () => {
-        let prov = formInput.val()
-        generateChart(prov)
-
-        return false
+    $("#form-daerah").on('submit', async (e) => {
+        e.preventDefault()
+        if (formInput.val() != ""){
+            $("#load-anim").toggleClass("load-rotate", true)
+            let prov = formInput.val()
+            await generateChart(prov)
+            $("#load-anim").toggleClass("load-rotate", false)
+        }
     })
     generateChart("INDONESIA")
 }
