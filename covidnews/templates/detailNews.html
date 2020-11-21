@@ -2,6 +2,9 @@
 {% load static %}
 {% block head%}
 <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+<style>
+
+</style>
 {% endblock head %}
 {% block content %}
 <div class="judul">
@@ -14,4 +17,30 @@
     <p>{{news.isi|safe}}</p>
     <p>Sumber:{{news.Sumber}}</p>
 </div>
+<div class="komentar">
+    <p>KOMENTAR</p>
+</div>
+<br>
+<form id="formKomentar" action="" method="POST">
+    {% csrf_token %}
+    <div>
+     <input type="text" name="nama" placeholder="Nama Anda" />
+    </div>
+    <div>
+     <textarea name="komentar" rows="10" placeholder="Berikan Komentar Anda"></textarea>
+    </div>
+    <div>
+      <input type="submit" value="Tambahkan Komentar"/>
+    </div>
+</form>
+{% for comment in comments %}
+{% if comment.berita == news%}
+<div class="namakomentar">
+    <p><u>{{comment.nama}}</u></p>
+</div>
+<div class="isikomentar">
+    <p>{{comment.komentar}}</p>
+</div>
+{% endif %}
+{% endfor %}    
 {% endblock content%}

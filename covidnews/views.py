@@ -16,7 +16,7 @@ def isiNews(request,pk):
 		news = News.objects.get(id=pk)
 		if len(nama)<=30 and len(komentar)<=100:
 			comment = Comment.objects.create(nama=nama, komentar=komentar, berita=news)
-			return redirect(f'/covidBlog/blog/{pk}#{comment.id}')
+			return redirect(f'/covidnews/news/{pk}#{comment.id}')
 
 	news = News.objects.get(id=pk)
 	comments = Comment.objects.all()
