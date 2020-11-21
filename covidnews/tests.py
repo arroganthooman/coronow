@@ -15,7 +15,7 @@ class Testing(TestCase):
             nama="nama",
             berita=news
         )
-    
+    #Test Model
     def test_apakah_ada_model_news(self):
         hitung_banyaknya = News.objects.all().count()
         self.assertEquals(hitung_banyaknya, 1)
@@ -24,6 +24,15 @@ class Testing(TestCase):
         hitung_banyaknya = Comment.objects.all().count()
         self.assertEquals(hitung_banyaknya, 1)
 
+    def test_str_model_news(self):
+        news =News.objects.get(Judul="judul")
+        self.assertEqual(str(news),news.Judul)
+
+    def test_str_model_comment(self):
+        komentar =Comment.objects.get(nama="nama")
+        self.assertEqual(str(komentar),komentar.nama)
+
+    # Test URL
     def test_url_news(self):
         response = Client().get('/covidnews/')
         self.assertEquals(response.status_code, 200)
@@ -32,6 +41,7 @@ class Testing(TestCase):
         response = Client().get('/covidnews/news/1')
         self.assertEquals(response.status_code, 200)
     
+    # Test Views
     def test_isi_news(self):
         response = Client().get('/covidnews/')
         html_kembalian = response.content.decode('utf8')
