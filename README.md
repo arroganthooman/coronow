@@ -1,6 +1,6 @@
 # [CoroNow](https://coronow2.herokuapp.com/ "Visit me!")
 
-[![Pipeline Status](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-2/badges/master/pipeline.svg)](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-1/-/commits/master) [![Coverage](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-2/badges/master/coverage.svg)](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-1/-/graphs/master/charts)
+[![Pipeline Status](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-2/badges/master/pipeline.svg)](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-2/-/commits/master) [![Coverage](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-2/badges/master/coverage.svg)](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-2/-/graphs/master/charts)
 
 #### coronow.herokuapp.com
 
