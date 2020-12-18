@@ -26,5 +26,6 @@ urlpatterns = [
     path('covidstats/', include('covidstats.urls')),
     path('covidBlog/', include('covidblog.urls')),
     path('feedback/', include('feedback.urls')),
-    path('covidnews/',include('covidnews.urls'))
+    path('covidnews/',include('covidnews.urls')),
+    path('login/', include('authentication.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

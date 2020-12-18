@@ -57,7 +57,8 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     'covidblog',
     'cloudinary',
-    'cloudinary_storage'
+    'cloudinary_storage',
+    'authentication'
 ]
 
 MIDDLEWARE = [
