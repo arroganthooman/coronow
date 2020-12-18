@@ -54,6 +54,13 @@
                         <a class="dpdwn dropdown-item" href="{% url 'listfeedback' %}">List Feedback</a>
                     </div>
                 </div>
+                {%block auth%}
+                {% if user.is_authenticated %}
+                <a href="{%url 'logout'%}" class="nav-link">Logout</a>
+                {% else %}
+                <a href="{%url 'login'%}" class="nav-link">Login</a>
+                {% endif %}
+                {% endblock auth %}
             </div>
         </div>
     </nav>
