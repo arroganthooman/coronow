@@ -2,7 +2,7 @@
 
 [![Pipeline Status](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-2/badges/master/pipeline.svg)](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-2/-/commits/master) [![Coverage](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-2/badges/master/coverage.svg)](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-2/-/graphs/master/charts)
 
-#### coronow.herokuapp.com
+#### coronow2.herokuapp.com
 
 ## Deskripsi app:
 CoroNow adalah website layanan penyedia informasi terkini mengenai COVID-19. CoroNow menyediakan informasi dalam bentuk Status Covid (Data terkini penyebaran Covid), News (Berita terkini mengenai Covid), Blog (Artikel-artikel penunjang), Feedback page, dan Landing Page.
