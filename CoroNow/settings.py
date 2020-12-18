@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^y(=8gsnp3ac#4p(_l6fh3c5i^dn%p12l)_6dy&ocjsqn3354%'
+SECRET_KEY = os.getenv('SECRET_KEY', '^y(=8gsnp3ac#4p(_l6fh3c5i^dn%p12l)_6dy&ocjsqn3354%')
 
 # Automatically determine environment by detecting if DATABASE_URL variable.
 # DATABASE_URL is provided by Heroku if a database add-on is added
@@ -39,7 +39,7 @@ DEBUG = not PRODUCTION
 
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', '')
 
-ALLOWED_HOSTS = [f'{HEROKU_APP_NAME}.herokuapp.com', 'localhost', '192.168.1.5', 'www.coronow.tk']
+ALLOWED_HOSTS = [f'{HEROKU_APP_NAME}.herokuapp.com', 'localhost', '192.168.1.5']
 
 # Application definition
 INSTALLED_APPS = [
@@ -172,9 +172,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ## cloud storage to store image
 cloudinary.config(
-  cloud_name = 'hqegsx6eq',
-  api_key = '144782739416582',
-  api_secret = '-Wwj4lJtrSf8PZaBtvLWpQv-hf0',
+  cloud_name = os.getenv('CLOUDINARY_NAME', 'hqegsx6eq'),
+  api_key = os.getenv('CLOUDINARY_API_KEY', '144782739416582'),
+  api_secret = os.getenv('CLOUDINARY_SECRET_KEY', '-Wwj4lJtrSf8PZaBtvLWpQv-hf0'),
   secure = True
 )
 

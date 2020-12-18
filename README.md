@@ -1,6 +1,6 @@
-# [CoroNow](https://coronow.herokuapp.com/ "Visit me!")
+# [CoroNow](https://coronow2.herokuapp.com/ "Visit me!")
 
-[![Pipeline Status](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-1/badges/master/pipeline.svg)](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-1/-/commits/master) [![Coverage](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-1/badges/master/coverage.svg)](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-1/-/graphs/master/charts)
+[![Pipeline Status](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-2/badges/master/pipeline.svg)](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-1/-/commits/master) [![Coverage](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-2/badges/master/coverage.svg)](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-1/-/graphs/master/charts)
 
 #### coronow.herokuapp.com
 
@@ -8,12 +8,12 @@
 CoroNow adalah website layanan penyedia informasi terkini mengenai COVID-19. CoroNow menyediakan informasi dalam bentuk Status Covid (Data terkini penyebaran Covid), News (Berita terkini mengenai Covid), Blog (Artikel-artikel penunjang), Feedback page, dan Landing Page.
 
 ## Link repo: 
-* [Gitlab](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-1)
-* [Heroku App](https://coronow.herokuapp.com/)
+* [Gitlab](https://gitlab.com/ppw-b-kelompok-7/tugas-kelompok-2)
+* [Heroku App](https://coronow2.herokuapp.com/)
 
 ## API:
-* https://services5.arcgis.com/VS6HdKS0VfIhv8Ct/ArcGIS/rest/services 
-* https://dekontaminasi.com/ 
+* https://data.covid19.go.id/
+* https://infeksiemerging.kemkes.go.id/
 
 
 ## Apps: 
