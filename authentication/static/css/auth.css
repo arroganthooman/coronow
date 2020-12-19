@@ -1,0 +1,35 @@
+/*Login*/
+.judul {
+    text-align: center;
+    font-weight: 800;
+    color: #F7F7F7;
+}
+.containform {
+    max-width: 430px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+}
+.label {
+    color: #FBD46D;
+}
+.button-custom {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 1px solid #4F8A8B;
+    background-color: transparent;
+    padding: 8px;
+    margin-top: 20px;
+    text-align: center;
+    transition: all;
+}
+.button-custom:hover {
+    background-color: #4F8A8B;
+}
+.line {
+    border: #F7F7F7 1px solid;
+}
+.mute {
+    color: rgba(255,255,255,0.7)
+}

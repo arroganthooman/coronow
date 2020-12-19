@@ -1,19 +1,31 @@
 {% extends 'base.html'%}
+{% load static %}
+{% block head %}
+	<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock head %}
+
 {%block content%}
-<div class="container">
+<div class="container containform">
+	<h2 class="judul">Log In</h2>
 	<form method="POST">
 		{%csrf_token%}
 		<div class="form-group">
-			<label for="exampleInputEmail1">Username</label>
+			<label for="exampleInputEmail1" class="label">Username</label>
 			<input name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
 			<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 		</div>
 		<div class="form-group">
-			<label for="exampleInputPassword1">Password</label>
+			<label for="exampleInputPassword1" class="label">Password</label>
 			<input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<div class="text-center">
+			<button type="submit" class="btn btn-primary mt-4">Submit</button>
+		</div>
 	</form>
-	<a style="color:black" href="{%url 'register' %}">Sign up here</a>
+	<hr class="line mt-3">
+	<div>
+		<small class="mute">Don't have an account yet?</small>
+		<a class="ke-register" style="color:#F7F7F7" href="{%url 'register' %}">Sign up here</a>
+	</div>
 </div>
 {% endblock content %}
