@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Comment, Blog
-from .forms import BlogForm#, PhotoForm
+from .forms import BlogForm
 
 # Create your views here.
 

@@ -121,7 +121,7 @@ class TestBlog(TestCase):
 		self.blog.delete()
 
 
-		##fitur baru TK 2
+		#fitur baru TK 2
 
 	def test_url_add_blog_tanpa_login(self):
 		response = self.client.get("/covidBlog/addBlog/")
