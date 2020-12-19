@@ -32,7 +32,7 @@ class TestFeedback(TestCase):
 
     def test_url_listfeedback_ada(self):
         response = Client().get('/feedback/listfeedback/')
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 302)
 
     ## Test Views
 
