@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from .models import Feedback
 from .forms import Form_Feedback
 
@@ -16,6 +17,7 @@ def savefeedback(request):
     else:
         return HttpResponseRedirect('/feedback/')
 
+@login_required(login_url='/login')
 def listfeedback(request):
     response = {'feedbacks' : Feedback.objects.all(),
                 'field' : Form_Feedback}
