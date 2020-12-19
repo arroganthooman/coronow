@@ -70,7 +70,7 @@ Deployment:
     - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
   script:
     - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
-    - heroku run --app $HEROKU_APP_NAME 'python manage.py migrate'
+    - heroku run --app $HEROKU_APP_NAME 'python manage.py makemigrations && python manage.py migrate'
   environment:
     name: production
     url: https://$HEROKU_APP_NAME.herokuapp.com
