@@ -1,14 +1,12 @@
-from datetime import time
-from django.http import response
 from django.test import TestCase
 from django.test.client import Client
 from django.urls import reverse
 from django.utils import timezone
-from django.core import management
+from django.contrib.auth.models import User
 from django import db
 from .models import KasusProvinsi, KasusUpdated
 from .task import main as task_main
-import threading, requests, re, datetime, json, schedule
+import threading, requests, re, datetime, json, schedule, logging
 
 # Create your tests here.
 class CovidstatsTest(TestCase):
@@ -26,6 +24,14 @@ class CovidstatsTest(TestCase):
         task_thread = threading.enumerate()[1]
         while(not task_thread.__dict__.get('task_done_once', False)):
             pass
+        
+        cls.user_credential = {
+            'username': 'test',
+            'email': 'test@test.xyz',
+            'password': 'test'
+        }
+        cls.user = User.objects.create_user(cls.user_credential['username'], cls.user_credential['email'], cls.user_credential['password'])
+        logging.basicConfig(level=logging.WARNING)
 
     #Task Test
     def test_task_thread_exists(self):
@@ -103,11 +109,17 @@ class CovidstatsTest(TestCase):
         self.assertIn(f'{KasusUpdated.objects.all()[0].kasus_sembuh_kum:,}', html)
         self.assertIn(f'{KasusUpdated.objects.all()[0].kasus_meninggal_kum:,}', html)
     
+    def test_views_pass_is_authenticated_as_context(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.context["is_auth"], response.wsgi_request.user.is_authenticated)
+
     def test_views_pass_KasusUpdated_as_context(self):
         response = self.client.get(self.url)
         self.assertEqual(response.context["kasus_updated"], KasusUpdated.objects.all()[0])
     
     def test_views_post_KasusProvinsi_return_json(self):
+        self.client.login(username=self.user_credential['username'], password=self.user_credential['password'])
+
         response = self.client.post(self.url, {
             "post_type": "POST_PROV",
             "prov": "DKI Jakarta"
@@ -117,6 +129,8 @@ class CovidstatsTest(TestCase):
         self.assertIn(KasusProvinsi.objects.get(nama_provinsi="DKI JAKARTA").data_json[-1], json.loads(html))
 
     def test_views_post_KasusProvinsi_not_found_return_json(self):
+        self.client.login(username=self.user_credential['username'], password=self.user_credential['password'])
+
         response = self.client.post(self.url, {
             "post_type": "POST_PROV",
             "prov": "else"
@@ -124,5 +138,24 @@ class CovidstatsTest(TestCase):
 
         html = response.content.decode('utf8')
         self.assertEqual(response.status_code, 404)
-        expected_json = {'not-found': True, 'msg': 'KasusProvinsi matching query does not exist.'}
+        expected_json = {
+            'fail': True, 
+            'reason': 'not-found', 
+            'msg': 'KasusProvinsi matching query does not exist.'
+        }
+        self.assertEqual(expected_json, json.loads(html))
+    
+    def test_views_post_KasusProvinsi_not_auth_return_json(self):
+        response = self.client.post(self.url, {
+            "post_type": "POST_PROV",
+            "prov": "else"
+        })
+
+        html = response.content.decode('utf8')
+        self.assertEqual(response.status_code, 403)
+        expected_json = {
+            'fail': True, 
+            'reason': 'not-auth', 
+            'msg': 'User is not authenticated.'
+        }
         self.assertEqual(expected_json, json.loads(html))
