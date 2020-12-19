@@ -119,3 +119,47 @@ class TestBlog(TestCase):
 
 		cloudinary.uploader.destroy(self.blog.image.public_id)
 		self.blog.delete()
+
+
+		##fitur baru TK 2
+
+	def test_url_add_blog_tanpa_login(self):
+		response = self.client.get("/covidBlog/addBlog/")
+		self.assertEquals(response.status_code, 302)
+
+	def test_url_add_blog_dengan_login(self):
+		user = User.objects.create_user(username='testuser', password="password")
+		self.client.login(username="testuser", password="password")
+
+		response = self.client.get('/covidBlog/addBlog/')
+		self.assertEquals(response.status_code,200)
+		self.assertTemplateUsed(response, "addBlog.html")
+
+
+	def test_view_blog(self):
+		user = User.objects.create_user('testing', password="heheoke")
+		user.is_superuser=True
+		user.save()
+		self.client.login(username="testing", password="heheoke")
+
+
+		testtime = datetime.now() - timedelta(days=60)
+		small_gif = (
+		    b'\x47\x49\x46\x38\x39\x61\x01\x00\x01\x00\x00\x00\x00\x21\xf9\x04'
+		    b'\x01\x0a\x00\x01\x00\x2c\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02'
+		    b'\x02\x4c\x01\x00\x3b'
+		)
+		image = SimpleUploadedFile(name='test_image.gif', content=small_gif, content_type='image/gif')
+
+		response = self.client.post('/covidBlog/addBlog/', data = {
+			'title':"testblog",
+			'image': image,
+			'body': 'testing',
+			'snippet':'testing'
+			})
+
+		self.assertEquals(response.status_code,200)
+		self.assertEquals(Blog.objects.count(),2)		
+
+
+
