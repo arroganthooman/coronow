@@ -307,6 +307,12 @@ function generateSVG(){
     $("#input-daerah")
         .autocomplete({ source: list_daerah })    
 
+    tippy('[data-tippy-content]', {
+        placement: 'bottom',
+        interactive: true,
+        appendTo: document.body
+    })
+
     let btnTgle = $("#buttonToggle")
     let tgl = btnTgle.parent()
     let logo = btnTgle.children()

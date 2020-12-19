@@ -3,9 +3,10 @@
 {% load humanize %}
 
 {% block head %}
+    <!-- Covidstats Stylesheet -->
     <link rel="stylesheet" href="{% static 'covidstats/covidstats.css' %}">
 
-    <!-- JQuery Style -->
+    <!-- JQuery Stylesheet -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" />
 
     <!-- D3 -->
@@ -21,12 +22,16 @@
 
 {% block content %}
     {% csrf_token %}
+    <!-- Title -->
     <input type="hidden" name="url" value="{% url 'covidstats' %}">
     <br>
     <div class="pt-5 mt-5 d-flex justify-content-center">
         <h1 style="font-weight: 700; font-size: 60px;" class="font-white m-5">CovidStats</h1>
     </div>
+    <!-- End of Title -->
+
     {% if kasus_updated %}
+    <!-- Total Kasus -->
     <div style="max-width: 900px;" class="mx-auto mb-5 d-flex container-fluid flex-column">
         <h2 style="font-size: 40px; font-weight: 500;" class="font-white mx-2">Total Kasus</h2>
         <p style="font-size: 20px;" class="font-white font-weight-light mx-2">Indonesia</p>
@@ -46,33 +51,52 @@
             </div>
         </div>
     </div>
-    <div style="height: 3em;"><br></div>
+    <!-- End of Total Kasus -->
+    
+    <!-- Kasus Harian -->
     <div style="max-width: 1300px;" class="d-flex flex-column w-100 px-5 my-5 py-5 align-self-center justify-content-start position-relative">
         <div id="kasus-harian" class="d-flex flex-column">
-        {% if is_auth %}
+
+            <!-- Input Daerah -->
             <form id="form-daerah" action="" class="position-relative d-flex flex-row ">
                 <div class="position-relative d-flex flex-row-reverse align-items-center">
+                    <!-- Auth check -->
+                    {% if is_auth %}
                     <input id="input-daerah" class="my-4 px-3 shadow" type="text" placeholder="Input Wilayah">
-                    <div id="notif" role="notif">
-                    </div>
+
+                    <!-- Notification "Nama provinsi tidak ditemukan" -->
+                    <div id="notif" role="notif"></div>
+
+                    <!-- Submit button -->
                     <button id="submit-button" type="submit">
                         <p style="font-weight: 300; font-family: 'Font Awesome'; ">&#xf002</p>
                     </button>
+
+                    <!-- Loading icon -->
                     <div style="right: -2.5em; " class="d-flex position-absolute text-center align-items-center">
-                        <!-- <p style="position: relative; top: 0.9px;" class="m-auto font-white">&#x10f3f4</p> -->
                         <svg style="display: none;" id="load-anim" xmlns="http://www.w3.org/2000/svg" fill="white" width="1.5em" height="1.5em" viewBox="0 0 512 512"><defs><style>.fa-secondary{opacity:.4}</style></defs><path d="M478.71 364.58zm-22 6.11l-27.83-15.9a15.92 15.92 0 0 1-6.94-19.2A184 184 0 1 1 256 72c5.89 0 11.71.29 17.46.83-.74-.07-1.48-.15-2.23-.21-8.49-.69-15.23-7.31-15.23-15.83v-32a16 16 0 0 1 15.34-16C266.24 8.46 261.18 8 256 8 119 8 8 119 8 256s111 248 248 248c98 0 182.42-56.95 222.71-139.42-4.13 7.86-14.23 10.55-22 6.11z" class="fa-secondary"/><path d="M271.23 72.62c-8.49-.69-15.23-7.31-15.23-15.83V24.73c0-9.11 7.67-16.78 16.77-16.17C401.92 17.18 504 124.67 504 256a246 246 0 0 1-25 108.24c-4 8.17-14.37 11-22.26 6.45l-27.84-15.9c-7.41-4.23-9.83-13.35-6.2-21.07A182.53 182.53 0 0 0 440 256c0-96.49-74.27-175.63-168.77-183.38z" class="fa-primary"/></svg>
                     </div>
+
+                    <!-- Disabled if not authenticated -->
+                    {% else %}
+                    <span class="my-4" data-tippy-content="Anda harus login untuk melihat data harian per provinsi.">
+                        <input id="input-daerah" class="px-3 shadow" type="text" placeholder="Input Wilayah" disabled>
+                    </span>
+                    {% endif %}
+
                 </div>
             </form>
-        {% endif %}
+
+            <!-- Title and Legends -->
             <h2 style="font-size: 40px; font-weight: 500;" class="font-white my-1">Kasus Harian</h2>
-        {% if is_auth %}
             <p id="prov-daerah" style="font-size: 20px; text-transform: capitalize;" class="font-white font-weight-light"></p>
             <div class="d-flex flex-column mx-1 my-1 position-relative">
                 <p id="p-sembuh" class="font-white font-weight-lighter my-1">Sembuh</p>
                 <p id="p-positif" class="font-white font-weight-lighter my-1">Positif</p>
                 <p id="p-meninggal" class="font-white font-weight-lighter my-1">Meninggal</p>
             </div>
+
+            <!-- Toggle button Perubahan Harian/Kumulatif -->
             <div id="toggle" class="d-flex flex-column align-items-center position-relative mt-4">
                 <div title="Perubahan harian" class="align-items-center" style="position: absolute; top: 0.8em; user-select: none;">
                     <svg class="m-auto" width="29" height="7"><path d="M.696 6.085l.608-.794c.207.159.392.217.605.208.228-.01.391-.06.98-.283 1.199-.455 1.962-.516 2.99.03.475.254 1.042-.072 2.223-1.216l.14-.135c.942-.918 1.354-1.266 1.913-1.52.846-.386 1.642-.208 2.294.6 1.131 1.401 1.718 2.024 2.15 2.254.289.154.43.079.726-.544.073-.154.15-.327.246-.546l.259-.603c.506-1.176.805-1.747 1.192-2.123.717-.694 1.484-.345 1.981.804.714 1.649.86 1.965 1.132 2.362.31.454.376.46.756.001.159-.192.296-.412.425-.671.076-.153.146-.312.229-.517.015-.037.163-.41.206-.514.472-1.13 1.103-1.508 2.218-.902.526.285.613.27.847-.01.02-.024.317-.405.433-.537a2.918 2.918 0 011.083-.793c1.043-.442 1.538.017 2.11 1.236l.016.034c.28.597.412.763.542.763v1c-.7 0-.992-.369-1.447-1.338l-.016-.034c-.364-.775-.48-.883-.815-.74-.29.123-.509.291-.723.534-.091.103-.377.47-.417.518-.542.647-1.15.756-2.09.246-.497-.27-.547-.24-.818.408-.04.095-.185.46-.202.505a8.265 8.265 0 01-.26.585 4.405 4.405 0 01-.551.865c-.816.985-1.676.914-2.351-.074-.326-.478-.471-.789-1.224-2.53-.256-.592-.256-.591-.368-.482-.252.243-.526.768-.97 1.8l-.26.606c-.1.228-.182.41-.26.576-.514 1.082-1.225 1.464-2.1.998-.601-.321-1.226-.984-2.457-2.51-.362-.448-.667-.516-1.101-.317-.411.187-.782.5-1.632 1.326l-.14.137c-1.514 1.467-2.34 1.94-3.39 1.381-.715-.38-1.209-.341-2.164.022-.705.267-.912.331-1.292.347a1.872 1.872 0 01-1.256-.413z" fill-rule="nonzero"></path></svg>
@@ -91,23 +115,19 @@
                     </div>
                 </div>
             </div>
-            {% endif %}
         </div>
-        {% if is_auth %}
+
+        <!-- Chart -->
         <div id="chart-container" class="d-flex justify-content-center position-relative">
             <svg id="chart" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="100%" style="height: 530px;">
             </svg>
             <p style="font-size: 10px; right: 0px; bottom: -60px;" class="font-white font-weight-light position-absolute text-right" id="update-terakhir-chart"></p>
         </div>
-        <div id="padding-middle" ><br></div>
-        {% else %}
-        <div id="not-auth" style="height: 400px;" class="d-flex flex-row text-center align-items-center w-100">
-            <p class="font-white mx-auto">Anda harus terautentikasi untuk melihat data harian.<br>Mohon login di <a href="#">sini</a>.</p>
-        </div>
-        {% endif %}
     </div>
+    <!-- End of Kasus Harian -->
     
-    <div class="d-flex flex-column mx-auto w-100 mb-5 px-3 py-5 align-content-center text-center position-relative">
+    <!-- Detail Kasus -->
+    <div style="margin-top: 15em;" class="d-flex flex-column mx-auto w-100 mb-5 px-3 py-5 align-content-center text-center position-relative">
         <h2 style="font-size: 44px; font-weight: 500;" class="font-white my-1">Detail Kasus</h2>
         <h4 class="font-white font-weight-light">Indonesia</h4>
         <div class="container mt-4">
@@ -161,17 +181,19 @@
             </div>
         </div>
     </div>
-    <div id="padding-bottom" style="height: 10vh;">
-        <br>
-    </div>
+    <!-- End of Detail Kasus -->
+
+    <!-- Sumber -->
     <div style="font-size: 10px;" class="position-relative font-white font-weight-lighter px-2 m-2"><p>Sumber data:<br>- data.covid19.go.id <br>- infeksiemerging.kemkes.go.id</p></div>
+
+    <!-- Renewing data -->
     {% else %}
     <div class="d-flex justify-content-center">
         <p class="font-white text-center">Data sedang diperbaharui,<br>mohon coba beberapa saat lagi.</p>
     </div>
     {% endif %}
-<script src="{% static 'covidstats/covidstatsMain.js' %}"></script>
-{% if is_auth %}
+
+<!-- Scripts -->
 <script src="{% static 'covidstats/covidstats.js' %}"></script>
-{% endif %}
+<!-- <script src="{% static 'covidstats/covidstatsMain.js' %}"></script> -->
 {% endblock content %}
