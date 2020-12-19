@@ -117,7 +117,7 @@ class CovidstatsTest(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.context["kasus_updated"], KasusUpdated.objects.all()[0])
     
-    def test_views_post_KasusProvinsi_return_json(self):
+    def test_views_post_KasusProvinsi_return_kasus_harian_json(self):
         self.client.login(username=self.user_credential['username'], password=self.user_credential['password'])
 
         response = self.client.post(self.url, {
@@ -145,17 +145,11 @@ class CovidstatsTest(TestCase):
         }
         self.assertEqual(expected_json, json.loads(html))
     
-    def test_views_post_KasusProvinsi_not_auth_return_json(self):
+    def test_views_post_KasusProvinsi_not_auth_return_kasus_harian_indonesia_json(self):
         response = self.client.post(self.url, {
             "post_type": "POST_PROV",
             "prov": "else"
         })
 
         html = response.content.decode('utf8')
-        self.assertEqual(response.status_code, 403)
-        expected_json = {
-            'fail': True, 
-            'reason': 'not-auth', 
-            'msg': 'User is not authenticated.'
-        }
-        self.assertEqual(expected_json, json.loads(html))
+        self.assertIn(KasusProvinsi.objects.get(nama_provinsi="INDONESIA").data_json[-1], json.loads(html))
