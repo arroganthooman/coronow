@@ -7,17 +7,23 @@ from .models import KasusUpdated, KasusProvinsi
 def covidstats(request):
     if request.method == "POST":
         try:
-            if request.POST["post_type"] == "POST_PROV":
+            if request.POST["post_type"] == "POST_PROV" and request.user.is_authenticated:
                 provinsi = KasusProvinsi.objects.get(nama_provinsi = request.POST["prov"].upper())
-                return JsonResponse(provinsi.data_json, safe=False)
+                return JsonResponse(provinsi.data_json[-400:], safe=False)
+            elif request.POST["post_type"] == "POST_PROV" and not request.user.is_authenticated:
+                return JsonResponse(
+                    status = 403,
+                    data = {'fail': True, 'reason': 'not-auth', 'msg': 'User is not authenticated.'}
+                )
         except KasusProvinsi.DoesNotExist as e:
             return JsonResponse(
                 status = 404, 
-                data = {'not-found': True, 'msg' : str(e)}
+                data = {'fail': True, 'reason': 'not-found', 'msg' : str(e)}
             )
 
     context = {}
     if KasusUpdated.objects.exists():
         context["kasus_updated"] = KasusUpdated.objects.all()[0]
+    context['is_auth'] = request.user.is_authenticated
 
     return render(request, "covidstats/covidstats.html", context=context)

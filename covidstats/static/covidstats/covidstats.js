@@ -57,10 +57,10 @@ async function generateChart(provinsi){
         }
         provDaerah.html(provinsi)
     }).fail(function (error) {
-        if(error.responseJSON['not-found'] == true){
+        if(error.responseJSON.reason === 'not-found'){
             tippyShow(tippy_prov_not_found)
-        } else{
-            console.log(error);
+        } else {
+            console.log(error)
         }
     }).catch(e => {});
 }
@@ -306,12 +306,6 @@ function generateSVG(){
     let list_daerah = ['DKI Jakarta', 'Jawa Timur', 'Jawa Barat', 'Jawa Tengah', 'Sulawesi Selatan', 'Sumatera Barat', 'Kalimantan Timur', 'Riau', 'Sumatera Utara', 'Bali', 'Kalimantan Selatan', 'Banten', 'Papua', 'Sumatera Selatan', 'Aceh', 'Sulawesi Utara', 'Sulawesi Tenggara', 'Kalimantan Tengah', 'Kepulauan Riau', 'Papua Barat', 'Daerah Istimewa Yogyakarta', 'Nusa Tenggara Barat', 'Maluku', 'Gorontalo', 'Lampung', 'Maluku Utara', 'Kalimantan Barat', 'Jambi', 'Bengkulu', 'Sulawesi Barat', 'Sulawesi Tengah', 'Kalimantan Utara', 'Nusa Tenggara Timur', 'Kepulauan Bangka Belitung', 'Indonesia']
     $("#input-daerah")
         .autocomplete({ source: list_daerah })    
-
-    tippy('[data-tippy-content]', {
-        placement: 'bottom',
-        interactive: true,
-        appendTo: document.body
-    })
 
     let btnTgle = $("#buttonToggle")
     let tgl = btnTgle.parent()

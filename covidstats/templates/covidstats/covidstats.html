@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" />
 
     <!-- D3 -->
-    <script src="{% static 'covidstats/d3.v5.min.js' %}"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
 
     <!-- Tippy -->
     <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
@@ -49,6 +49,7 @@
     <div style="height: 3em;"><br></div>
     <div style="max-width: 1300px;" class="d-flex flex-column w-100 px-5 my-5 py-5 align-self-center justify-content-start position-relative">
         <div id="kasus-harian" class="d-flex flex-column">
+        {% if is_auth %}
             <form id="form-daerah" action="" class="position-relative d-flex flex-row ">
                 <div class="position-relative d-flex flex-row-reverse align-items-center">
                     <input id="input-daerah" class="my-4 px-3 shadow" type="text" placeholder="Input Wilayah">
@@ -63,7 +64,9 @@
                     </div>
                 </div>
             </form>
+        {% endif %}
             <h2 style="font-size: 40px; font-weight: 500;" class="font-white my-1">Kasus Harian</h2>
+        {% if is_auth %}
             <p id="prov-daerah" style="font-size: 20px; text-transform: capitalize;" class="font-white font-weight-light"></p>
             <div class="d-flex flex-column mx-1 my-1 position-relative">
                 <p id="p-sembuh" class="font-white font-weight-lighter my-1">Sembuh</p>
@@ -88,13 +91,22 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
+        {% if is_auth %}
         <div id="chart-container" class="d-flex justify-content-center position-relative">
-            <svg id="chart" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="100%" style="height: 530px;"></svg>
+            <svg id="chart" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="100%" style="height: 530px;">
+            </svg>
             <p style="font-size: 10px; right: 0px; bottom: -60px;" class="font-white font-weight-light position-absolute text-right" id="update-terakhir-chart"></p>
         </div>
+        <div id="padding-middle" ><br></div>
+        {% else %}
+        <div id="not-auth" style="height: 400px;" class="d-flex flex-row text-center align-items-center w-100">
+            <p class="font-white mx-auto">Anda harus terautentikasi untuk melihat data harian.<br>Mohon login di <a href="#">sini</a>.</p>
+        </div>
+        {% endif %}
     </div>
-    <div id="padding-middle" ><br></div>
+    
     <div class="d-flex flex-column mx-auto w-100 mb-5 px-3 py-5 align-content-center text-center position-relative">
         <h2 style="font-size: 44px; font-weight: 500;" class="font-white my-1">Detail Kasus</h2>
         <h4 class="font-white font-weight-light">Indonesia</h4>
@@ -158,5 +170,8 @@
         <p class="font-white text-center">Data sedang diperbaharui,<br>mohon coba beberapa saat lagi.</p>
     </div>
     {% endif %}
+<script src="{% static 'covidstats/covidstatsMain.js' %}"></script>
+{% if is_auth %}
 <script src="{% static 'covidstats/covidstats.js' %}"></script>
+{% endif %}
 {% endblock content %}
