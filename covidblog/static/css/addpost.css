@@ -1,0 +1,21 @@
+.form-control {
+	background-color: transparent;
+	border:2px solid #375e5e;
+	/*box-shadow: 5px 5px;*/
+}
+
+label {
+	font-family: 'Poppins', sans-serif;
+	color:#FBD46D;
+}
+
+button {
+	color:#FBD46D !important;
+	border: 2px solid #4F8A8B !important;
+	background-color: transparent !important;
+}
+
+button:hover {
+	background-color: white !important;
+	color:black !important;
+}
