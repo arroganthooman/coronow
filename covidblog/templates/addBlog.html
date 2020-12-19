@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+{% load cloudinary %}
+{%load static%}
+{% block head%}
+	<link rel="stylesheet" href="{% static 'css/addpost.css' %}">
+{% endblock head %}
+{% block content%}
+	<div style="width:100%; margin-top: 10vh" class="container">
+		<form method="POST"  enctype="multipart/form-data">
+			{%csrf_token%}
+			{{form.media}}
+			{{form.as_p}}
+			<div class="row d-flex pb-5">
+				<div class="col-auto align-self-end">
+					<button type="submit" class="btn btn-primary mt-3">Submit</button>
+				</div>
+			</div>
+		</form>
+	</div>
+{% endblock content%}

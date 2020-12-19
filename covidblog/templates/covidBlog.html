@@ -26,6 +26,7 @@
     <div class="container-fluid d-flex justify-content-center blog-list">
         <div style="width:100vw" class="row d-flex justify-content-around">
         	{% for blog in blog %}
+            {%if blog.acc %}
             <div class="col-md-4 d-flex justify-content-center">
                 <div class="card">
                     <div class="img-container">
@@ -43,8 +44,12 @@
                     </div>
                 </div>
             </div>
+            {%endif%}
             {% endfor %}
 </div>
+</div>
+<div class="container-fluid d-flex justify-content-end">
+<h4 style="color:#FBD46D">Want to write for our blog? Click <a href="{% url 'addPost'%}">here</a>.</h4>
 </div>
 </section>
 <!-- end of blog -->

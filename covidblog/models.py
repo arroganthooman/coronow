@@ -24,6 +24,7 @@ class Blog(models.Model):
     image = CloudinaryField("image")
     body = RichTextField(blank=False, null=False)
     snippet = RichTextField(blank=False, null=False, max_length=100)
+    acc = models.BooleanField(default=False)
     
     def __str__(self):
     	return self.title

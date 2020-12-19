@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Comment, Blog
+from .forms import BlogForm#, PhotoForm
 
 # Create your views here.
 
@@ -28,3 +30,21 @@ def isiBlog(request,pk):
 	}
 	
 	return render(request, 'isiBlog.html', response)
+
+@login_required(login_url='/login')
+def addPost(request):
+	context = {
+	'form':BlogForm()
+	}
+
+	if request.method == "POST":
+		# form_photo = PhotoForm(request.POST, request.FILES)
+		form = BlogForm(request.POST, request.FILES)
+		context['posted'] = form.instance
+		if form.is_valid():
+			instance = form.save(commit=False)
+			instance.author = request.user
+			instance.save()
+			return render(request, "thanks.html")
+
+	return render(request, 'addBlog.html', context)
