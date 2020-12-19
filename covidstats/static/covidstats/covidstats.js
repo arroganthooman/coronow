@@ -57,10 +57,10 @@ async function generateChart(provinsi){
         }
         provDaerah.html(provinsi)
     }).fail(function (error) {
-        if(error.responseJSON['not-found'] == true){
+        if(error.responseJSON.reason === 'not-found'){
             tippyShow(tippy_prov_not_found)
-        } else{
-            console.log(error);
+        } else {
+            console.log(error)
         }
     }).catch(e => {});
 }
