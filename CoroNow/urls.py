@@ -19,6 +19,7 @@ from django.urls.conf import include
 from django.conf import settings
 from django.conf.urls.static import static
 
+import authentication.views as authentication
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +28,7 @@ urlpatterns = [
     path('covidBlog/', include('covidblog.urls')),
     path('feedback/', include('feedback.urls')),
     path('covidnews/',include('covidnews.urls')),
-    path('login/', include('authentication.urls'))
+    path('login/', authentication.login, name='login'),
+    path('logout/', authentication.logging_out, name='logout'),
+    path('register/', authentication.register, name='register'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
