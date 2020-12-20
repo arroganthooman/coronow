@@ -1,17 +1,67 @@
-/*Login*/
+/* Auth Form */
 .judul {
     text-align: center;
-    font-weight: 800;
-    color: #F7F7F7;
+    font-weight: 700;
+    color: #EEEEEE;
+    margin-bottom: 2rem;
 }
-.containform {
-    max-width: 430px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-
+.containform-login {
+    max-width: 450px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+.containform-register {
+    max-width: 550px;
+    margin-top: 40px;
+    margin-bottom: 80px;
+}
+.div-form {
+    background-color: #2c323a;
 }
 .label {
     color: #FBD46D;
+}
+input{
+    filter: none;
+    background-color: #2c323a;
+    background-clip: padding-box;
+    color: #EEEEEE;
+    border: unset;
+    border-radius: 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #eeeeeeA0;
+
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    transition: all .2s ease-in-out;
+}
+input:focus{
+    border-bottom-width: 1px;
+    border-bottom-color: #eeeeee;
+    box-shadow: unset!important;
+    outline: 0;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active   {
+    -webkit-box-shadow: 0 0 0 30px #2c323a inset !important;
+    box-shadow:0 0 0 30px #2c323a inset !important ;
+    -webkit-text-fill-color: #eeeeee !important;
+    caret-color: #eeeeee;
+}
+.mute {
+    color: rgba(255,255,255,0.7)
+}
+
+/* .line {
+    border: #EEEEEE 1px solid;
 }
 .button-custom {
     font-family: 'Montserrat', sans-serif;
@@ -26,10 +76,4 @@
 }
 .button-custom:hover {
     background-color: #4F8A8B;
-}
-.line {
-    border: #F7F7F7 1px solid;
-}
-.mute {
-    color: rgba(255,255,255,0.7)
-}
+} */
