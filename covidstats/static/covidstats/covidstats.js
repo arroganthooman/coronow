@@ -126,6 +126,11 @@ function generateSVG(){
         }
     }
 
+    //Remove xAxis to avoid problems in bars creation
+    if(typeof xAxis !== "undefined"){
+        xAxis.remove()
+    }
+
     //Create all stacked bars
     rect = svg.selectAll("g")
         .data(dataStacked)
@@ -218,12 +223,11 @@ function generateSVG(){
             exit => exit.remove()
         )
 
-    //Create x Axis
-    if(typeof xAxis === "undefined"){
-        xAxis = svg.append("g")
-            .attr("transform", `translate(0,${height - margin.bottom})`)
-    }
+    //Create xAxis
+    xAxis = svg.append("g")
+    .attr("transform", `translate(0,${height - margin.bottom})`)
 
+    //Update xAxis
     function updateX() {
         width = parseInt(svg.style("width"), 10)
         x.range([margin.left, width - margin.right])
@@ -238,6 +242,7 @@ function generateSVG(){
             .tickSizeOuter(0))
     }
 
+    //Update bars width
     function updateWidth() {
         rect.attr("x", d => x(tanggal_obj[d[2]]))
             .attr("width", (width - margin.right) / m * tickW)
@@ -247,7 +252,7 @@ function generateSVG(){
     async function transitionStacked() {
         y.domain([0, y1Max]);
 
-        //Run animation in rect simultaniously
+        //Run animation in rect width and height simultaniously
         if(rect._groups[0][0].getAttribute('x') != null){
             rect.call(async function() {
                 await d3.select({})
