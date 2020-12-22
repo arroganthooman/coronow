@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from .models import News, Comment
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your tests here.
 class Testing(TestCase):
@@ -57,6 +58,13 @@ class Testing(TestCase):
     
     def test_url_addnews(self):
         response = Client().get('/covidnews/addNews/')
+        self.assertEquals(response.status_code, 302)
+
+    def test_url_addnews_withlogin(self):
+        user = User.objects.create_user(username='testuser', password="password")
+        self.client.login(username="testuser", password="password")
+        
+        response = self.client.get('/covidnews/addNews/')
         self.assertEquals(response.status_code, 200)
     
     # Test Views
