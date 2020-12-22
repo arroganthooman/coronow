@@ -54,9 +54,8 @@ $(".postComment").on('submit', (e) => {
 		success: (e) => {
 			$("#nama").val("");
 			$("#komentar").val("");
-			console.log(e);
-
 			$(".list-komen").empty();
+			
 			for (let i=e.length-1; i>=0; i--) {
 				$(".list-komen").append(
 					`<div class="row">

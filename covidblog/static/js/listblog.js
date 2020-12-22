@@ -1,5 +1,4 @@
 // animation effect
-
 $(document).ready((e) => {
 	$(".col-md-4").hover(function(){
 		$(this).animate({

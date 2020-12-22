@@ -58,15 +58,12 @@ class TestBlog(TestCase):
 
 	## Test URL
 	def test_url_list_blog(self):
-		# client = Client()
-		# url = reverse("covidBlog")
 		response = self.client.get('/covidBlog/')
 		self.assertEquals(response.status_code, 200)
 		cloudinary.uploader.destroy(self.blog.image.public_id)
 
 	def test_url_per_blog(self):
 		client = Client()
-		# response = client.get(reverse('blog', args=[self.blog.id]))
 		response = self.client.get('/covidBlog/blog/'+str(self.blog.id))
 		self.assertEquals(response.status_code, 200)
 		cloudinary.uploader.destroy(self.blog.image.public_id)
@@ -75,7 +72,6 @@ class TestBlog(TestCase):
 	## Test View
 	def test_view_covidBlog(self):
 		url = reverse('covidBlog')
-		# response = Client().get(url)
 		response = self.client.get(url)
 		self.assertTemplateUsed(response, 'base.html')
 		self.assertTemplateUsed(response, 'covidBlog.html')
@@ -83,20 +79,11 @@ class TestBlog(TestCase):
 
 	def test_view_isiBlog(self):
 		url = reverse('blog', args=[self.blog.id])
-		# response = Client().get(url)
 
 		response = self.client.get(url)
 		self.assertTemplateUsed(response, 'base.html')
 		self.assertTemplateUsed(response, 'isiBlog.html')
 		cloudinary.uploader.destroy(self.blog.image.public_id)
-
-
-		## test form comment
-		# response =  self.client.post(url, data= {
-		# 	'komentar' : "ngetest",
-		# 	'nama' : 'fikri',
-		# 	'blog' : self.blog
-		# })
 
 		response =  self.client.post('/covidBlog/postComment/'+str(self.blog.id), data= {
 			'komentar' : "ngetest",
@@ -122,8 +109,7 @@ class TestBlog(TestCase):
 		self.blog.delete()
 
 
-		#fitur baru TK 2
-
+		##fitur baru TK 2
 	def test_url_add_blog_tanpa_login(self):
 		response = self.client.get("/covidBlog/addBlog/")
 		self.assertEquals(response.status_code, 302)

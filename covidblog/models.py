@@ -8,7 +8,6 @@ import cloudinary
 import os
 
 # Create your models here.
-
 class BlogQuerySet(models.QuerySet):
     def delete(self, *args, **kwargs):
         for obj in self:
@@ -38,7 +37,6 @@ class Comment(models.Model):
 
 	def __str__(self):
 		return self.nama
-
 
 
 ## delete image when delete models
