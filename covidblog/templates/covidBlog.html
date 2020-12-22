@@ -24,7 +24,7 @@
 <!-- Blog list -->
 <section>
     <div class="container-fluid d-flex justify-content-center blog-list">
-        <div style="width:100vw" class="row d-flex justify-content-around">
+        <div style="width:100vw" class="row d-flex justify-content-around container-blog">
         	{% for blog in blog %}
             {%if blog.acc %}
             <div class="col-md-4 d-flex justify-content-center">
@@ -46,6 +46,7 @@
             </div>
             {%endif%}
             {% endfor %}
+
 </div>
 </div>
 <div class="container-fluid d-flex justify-content-end">
@@ -53,6 +54,9 @@
 </div>
 </section>
 <!-- end of blog -->
+
+
+<script src="{% static 'js/listblog.js'%}"></script>
 
 {% endblock content%}
 <!-- end of block -->
