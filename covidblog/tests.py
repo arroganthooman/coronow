@@ -7,11 +7,7 @@ from django.urls import reverse
 import cloudinary.uploader
 import cloudinary
 import mock
-
 from datetime import *
-	
-
-
 # Create your tests here.
 
 # Blog tests
@@ -48,7 +44,6 @@ class TestBlog(TestCase):
 
 
 	## Test Model
-
 	def test_model_blog(self):
 		self.assertEquals(Blog.objects.count(),1)
 		cloudinary.uploader.destroy(self.blog.image.public_id)
@@ -62,42 +57,48 @@ class TestBlog(TestCase):
 
 
 	## Test URL
-
 	def test_url_list_blog(self):
-		client = Client()
-		url = reverse("covidBlog")
-		response = client.get(url)
+		# client = Client()
+		# url = reverse("covidBlog")
+		response = self.client.get('/covidBlog/')
 		self.assertEquals(response.status_code, 200)
 		cloudinary.uploader.destroy(self.blog.image.public_id)
 
 	def test_url_per_blog(self):
 		client = Client()
-		response = client.get(reverse('blog', args=[self.blog.id]))
+		# response = client.get(reverse('blog', args=[self.blog.id]))
+		response = self.client.get('/covidBlog/blog/'+str(self.blog.id))
 		self.assertEquals(response.status_code, 200)
 		cloudinary.uploader.destroy(self.blog.image.public_id)
 
 
 	## Test View
-
 	def test_view_covidBlog(self):
 		url = reverse('covidBlog')
-		response = Client().get(url)
-
+		# response = Client().get(url)
+		response = self.client.get(url)
 		self.assertTemplateUsed(response, 'base.html')
 		self.assertTemplateUsed(response, 'covidBlog.html')
 		cloudinary.uploader.destroy(self.blog.image.public_id)		
 
 	def test_view_isiBlog(self):
 		url = reverse('blog', args=[self.blog.id])
-		response = Client().get(url)
+		# response = Client().get(url)
 
+		response = self.client.get(url)
 		self.assertTemplateUsed(response, 'base.html')
 		self.assertTemplateUsed(response, 'isiBlog.html')
 		cloudinary.uploader.destroy(self.blog.image.public_id)
 
 
 		## test form comment
-		response =  self.client.post(url, data= {
+		# response =  self.client.post(url, data= {
+		# 	'komentar' : "ngetest",
+		# 	'nama' : 'fikri',
+		# 	'blog' : self.blog
+		# })
+
+		response =  self.client.post('/covidBlog/postComment/'+str(self.blog.id), data= {
 			'komentar' : "ngetest",
 			'nama' : 'fikri',
 			'blog' : self.blog
@@ -159,7 +160,23 @@ class TestBlog(TestCase):
 			})
 
 		self.assertEquals(response.status_code,200)
-		self.assertEquals(Blog.objects.count(),2)		
+		self.assertEquals(Blog.objects.count(),2)	
+
+
+	def test_post_comment(self):
+		response =  self.client.post('/covidBlog/postComment/'+str(self.blog.id), data= {
+			'komentar' : "ngetest",
+			'nama' : 'fikri',
+			'blog' : self.blog
+		})
+		self.assertEqual(response['content-type'], 'text/json-comment-filtered')
+
+
+	def test_getAllComment(self):
+		response = self.client.get('/covidBlog/getAllComment/'+str(self.blog.id))
+
+		self.assertEqual(response['content-type'], 'text/json-comment-filtered')
+		self.assertEquals(response.status_code,200)
 
 
 
