@@ -39,7 +39,8 @@ class TestFeedback(TestCase):
         user = User.objects.create_user(username='test',password='password')
         self.client.login(username='test', password='password')
         response = self.client.get('/feedback/listfeedback/')
-        self.assertEquals(response.status_code, 302)
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'listfeedback.html')
 
     ## Test Views
 
