@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+from django.urls import reverse
 # Create your models here.
 
 class News(models.Model):
@@ -14,6 +15,8 @@ class News(models.Model):
     # with their title name 
     def __str__(self): 
         return self.Judul
+    def get_absolute_url(self):
+        return reverse('news', args=[str(self.id)])
 
 class Comment(models.Model):
 	komentar = models.CharField(max_length=200, null=False, blank=False)
