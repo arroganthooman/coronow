@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from django.urls import resolve
 from .models import Feedback
 from .views import feedback, savefeedback, listfeedback
+from django.contrib.auth.models import User
 
 # Create your tests here.
 
@@ -30,8 +31,14 @@ class TestFeedback(TestCase):
         response = Client().get('/feedback/savefeedback/')
         self.assertEquals(response.status_code, 302)
 
-    def test_url_listfeedback_ada(self):
+    def test_url_listfeedback_belum_login(self):
         response = Client().get('/feedback/listfeedback/')
+        self.assertEquals(response.status_code, 302)
+
+    def test_url_listfeedback_setelah_login(self):
+        user = User.objects.create_user(username='test',password='password')
+        self.client.login(username='test', password='password')
+        response = self.client.get('/feedback/listfeedback/')
         self.assertEquals(response.status_code, 302)
 
     ## Test Views
@@ -48,6 +55,10 @@ class TestFeedback(TestCase):
     def test_views_savefeedback(self):
         found = resolve('/feedback/savefeedback/')
         self.assertEquals(found.func, savefeedback)
+
+    def test_views_listfeedback_ada(self):
+        found = resolve('/feedback/listfeedback/')
+        self.assertEquals(found.func, listfeedback)
 
     def test_POST_form(self):
         response = Client().post('/feedback/savefeedback/', data = {'nama': 'Spongebob','email':
