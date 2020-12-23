@@ -1,5 +1,7 @@
 from django.test import TestCase, Client
 from .models import News, Comment
+from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your tests here.
 class Testing(TestCase):
@@ -15,6 +17,13 @@ class Testing(TestCase):
             nama="nama",
             berita=news
         )
+    def createNews(self):
+        judul="judul"
+        description="desc"
+        foto="foto"
+        sumber="sumber"
+        return News.objects.create(Judul=judul,description=description,Foto=foto,Sumber=sumber)
+
     #Test Model
     def test_apakah_ada_model_news(self):
         hitung_banyaknya = News.objects.all().count()
@@ -32,6 +41,12 @@ class Testing(TestCase):
         komentar =Comment.objects.get(nama="nama")
         self.assertEqual(str(komentar),komentar.nama)
 
+    def test_get_absolute_url_model_news(self):
+        w= self.createNews()
+        responses =Client().get(reverse('news',args=[w.pk]))
+        response= self.client.post("/covidnews/")
+        self.assertEqual(responses.status_code,200)
+
     # Test URL
     def test_url_news(self):
         response = Client().get('/covidnews/')
@@ -39,6 +54,17 @@ class Testing(TestCase):
     
     def test_url_detailnews(self):
         response = Client().get('/covidnews/news/1')
+        self.assertEquals(response.status_code, 200)
+    
+    def test_url_addnews(self):
+        response = Client().get('/covidnews/addNews/')
+        self.assertEquals(response.status_code, 302)
+
+    def test_url_addnews_withlogin(self):
+        user = User.objects.create_user(username='testuser', password="password")
+        self.client.login(username="testuser", password="password")
+        
+        response = self.client.get('/covidnews/addNews/')
         self.assertEquals(response.status_code, 200)
     
     # Test Views
