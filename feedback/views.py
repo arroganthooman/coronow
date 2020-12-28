@@ -13,12 +13,22 @@ def feedback(request):
 def savefeedback(request):
     form = Form_Feedback(request.POST or None)
     if (form.is_valid and request.method == 'POST'):
-        form.save()
-        return HttpResponseRedirect('/feedback/')
+        post_nama = request.POST.get('nama')
+        post_email = request.POST.get('email')
+        post_isi = request.POST.get('isi')
+        data = {}
+
+        feedback = Feedback(nama=post_nama, email=post_email, isi=post_isi)
+        feedback.save()
+
+        data['nama'] = feedback.nama
+        data['email'] = feedback.email
+        data['isi'] = feedback.isi
+
+        return JsonResponse(data, safe=False)
     else:
-        return HttpResponseRedirect('/feedback/')
-
-
+        data = {'gaada' : 'gabisa'}
+        return JsonResponse(data, safe=False)
 
 @login_required(login_url='/login')
 def listfeedback(request):

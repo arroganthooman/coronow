@@ -17,11 +17,24 @@ function savefeedback() {
             csrfmiddlewaretoken: window.CSRF_TOKEN
         },
         success: function (data) {
+            $('#nama').val('');
+            $('#email').val('');
+            $('#isi').val('');
             console.log(data);
             console.log("success");
+
+            var html = "";
+            html += '<div class="alert alert-success" style="text-align: center;">';
+            html += 'Terima kasih telah mengirim feedback!';
+            html += '</div>';
+            $('#respons').append(html);
         },
 
         error: function (error) {
+            var html = "";
+            html += '<div class="alert alert-warning" style="text-align: center;">';
+            html += 'Oops! Terdapat error saat mengirim feedback';
+            html += '</div>';
             console.log(error);
         }
     });
