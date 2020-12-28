@@ -43,9 +43,8 @@ class Testing(TestCase):
 
     def test_get_absolute_url_model_news(self):
         w= self.createNews()
-        responses =Client().get(reverse('news',args=[w.pk]))
-        response= self.client.post("/covidnews/")
-        self.assertEqual(responses.status_code,200)
+        responses =w.get_absolute_url()
+        self.assertEqual(responses,'/covidnews/news/2')
 
     # Test URL
     def test_url_news(self):
