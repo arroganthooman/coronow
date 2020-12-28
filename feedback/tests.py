@@ -29,7 +29,7 @@ class TestFeedback(TestCase):
 
     def test_url_savefeedback_ada(self):
         response = Client().get('/feedback/savefeedback/')
-        self.assertEquals(response.status_code, 302)
+        self.assertEquals(response.status_code, 200)
 
     def test_url_listfeedback_belum_login(self):
         response = Client().get('/feedback/listfeedback/')
@@ -65,4 +65,8 @@ class TestFeedback(TestCase):
         response = Client().post('/feedback/savefeedback/', data = {'nama': 'Spongebob','email':
         'spongebob@gmail.com','isi': 'halo'})
         banyaknya = Feedback.objects.filter(nama="Spongebob").count()
+        html = response.content.decode('utf-8')
+        self.assertIn("nama", html)
+        self.assertIn("email", html)
+        self.assertIn("isi", html)
         self.assertEquals(banyaknya, 1)

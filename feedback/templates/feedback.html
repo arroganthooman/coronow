@@ -21,7 +21,9 @@
 <!--Form-->
 <section>
     <div class="container container-form">
-        <form class="form" action="savefeedback/" method="POST">
+        <!--Respons Form-->
+        <div id="respons"></div> 
+        <form id="sub" class="form" action="savefeedback/" method="POST">
             {% csrf_token %}
             <p class="fields">{{ field.nama }}</p>
             <p class="fields">{{ field.email }}</p>
@@ -30,4 +32,8 @@
         </form>
     </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
+<script src="{% static 'js/feedback.js' %}"></script>
 {% endblock content %}
