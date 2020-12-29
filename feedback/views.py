@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Feedback
 from .forms import Form_Feedback
 import json
+from django.core import serializers
 
 # Create your views here.
 def feedback(request):
@@ -32,6 +33,7 @@ def savefeedback(request):
 
 @login_required(login_url='/login')
 def listfeedback(request):
-    response = {'feedbacks' : Feedback.objects.all(),
-                'field' : Form_Feedback}
-    return render(request, 'listfeedback.html', response)
+    return render(request, 'listfeedback.html')
+
+def perantara(request):
+    return render(request, 'listfeedback.html')

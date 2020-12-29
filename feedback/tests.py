@@ -42,6 +42,9 @@ class TestFeedback(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'listfeedback.html')
 
+    def test_url_data(self):
+        response =  self.client.get('/feedback/data/')
+
     ## Test Views
 
     def test_template_feedback(self):
@@ -70,3 +73,8 @@ class TestFeedback(TestCase):
         self.assertIn("email", html)
         self.assertIn("isi", html)
         self.assertEquals(banyaknya, 1)
+
+    def test_GET_form(self):
+        response =  self.client.get('/feedback/data/')
+        html = response.content.decode('utf-8')
+        self.assertIn("nama", html)

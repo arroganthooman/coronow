@@ -3,6 +3,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/feedback.css' %}">
+<link rel="shortcut icon" href="/folder-name/logo.ico">
 {% endblock head %}
 
 {% block content %}
@@ -21,19 +22,11 @@
 <!--Form-->
 <section>
     <div class="container container-list">
-        <div class="row" style="text-align: center;">
-            {% if feedbacks %}
-            {% for feedback in feedbacks %}
-            <div class="singles col-xl-4 col-lg-4 col-md-3">
-                <p>{{ feedback.nama }}</p>
-                <p>{{ feedback.email }}</p>
-                <p>{{ feedback.isi }}</p>
-            </div>
-            {% endfor %}
-            {% endif %}
+        <div id="isi" class="row" style="text-align: center;">
         </div>
     </div>
 </section>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{% static 'js/listfeedback.js' %}"></script>
 {% endblock content %}
