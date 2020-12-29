@@ -4,6 +4,8 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/feedback.css' %}">
 <link rel="shortcut icon" href="/folder-name/logo.ico">
+<link rel="stylesheet" href="{% static 'slick/slick.css' %}">
+<link rel="stylesheet" href="{% static 'slick/slick-theme.css' %}">
 {% endblock head %}
 
 {% block content %}
@@ -22,11 +24,13 @@
 <!--Form-->
 <section>
     <div class="container container-list">
-        <div id="isi" class="row" style="text-align: center;">
+        <div id="isi" style="text-align: center;">
         </div>
     </div>
 </section>
+
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="{% static 'js/listfeedback.js' %}"></script>
+<script src="{% static 'slick/slick.min.js' %}"></script>
 {% endblock content %}

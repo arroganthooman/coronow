@@ -10,17 +10,27 @@ $(document).ready(function() {
                 email = data[i].fields.email;
                 isi = data[i].fields.isi;
 
-                html += '<div class="singles col-xl-4 col-lg-4 col-md-3">';
+                html += '<div class="singles">';
                 html += '<p>' + nama + '</p>';
                 html += '<p>' + email + '</p>';
                 html += '<p>' + isi + '</p>';
+                html += '</div>';
 
                 $('#isi').append(html);
             }
+            $('#isi').slick({
+                mobileFirst: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                dots: true,
+                
+            });
         },
         
         error: function(error) {
             console.log(error);
         }
-	});
+    });
 });
