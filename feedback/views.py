@@ -34,6 +34,8 @@ def savefeedback(request):
 @login_required(login_url='/login')
 def listfeedback(request):
     return render(request, 'listfeedback.html')
-
+    
 def perantara(request):
-    return render(request, 'listfeedback.html')
+    feedback = Feedback.objects.all()
+    data = serializers.serialize('python',feedback)
+    return JsonResponse(data, safe=False)
