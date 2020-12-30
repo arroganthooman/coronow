@@ -39,3 +39,9 @@ function savefeedback() {
         }
     });
 };
+
+$('.submit-button').mouseenter( function(){ 
+    $(this).css('background-color','#3d6869');
+}).mouseleave(function() {
+    $(this).css('background-color','#4F8A8B');
+});
