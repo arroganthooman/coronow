@@ -5,7 +5,7 @@ $('#sub').on('submit', function (event) {
 });
 
 function savefeedback() {
-    console.log("save feedback bisa");
+    //console.log("save feedback bisa");
     $.ajax({
         url: "savefeedback/",
         type: "POST",
@@ -35,6 +35,7 @@ function savefeedback() {
             html += '<div class="alert alert-warning" style="text-align: center;">';
             html += 'Oops! Terdapat error saat mengirim feedback';
             html += '</div>';
+            $('#respons').append(html);
             console.log(error);
         }
     });
