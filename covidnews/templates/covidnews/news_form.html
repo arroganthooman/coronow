@@ -1,6 +1,9 @@
 {% extends 'base.html'%}
 {% load static %}
 {% block head%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{% static 'js/newsform.js'%}"></script>
+
 <style>
 form{
   color:#FBD46D ;
@@ -29,7 +32,13 @@ form input, textarea{
     {{ form.media}}
     {{ form.as_p }} 
       
-    <input type="submit" value="Submit"> 
+    <input type="submit" value="Submit" > 
+    <script>
+      function myFunction() {
+        alert("Anda akan menambahkan Berita");
+      }
+      </script>
+      
   </form>
 
   {% endblock content %}

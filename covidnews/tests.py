@@ -12,6 +12,7 @@ class Testing(TestCase):
             Foto="foto",
             Sumber="sumber"
             )
+        self.news=news
         Comment.objects.create(
             komentar="aku seorang",
             nama="nama",
@@ -85,9 +86,16 @@ class Testing(TestCase):
     def test_template_detailnews(self):
         response = Client().get('/covidnews/news/1')
         self.assertTemplateUsed(response, 'detailNews.html','base.html')
+    
+    def test_getAllComment(self):
+        response = self.client.get('/covidnews/getAllComment/'+str(self.news.id))
+        self.assertEqual(response['content-type'], 'text/json-comment-filtered')
+        self.assertEquals(response.status_code,200)
 
-    def test_POST_form(self):
-        response = Client().post('/covidnews/news/1', data = {'komentar': 'komen','nama':
-        'namabaru'})
-        banyaknya = Comment.objects.filter(nama="namabaru").count()
-        self.assertEquals(banyaknya, 1)    
+    def test_postComment(self):
+        response =  self.client.post('/covidnews/postComment/'+str(self.news.id), data= {
+            'nama' : 'fikri',
+            'komentar' : "ngetest",
+            'berita' : self.news
+            })
+        self.assertEqual(response['content-type'], 'text/json-comment-filtered')   

@@ -2,6 +2,9 @@
 {% load static %}
 {% block head%}
 <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{% static 'js/detail.js'%}"></script>
+
 <style>
 
 </style>
@@ -11,7 +14,7 @@
     <p>CovidNews</p>
 </div>
 <div class="Namaberita">
-    <p>{{news.Judul}} <img src="{{news.Foto}}"></p>
+    <p>{{news.Judul}} <img  src="{{news.Foto}}"></p>
 </div>
 <div class="isiBerita">
     <p>{{news.isi|safe}}</p>
@@ -21,26 +24,17 @@
     <p>KOMENTAR</p>
 </div>
 <br>
-<form id="formKomentar" action="" method="POST">
+<form id="formKomentar" method="POST">
     {% csrf_token %}
     <div>
-     <input type="text" name="nama" placeholder="Nama Anda" />
+     <input id ="nama" type="text" name="nama" placeholder="Nama Anda" />
     </div>
     <div>
-     <textarea name="komentar" rows="10" placeholder="Berikan Komentar Anda"></textarea>
+     <textarea id="komentar" name="komentar" rows="10" placeholder="Berikan Komentar Anda"></textarea>
     </div>
     <div>
       <input type="submit" value="Tambahkan Komentar"/>
     </div>
 </form>
-{% for comment in comments %}
-{% if comment.berita == news%}
-<div class="namakomentar">
-    <p><u>{{comment.nama}}</u></p>
-</div>
-<div class="isikomentar">
-    <p>{{comment.komentar}}</p>
-</div>
-{% endif %}
-{% endfor %}    
+<div class="listkomen"></div>
 {% endblock content%}
